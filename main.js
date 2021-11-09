@@ -7,7 +7,7 @@ const cameraBackwardEventName = "moveCameraBackward"
 const initialCameraMovement = "initCameraMovement"
 
 const sceneAssets = [
-    'assets/Building.gltf',
+    'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/Building.gltf',
     'assets/Cubes.gltf',
     'assets/DearRider_1977.gltf',
     'assets/DearRider_1983.gltf',
