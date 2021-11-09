@@ -1,5 +1,5 @@
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js';
-// import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
 
 //event names
 const cameraFowardEventName = "moveCameraFoward"
@@ -7,8 +7,8 @@ const cameraBackwardEventName = "moveCameraBackward"
 const initialCameraMovement = "initCameraMovement"
 
 const sceneAssets = [
-    'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/Building.gltf',
-    'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/Cubes.gltf',
+    'assets/Building.gltf',
+    'assets/Cubes.gltf',
     'assets/DearRider_1977.gltf',
     'assets/DearRider_1983.gltf',
     'assets/DearRider_1986.gltf',
@@ -25,91 +25,91 @@ const loadedItems = {}
 const timelineObj = [
     {
         id: 0,
-        position: { x: -201.961180449289, y: 112.06806194991873, z: -757.6556653244023 },
+        position: { x: -201.961180449289, y: 125.06806194991873, z: -857.6556653244023 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: -201.961180449289, y: 112.06806194991873, z: -757.6556653244023 }
     },
     {
         id: 1,
-        position: { x: 506, y: 190, z: -350 },
+        position: { x: 506, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: 506, y: 190, z: -160 }
     },
     {
         id: 2,
-        position: { x: 106, y: 190, z: -350 },
+        position: { x: 106, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: 106, y: 190, z: -105 }
     },
     {
         id: 3,
-        position: { x: -397, y: 190, z: -350 },
+        position: { x: -397, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: -397, y: 190, z: -105 }
     },
     {
         id: 4,
-        position: { x: -884, y: 190, z: -350 },
+        position: { x: -900, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: -900, y: 190, z: -105 }
     },
     {
         id: 5,
-        position: { x: 281, y: 190, z: 85 },
+        position: { x: -599, y: 150, z: 85 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
-        pivot: { x: 300, y: 190, z: 300 }
+        pivot: { x: -599, y: 190, z: 300 }
     },
     {
         id: 6,
-        position: { x: -189, y: 190, z: 85 },
+        position: { x: -225, y: 150, z: 85 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: -200, y: 190, z: 300 }
     },
     {
         id: 7,
-        position: { x: -599, y: 190, z: 85 },
+        position: { x: 281, y: 150, z: 85 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
-        pivot: { x: -599, y: 190, z: 300 }
+        pivot: { x: 281, y: 190, z: 300 }
     },
     {
         id: 8,
-        position: { x: 495, y: 190, z: 500 },
+        position: { x: 495, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: 500, y: 190, z: 700 }
     },
     {
         id: 9,
-        position: { x: 104, y: 190, z: 500 },
+        position: { x: 104, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: 104, y: 190, z: 700 }
     },
     {
         id: 10,
-        position: { x: -396, y: 190, z: 500 },
+        position: { x: -396, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: -400, y: 190, z: 700 }
     },
     {
         id: 11,
-        position: { x: -913, y: 190, z: 500 },
+        position: { x: -913, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: -900, y: 190, z: 700 }
     },
     {
         id: 12,
-        position: { x: 0, y: 190, z: 1400 },
+        position: { x: 0, y: 150, z: 1400 },
         rotation: { x: 2.8, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
         pivot: { x: 0, y: 190, z: 1400 }
@@ -142,7 +142,7 @@ const threeScene = {
         this.renderer.shadowMapSoft = true;
         container.appendChild(this.renderer.domElement);
 
-        // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
 
         this.camera.position.set(0, 20, 100);
@@ -205,10 +205,12 @@ const threeScene = {
     setUpScene() {
         loadedItems[0].position.set(-1000, 0, 0)
 
-        loadedItems[1].position.set(-200, 70, -550)
+        loadedItems[1].position.set(-200, 140, -550)
+        loadedItems[1].scale.set(2, 2, 2)
 
         loadedItems[2].position.set(500, 70, -125)
         loadedItems[2].scale.set(3, 3, -3)
+        loadedItems[2].scale.set(2, 2, -2)
         loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
@@ -221,7 +223,7 @@ const threeScene = {
         this.addLight(100, 500, -295, loadedItems[3])
 
         loadedItems[4].position.set(-400, 70, -100)
-        loadedItems[4].scale.set(1.5, 1.5, -1.5)
+        loadedItems[4].scale.set(1, 1, -1)
         loadedItems[4].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[2].material.side = THREE.FrontSide
@@ -230,7 +232,7 @@ const threeScene = {
         this.addLight(-400, 500, -175, loadedItems[4])
 
         loadedItems[5].position.set(-900, 70, -100)
-        loadedItems[5].scale.set(0.65, 0.65, -0.65)
+        loadedItems[5].scale.set(0.45, 0.45, -0.45)
         loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
@@ -238,15 +240,15 @@ const threeScene = {
         this.addLight(-900, 500, -175, loadedItems[5])
 
         loadedItems[6].position.set(300, 70, 300)
-        loadedItems[6].scale.set(1.75, 1.75, -1.75)
+        loadedItems[6].scale.set(1.15, 1.15, -1.15)
         loadedItems[6].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[6].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[6].children[0].children[2].material.side = THREE.FrontSide
-        timelineObj[5].obj = loadedItems[6]
+        timelineObj[5].obj = loadedItems[8]
         this.addLight(300, 500, 125, loadedItems[6])
 
         loadedItems[7].position.set(-200, 70, 300)
-        loadedItems[7].scale.set(1.5, 1.5, -1.5)
+        loadedItems[7].scale.set(1, 1, -1)
         loadedItems[7].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
@@ -254,15 +256,15 @@ const threeScene = {
         this.addLight(-200, 500, 125, loadedItems[7])
 
         loadedItems[8].position.set(-600, 70, 300)
-        loadedItems[8].scale.set(1.5, 1.5, -1.5)
+        loadedItems[8].scale.set(1, 1, -1)
         loadedItems[8].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[8].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[8].children[0].children[2].material.side = THREE.FrontSide
-        timelineObj[7].obj = loadedItems[8]
+        timelineObj[7].obj = loadedItems[6]
         this.addLight(-600, 500, 125, loadedItems[8])
 
         loadedItems[9].position.set(500, 50, 700)
-        loadedItems[9].scale.set(0.5, 0.5, 0.5)
+        loadedItems[9].scale.set(0.3, 0.3, 0.3)
         loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 4.8)
         loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
@@ -271,7 +273,7 @@ const threeScene = {
         this.addLight(500, 500, 525, loadedItems[9])
 
         loadedItems[10].position.set(100, 70, 700)
-        loadedItems[10].scale.set(1.5, 1.5, -1.5)
+        loadedItems[10].scale.set(1, 1, -1)
         loadedItems[10].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
@@ -279,7 +281,7 @@ const threeScene = {
         this.addLight(100, 500, 525, loadedItems[10])
 
         loadedItems[11].position.set(-400, 70, 700)
-        loadedItems[11].scale.set(1.5, 1.5, -1.5)
+        loadedItems[11].scale.set(1, 1, -1)
         loadedItems[11].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
@@ -287,24 +289,31 @@ const threeScene = {
         this.addLight(-400, 500, 525, loadedItems[11])
 
         loadedItems[12].position.set(-900, 35, 700)
-        loadedItems[12].scale.set(1.5, 2, -1.5)
+        loadedItems[12].scale.set(1, 1.5, -1)
         loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[11].obj = loadedItems[12]
         this.addLight(-900, 500, 525, loadedItems[12])
 
-        document.addEventListener(cameraFowardEventName, this.fowards)
+        document.addEventListener(cameraFowardEventName, () => {
+            this.fowards()
+        })
         listeners.push({ eventName: cameraFowardEventName, eventFunc: this.fowards })
 
-        document.addEventListener(cameraBackwardEventName, this.backwards)
+        document.addEventListener(cameraBackwardEventName, () => {
+            this.backwards()
+        })
         listeners.push({ eventName: cameraBackwardEventName, eventFunc: this.backwards })
 
         this.camera.position.set(-852, 300, -1158)
         this.camera.rotation.set(3.75, -0.5, 3.5)
 
+        // this.moveCamera(11)
 
-        document.addEventListener(initialCameraMovement, this.startAnim)
+        document.addEventListener(initialCameraMovement, () => {
+            this.startAnim()
+        })
         listeners.push({ eventName: initialCameraMovement, eventFunc: this.startAnim })
     },
     backwards() {
