@@ -8,7 +8,7 @@ const initialCameraMovement = "initCameraMovement"
 
 const sceneAssets = [
     'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/Building.gltf',
-    'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/Cubes.gltf',
+    '',
     'assets/DearRider_1977.gltf',
     'assets/DearRider_1983.gltf',
     'assets/DearRider_1986.gltf',
