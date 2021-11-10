@@ -1,6 +1,5 @@
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
-// import { FBXLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/FBXLoader.js';
 
 const sceneAssets = [
     'assets/Building.gltf',
@@ -93,6 +92,12 @@ const timelineObj = [
     },
     {
         id: 12,
+        position: { x: -500, y: 150, z: 952 },
+        rotation: { x: 2.99, y: -0.03892926785276455, z: 3.1398363604390074 },
+        obj: false,
+    },
+    {
+        id: 13,
         position: { x: 0, y: 150, z: 1400 },
         rotation: { x: 2.8, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
@@ -150,7 +155,7 @@ const threeScene = {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
 
-        const light = new THREE.AmbientLight(0x404040, 2); // soft white light
+        const light = new THREE.AmbientLight(0x404040, 4); // soft white light
         this.scene.add(light);
 
         this.scroll = false
@@ -291,14 +296,43 @@ const threeScene = {
         timelineObj[11].obj = loadedItems[12]
         this.addLight(-900, 500, 525, loadedItems[12])
 
-        document.addEventListener("wheel", (evt) => {
-            if (evt.deltaY > 0 && this.scroll) {
-                this.fowards()
+        let valueInVh = 1
 
+        document.addEventListener("wheel", (evt) => {
+            console.log(valueInVh * window.innerHeight / 100)
+            if (evt.deltaY > 0 && this.scroll && (valueInVh * window.innerHeight / 100) > 200) {
+                this.fowards()
+                valueInVh = 1
             }
-            else if (evt.deltaY < 0 && this.scroll) {
+            else if (evt.deltaY < 0 && this.scroll && (valueInVh * window.innerHeight / 100) > 200) {
                 this.backwards()
+                valueInVh = 1
             }
+            valueInVh++
+        })
+
+        this.touchDown = false
+        this.initPoint = 0
+
+       
+        document.getElementById("threeDiv").addEventListener("touchstart", (event) => {
+            this.touchDown = true
+            this.initPoint = event.touches[0].clientY
+        })
+        document.getElementById("threeDiv").addEventListener("touchmove", (event) => {
+            if (event.targetTouches.length === 1 && this.touchDown) {
+                if (event.touches[0].clientY > this.initPoint && this.scroll) {
+                    this.fowards()
+                }
+                else if (event.touches[0].clientY < this.initPoint && this.scroll) {
+                    this.backwards()
+                }
+                event.preventDefault()
+            }
+        })
+
+        document.getElementById("threeDiv").addEventListener("touchend", () => {
+            this.touchDown = false
         })
 
 
