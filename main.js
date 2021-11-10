@@ -201,6 +201,16 @@ const threeScene = {
                 }
             );
         }
+        this.scene.background = new THREE.CubeTextureLoader()
+            .setPath('assets/cube/')
+            .load([
+                'right.png',
+                'left.png',
+                'top.png',
+                'bottom.png',
+                'front.png',
+                'back.png'
+            ]);
     },
     setUpScene() {
         loadedItems[0].position.set(-1000, 0, 0)
@@ -449,4 +459,3 @@ const threeScene = {
 threeScene.init(document.getElementById("threeDiv"))
 threeScene.loadModels()
 threeScene.animate()
-
