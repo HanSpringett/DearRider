@@ -338,7 +338,7 @@ const threeScene = {
             this.touchDown = false
         })
 
-        this.cameraMovementEvents()
+        // this.cameraMovementEvents()
 
 
         this.camera.position.set(-900, 500, -1200)
@@ -456,8 +456,8 @@ const threeScene = {
     animate() {
         const animate = () => {
             if (this.index == 0) {
-                this.rotateVertical()
-                this.rotate()
+                // this.rotateVertical()
+                // this.rotate()
             }
             this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
@@ -502,9 +502,8 @@ const threeScene = {
         this.camera.getWorldDirection(v2)
 
         const v3 = new THREE.Vector3((v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x))
-
-        this.initAngle += this.camera.sideRotationScalar
         console.log(this.initAngle)
+        this.initAngle += this.camera.sideRotationScalar
         if (this.checkCameraRotationMouse(this.initAngle) === false) {
             this.camera.rotateOnWorldAxis(v3, this.camera.sideRotationScalar)
         } else {
@@ -517,7 +516,7 @@ const threeScene = {
         // this.camera.rotation.z = 0
     },
     checkCameraRotationMouse(y) {
-        if (y < 0.5 && y > -0.25) {
+        if (y < 0.8 && y > -0.8) {
             return false
         }
         return true
