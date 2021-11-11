@@ -20,7 +20,7 @@ const loadedItems = {}
 const timelineObj = [
     {
         id: 0,
-        position: { x: -201.961180449289, y: 125.06806194991873, z: -857.6556653244023 },
+        position: { x: -201.961180449289, y: 200, z: -900 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
@@ -105,6 +105,12 @@ const timelineObj = [
 ]
 const mouse = new THREE.Vector2();
 
+//drag around when at cubes
+//start postion a bit further, towards from corner
+//adjust lights
+//change fov when at cubes from 75 to 100
+//center camera on board
+
 const threeScene = {
 
     init(container) {
@@ -128,6 +134,9 @@ const threeScene = {
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMapSoft = true;
         container.appendChild(this.renderer.domElement);
+
+        this.camera.forwardRotationScalar = 0
+        this.camera.sideRotationScalar = 0
 
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
@@ -155,7 +164,7 @@ const threeScene = {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
 
-        const light = new THREE.AmbientLight(0x404040, 4); // soft white light
+        const light = new THREE.AmbientLight(0x404040, 1); // soft white light
         this.scene.add(light);
 
         this.scroll = false
@@ -205,7 +214,7 @@ const threeScene = {
         loadedItems[0].position.set(-1000, 0, 0)
 
         loadedItems[1].position.set(-200, 140, -550)
-        loadedItems[1].scale.set(2, 2, 2)
+        loadedItems[1].scale.set(2, 2, -2)
         this.addLight(-200, 500, -2000, loadedItems[1])
 
         loadedItems[2].position.set(500, 70, -125)
@@ -215,7 +224,7 @@ const threeScene = {
         loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[1].obj = loadedItems[2]
-        this.addLight(500, 500, -300, loadedItems[2])
+        this.addLight(500, 250, -250, loadedItems[2])
 
         loadedItems[3].position.set(100, 70, -120)
         loadedItems[3].scale.set(1.5, 1.5, 1.5)
@@ -296,30 +305,24 @@ const threeScene = {
         timelineObj[11].obj = loadedItems[12]
         this.addLight(-900, 500, 525, loadedItems[12])
 
-        let valueInVh = 1
-
-        document.addEventListener("wheel", (evt) => {
-            console.log(valueInVh * window.innerHeight / 100)
-            if (evt.deltaY > 0 && this.scroll && (valueInVh * window.innerHeight / 100) > 200) {
+        window.addEventListener("wheel", (evt) => {
+            if (evt.deltaY > 0 && this.scroll) {
                 this.fowards()
-                valueInVh = 1
             }
-            else if (evt.deltaY < 0 && this.scroll && (valueInVh * window.innerHeight / 100) > 200) {
+            else if (evt.deltaY < 0 && this.scroll) {
                 this.backwards()
-                valueInVh = 1
             }
-            valueInVh++
         })
 
         this.touchDown = false
         this.initPoint = 0
 
-       
-        document.getElementById("threeDiv").addEventListener("touchstart", (event) => {
+
+        window.addEventListener("touchstart", (event) => {
             this.touchDown = true
             this.initPoint = event.touches[0].clientY
         })
-        document.getElementById("threeDiv").addEventListener("touchmove", (event) => {
+        window.addEventListener("touchmove", (event) => {
             if (event.targetTouches.length === 1 && this.touchDown) {
                 if (event.touches[0].clientY > this.initPoint && this.scroll) {
                     this.fowards()
@@ -331,13 +334,15 @@ const threeScene = {
             }
         })
 
-        document.getElementById("threeDiv").addEventListener("touchend", () => {
+        window.addEventListener("touchend", () => {
             this.touchDown = false
         })
 
+        this.cameraMovementEvents()
 
-        this.camera.position.set(-852, 300, -1158)
-        this.camera.rotation.set(3.75, -0.5, 3.5)
+
+        this.camera.position.set(-900, 500, -1200)
+        this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
 
         gsap.delayedCall(1, () => {
             this.startAnim()
@@ -359,11 +364,11 @@ const threeScene = {
         this.moveCamera(0, false)
     },
     addLight(x, y, z, target) {
-        const spotLight = new THREE.SpotLight(0xffffff, 4);
+        const spotLight = new THREE.SpotLight(0xffffff, 2);
         spotLight.position.set(x, y, z);
         spotLight.target = target;
         spotLight.penumbra = 1
-        spotLight.angle = 1
+        spotLight.angle = 0.75
         spotLight.castShadow = true;
 
         this.scene.add(spotLight);
@@ -378,7 +383,7 @@ const threeScene = {
             x: timelineObj[index].position.x,
             y: timelineObj[index].position.y,
             z: timelineObj[index].position.z,
-            duration: 1,
+            duration: 2,
             onComplete: () => {
                 self.startSpinBoard(index)
                 this.scroll = true
@@ -388,7 +393,7 @@ const threeScene = {
             x: timelineObj[index].rotation.x,
             y: timelineObj[index].rotation.y,
             z: timelineObj[index].rotation.z,
-            duration: 1,
+            duration: 2,
         })
     },
     startSpinBoard(index) {
@@ -450,6 +455,10 @@ const threeScene = {
     },
     animate() {
         const animate = () => {
+            if (this.index == 0) {
+                this.rotateVertical()
+                this.rotate()
+            }
             this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
         }
@@ -463,6 +472,55 @@ const threeScene = {
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
+    },
+    cameraMovementEvents() {
+        let thisPoint, lastPoint
+        let pointerDown = false
+        this.initAngle = 0
+        document.addEventListener("pointerdown", (event) => {
+            lastPoint = new THREE.Vector2(event.clientX, event.clientY)
+            pointerDown = true
+        })
+        document.addEventListener("pointermove", (event) => {
+            if (pointerDown) {
+                thisPoint = new THREE.Vector2(event.clientX, event.clientY)
+                this.camera.forwardRotationScalar = (thisPoint.x - lastPoint.x);
+                this.camera.sideRotationScalar = (thisPoint.y - lastPoint.y);
+                lastPoint = new THREE.Vector2(event.clientX, event.clientY)
+            }
+        })
+
+        document.addEventListener("pointerup", () => {
+            this.camera.forwardRotationScalar = 0;
+            this.camera.sideRotationScalar = 0;
+            pointerDown = false
+        })
+    },
+    rotateVertical() {
+        const v1 = new THREE.Vector3(0, 1, 0)
+        const v2 = new THREE.Vector3()
+        this.camera.getWorldDirection(v2)
+
+        const v3 = new THREE.Vector3((v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x))
+
+        this.initAngle += this.camera.sideRotationScalar
+        console.log(this.initAngle)
+        if (this.checkCameraRotationMouse(this.initAngle) === false) {
+            this.camera.rotateOnWorldAxis(v3, this.camera.sideRotationScalar)
+        } else {
+            this.initAngle -= this.camera.sideRotationScalar
+        }
+        // this.camera.rotation.z = 0
+    },
+    rotate() {
+        this.camera.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), (-this.camera.forwardRotationScalar / 300))
+        // this.camera.rotation.z = 0
+    },
+    checkCameraRotationMouse(y) {
+        if (y < 0.5 && y > -0.25) {
+            return false
+        }
+        return true
     }
 }
 
