@@ -477,8 +477,8 @@ const threeScene = {
         })
         window.addEventListener("touchmove", (evt) => {
             let value1 = (evt.touches[0].x + evt.touches[1].x) - initPointX
-            let value2 = (evt.touches[0].y + evt.touches[1].y) - initPointY
-            this.camera.fov = Math.min(Math.max(this.camera.fov + (value1 + value2), 20), 65);
+            // let value2 = (evt.touches[0].y + evt.touches[1].y) - initPointY
+            this.camera.fov = Math.min(Math.max(this.camera.fov + value1, 20), 65);
             this.camera.updateProjectionMatrix()
         })
     }
