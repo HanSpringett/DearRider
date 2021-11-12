@@ -529,12 +529,13 @@ export default class threeScene {
     }
     setCameraPinch() {
         let value = 0
+        const self = this
         window.addEventListener("touchstart", (evt) => {
             value = evt.touches[0].clientY
 
         })
         window.addEventListener("touchmove", (evt) => {
-            if (evt.touches.length > 1) {
+            if (evt.touches.length > 1 && self.index == 0) {
                 let f = (evt.touches[0].clientY - value) / 10
                 this.camera.fov = Math.min(Math.max(this.camera.fov + f, 20), 125);
                 this.camera.updateProjectionMatrix()
