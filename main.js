@@ -215,7 +215,6 @@ const threeScene = {
         this.addLight(-200, 500, -2000, loadedItems[1])
 
         loadedItems[2].position.set(500, 70, -125)
-        loadedItems[2].scale.set(1, 1, -1)
         loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
@@ -223,12 +222,10 @@ const threeScene = {
         this.addLight(500, 250, -250, loadedItems[2])
 
         loadedItems[3].position.set(100, 70, -120)
-        loadedItems[3].scale.set(1, 1, -1)
         timelineObj[2].obj = loadedItems[3]
         this.addLight(100, 500, -300, loadedItems[3])
 
         loadedItems[4].position.set(-400, 70, -100)
-        loadedItems[4].scale.set(1, 1, -1)
         loadedItems[4].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[2].material.side = THREE.FrontSide
@@ -237,7 +234,6 @@ const threeScene = {
         this.addLight(-400, 500, -300, loadedItems[4])
 
         loadedItems[5].position.set(-900, 70, -100)
-        loadedItems[5].scale.set(1, 1, -1)
         loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
@@ -245,7 +241,6 @@ const threeScene = {
         this.addLight(-900, 500, -300, loadedItems[5])
 
         loadedItems[6].position.set(300, 70, 300)
-        loadedItems[6].scale.set(1, 1, -1)
         loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
@@ -253,7 +248,6 @@ const threeScene = {
         this.addLight(300, 500, 125, loadedItems[6])
 
         loadedItems[7].position.set(-200, 70, 300)
-        loadedItems[7].scale.set(1, 1, -1)
         loadedItems[7].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
@@ -269,7 +263,6 @@ const threeScene = {
         this.addLight(-600, 500, 125, loadedItems[8])
 
         loadedItems[9].position.set(500, 70, 700)
-        loadedItems[9].scale.set(1, 1, -1)
         loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
@@ -277,7 +270,6 @@ const threeScene = {
         this.addLight(500, 500, 525, loadedItems[9])
 
         loadedItems[10].position.set(100, 70, 700)
-        loadedItems[10].scale.set(1, 1, -1)
         loadedItems[10].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
@@ -285,7 +277,6 @@ const threeScene = {
         this.addLight(100, 500, 525, loadedItems[10])
 
         loadedItems[11].position.set(-400, 70, 700)
-        loadedItems[11].scale.set(1, 1, -1)
         loadedItems[11].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
@@ -293,7 +284,6 @@ const threeScene = {
         this.addLight(-400, 500, 525, loadedItems[11])
 
         loadedItems[12].position.set(-900, 70, 700)
-        loadedItems[12].scale.set(1, 1, -1)
         loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
