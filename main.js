@@ -339,6 +339,7 @@ const threeScene = {
         this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
 
         this.setCameraPinch()
+        this.cameraMovementEvents()
 
         gsap.delayedCall(1, () => {
             this.startAnim()
@@ -453,6 +454,8 @@ const threeScene = {
     animate() {
         const animate = () => {
             if (this.index == 0) {
+                this.rotateVertical()
+                this.rotate()
             }
             this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
@@ -469,18 +472,78 @@ const threeScene = {
 
     },
     setCameraPinch() {
-        let initPointX
-        let initPointY
+        let value = 0
         window.addEventListener("touchstart", (evt) => {
-            initPointX = evt.touches[0].x + evt.touches[1].x
-            initPointY = evt.touches[0].y + evt.touches[1].y
+            value = evt.touches[0].clientY
+
+        })
+        window.addEventListener("touchmove", (evt) => {
+            if (evt.touches.length > 1) {
+                let f = (evt.touches[0].clientY - value) / 10
+                this.camera.fov = Math.min(Math.max(this.camera.fov + f, 20), 125);
+                this.camera.updateProjectionMatrix()
+            }
+        })
+    },
+    cameraMovementEvents() {
+        let thisPoint, lastPoint
+        let pointerDown = false
+        this.initAngle = 0
+        window.addEventListener("pointerdown", (event) => {
+            lastPoint = new THREE.Vector2(event.clientX, event.clientY)
+            pointerDown = true
+        })
+
+        document.addEventListener("pointermove", (event) => {
+            if (pointerDown) {
+                thisPoint = new THREE.Vector2(event.clientX, event.clientY)
+                this.camera.forwardRotationScalar = (thisPoint.x - lastPoint.x);
+                this.camera.sideRotationScalar = (thisPoint.y - lastPoint.y);
+                lastPoint = new THREE.Vector2(event.clientX, event.clientY)
+            }
         })
         window.addEventListener("touchmove", (evt) => {
             let value1 = (evt.touches[0].x + evt.touches[1].x) - initPointX
-            // let value2 = (evt.touches[0].y + evt.touches[1].y) - initPointY
-            this.camera.fov = Math.min(Math.max(this.camera.fov + value1, 20), 65);
+            let value2 = (evt.touches[0].y + evt.touches[1].y) - initPointY
+            this.camera.fov = Math.min(Math.max(this.camera.fov + (value1 + value2), 20), 65);
             this.camera.updateProjectionMatrix()
         })
+
+        window.addEventListener("pointerup", () => {
+            this.camera.forwardRotationScalar = 0;
+            this.camera.sideRotationScalar = 0;
+            pointerDown = false
+        })
+        window.addEventListener("touchend", () => {
+            this.camera.forwardRotationScalar = 0;
+            this.camera.sideRotationScalar = 0;
+            pointerDown = false
+        })
+    },
+    rotateVertical() {
+        const v1 = new THREE.Vector3(0, 1, 0)
+        const v2 = new THREE.Vector3()
+        this.camera.getWorldDirection(v2)
+
+        const v3 = new THREE.Vector3((v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x))
+        console.log(this.initAngle)
+        this.initAngle += this.camera.sideRotationScalar
+        if (this.checkCameraRotationMouse(this.initAngle) === false) {
+            this.camera.rotateOnWorldAxis(v3, this.camera.sideRotationScalar)
+        } else {
+            this.initAngle -= this.camera.sideRotationScalar
+        }
+        // this.camera.rotation.z = 0
+    },
+    rotate() {
+        this.camera.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), (-this.camera.forwardRotationScalar / 300))
+        // this.camera.rotation.z = 0
+    },
+    checkCameraRotationMouse(y) {
+        if (y < 0.8 && y > -0.8) {
+            return false
+        }
+        return true
     }
 }
 
