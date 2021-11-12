@@ -4,17 +4,17 @@ import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/js
 const sceneAssets = [
     'assets/Building.gltf',
     'assets/Cubes.gltf',
-    'assets/DearRider_1977_180.gltf',
-    'assets/DearRider_1983.gltf',
+    'assets/1979.gltf',
+    'assets/1983.gltf',
     'assets/DearRider_1986.gltf',
-    'assets/DearRider_1989.gltf',
-    'assets/DearRider_1996_Dolphin.gltf',
-    'assets/DearRider_1996_Custom.gltf',
-    'assets/DearRider_1993.gltf',
-    'assets/DearRider_2002.gltf',
-    'assets/DearRider_2013.gltf',
-    'assets/DearRider_2020.gltf',
-    'assets/DearRider_2021.gltf'
+    'assets/1989.gltf',
+    'assets/1996_dolphin.gltf',
+    'assets/1996.gltf',
+    'assets/1993.gltf',
+    'assets/2002.gltf',
+    'assets/2013.gltf',
+    'assets/2020.gltf',
+    'assets/2021.gltf'
 ]
 const loadedItems = {}
 const timelineObj = [
@@ -215,8 +215,7 @@ const threeScene = {
         this.addLight(-200, 500, -2000, loadedItems[1])
 
         loadedItems[2].position.set(500, 70, -125)
-        loadedItems[2].scale.set(3, 3, 3)
-        loadedItems[2].scale.set(2, 2, 2)
+        loadedItems[2].scale.set(1, 1, -1)
         loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
@@ -224,7 +223,7 @@ const threeScene = {
         this.addLight(500, 250, -250, loadedItems[2])
 
         loadedItems[3].position.set(100, 70, -120)
-        loadedItems[3].scale.set(1.5, 1.5, 1.5)
+        loadedItems[3].scale.set(1, 1, -1)
         timelineObj[2].obj = loadedItems[3]
         this.addLight(100, 500, -300, loadedItems[3])
 
@@ -238,7 +237,7 @@ const threeScene = {
         this.addLight(-400, 500, -300, loadedItems[4])
 
         loadedItems[5].position.set(-900, 70, -100)
-        loadedItems[5].scale.set(0.45, 0.45, -0.45)
+        loadedItems[5].scale.set(1, 1, -1)
         loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
@@ -246,10 +245,10 @@ const threeScene = {
         this.addLight(-900, 500, -300, loadedItems[5])
 
         loadedItems[6].position.set(300, 70, 300)
-        loadedItems[6].scale.set(1.15, 1.15, -1.15)
-        loadedItems[6].children[0].children[0].material.side = THREE.FrontSide
-        loadedItems[6].children[0].children[1].material.side = THREE.FrontSide
-        loadedItems[6].children[0].children[2].material.side = THREE.FrontSide
+        loadedItems[6].scale.set(1, 1, -1)
+        loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
+        loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
+        loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[5].obj = loadedItems[8]
         this.addLight(300, 500, 125, loadedItems[6])
 
@@ -263,15 +262,14 @@ const threeScene = {
 
         loadedItems[8].position.set(-600, 70, 300)
         loadedItems[8].scale.set(1, 1, -1)
-        loadedItems[8].children[0].children[0].material.side = THREE.FrontSide
-        loadedItems[8].children[0].children[1].material.side = THREE.FrontSide
-        loadedItems[8].children[0].children[2].material.side = THREE.FrontSide
+        loadedItems[8].children[0].children[0].children[0].material.side = THREE.FrontSide
+        loadedItems[8].children[0].children[0].children[1].material.side = THREE.FrontSide
+        // loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[7].obj = loadedItems[6]
         this.addLight(-600, 500, 125, loadedItems[8])
 
-        loadedItems[9].position.set(500, 50, 700)
-        loadedItems[9].scale.set(0.3, 0.3, 0.3)
-        loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 4.8)
+        loadedItems[9].position.set(500, 70, 700)
+        loadedItems[9].scale.set(1, 1, -1)
         loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
@@ -294,8 +292,8 @@ const threeScene = {
         timelineObj[10].obj = loadedItems[11]
         this.addLight(-400, 500, 525, loadedItems[11])
 
-        loadedItems[12].position.set(-900, 35, 700)
-        loadedItems[12].scale.set(1, 1.5, -1)
+        loadedItems[12].position.set(-900, 70, 700)
+        loadedItems[12].scale.set(1, 1, -1)
         loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
