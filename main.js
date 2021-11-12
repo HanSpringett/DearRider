@@ -339,7 +339,7 @@ const threeScene = {
         this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
 
         this.setCameraPinch()
-        this.cameraMovementEvents()
+        // this.cameraMovementEvents()
 
         gsap.delayedCall(1, () => {
             this.startAnim()
