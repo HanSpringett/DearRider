@@ -6,7 +6,7 @@ const sceneAssets = [
     'assets/Cubes.gltf',
     'assets/1979.gltf',
     'assets/1983.gltf',
-    'assets/DearRider_1986.gltf',
+    'assets/1986.gltf',
     'assets/1989.gltf',
     'assets/1996_dolphin.gltf',
     'assets/1996.gltf',
