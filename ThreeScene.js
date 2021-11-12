@@ -381,8 +381,6 @@ export default class threeScene {
         //start animation function
         this.startAnim()
 
-        this.goTo(self.timelineObj[12])
-
         this.circle = this.addRing()
         this.circle.scale.set(3, 3, 3)
         this.circle.visible = false
