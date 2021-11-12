@@ -14,7 +14,9 @@ const sceneAssets = [
     'assets/2002.gltf',
     'assets/2013.gltf',
     'assets/2020.gltf',
-    'assets/2021.gltf'
+    'assets/2021.gltf',
+    'assets/DearRiderOutro1.gltf',
+    'assets/DearRiderOutro2.gltf'
 ]
 const loadedItems = {}
 //coordinates for camera movement and object references
@@ -94,13 +96,13 @@ const timelineObj = [
     {
         id: 12,
         position: { x: -500, y: 150, z: 952 },
-        rotation: { x: 2.99, y: -0.03892926785276455, z: 3.1398363604390074 },
+        rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 13,
         position: { x: 0, y: 150, z: 1400 },
-        rotation: { x: 2.8, y: -0.03892926785276455, z: 3.1398363604390074 },
+        rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     }
 ]
@@ -297,6 +299,14 @@ const threeScene = {
         timelineObj[11].obj = loadedItems[12]
         this.addLight(-890, 500, 525, loadedItems[12])
 
+        //placeholder1
+        loadedItems[13].position.set(-500, 150, 1050)
+        this.placeholder1 = loadedItems[13]
+        this.placeholder1.visible = false
+        //placeholder2
+        loadedItems[14].position.set(0, 150, 1500)
+        this.placeholder2 = loadedItems[14]
+        this.placeholder2.visible = false
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
@@ -338,7 +348,8 @@ const threeScene = {
             // calculate objects intersecting the picking ray
             const intersects = this.raycaster.intersectObjects(this.scene.children);
             if (intersects[0].object.name == "explore") {
-                window.dispatchEvent(new CustomEvent("openExplore", {detail: this.index}))
+                window.dispatchEvent(new CustomEvent("openExplore", { detail: this.index }))
+                console.log("Index", this.index)
             }
         })
 
@@ -346,6 +357,11 @@ const threeScene = {
         window.addEventListener("moveCameraTimeline", (evt) => {
             this.goTo(timelineObj[evt.detail])
         })
+        /*
+        //@index is 
+        this.goTo(timelineObj[index])
+        
+        */
 
         this.camera.position.set(-900, 500, -1200)
         this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
@@ -408,8 +424,18 @@ const threeScene = {
                 if (index <= 11) {
                     this.circle.position.set(timelineObj[index].position.x + 10, timelineObj[index].position.y / 2, timelineObj[index].position.z - 150)
                     this.circle.visible = true
+                    this.placeholder2.visible = false
+                    this.placeholder1.visible = false
+                    
                 }
-
+                else if(index == 12){
+                    this.placeholder1.visible = true
+                    this.placeholder2.visible = false
+                }
+                else if(index == 13){
+                    this.placeholder2.visible = true
+                    this.placeholder1.visible = false
+                }
             }
         })
         gsap.to(this.camera.rotation, {
