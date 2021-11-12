@@ -196,16 +196,49 @@ const threeScene = {
                 }
             );
         }
-        this.scene.background = new THREE.CubeTextureLoader()
-            .setPath('assets/cube/')
-            .load([
-                'right.jpg',
-                'left.jpg',
-                'top.jpg',
-                'bottom.jpg',
-                'front.jpg',
-                'back.jpg'
-            ]);
+        // this.scene.background = new THREE.CubeTextureLoader()
+        //     .setPath('assets/cube/')
+        //     .load([
+        //         'right.jpg',
+        //         'left.jpg',
+        //         'top.jpg',
+        //         'bottom.jpg',
+        //         'front.jpg',
+        //         'back.jpg'
+        //     ]);
+
+        const textureLoader = new THREE.TextureLoader()
+
+        const materials = [
+            new THREE.MeshBasicMaterial({
+                map: textureLoader.load('assets/cube/right.jpg'),
+                side: THREE.BackSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: textureLoader.load('assets/cube/left.jpg'),
+                side: THREE.BackSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: textureLoader.load('assets/cube/top.jpg'),
+                side: THREE.BackSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: textureLoader.load('assets/cube/bottom.jpg'),
+                side: THREE.BackSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: textureLoader.load('assets/cube/front.jpg'),
+                side: THREE.BackSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: textureLoader.load('assets/cube/back.jpg'),
+                side: THREE.BackSide
+            })
+        ];
+
+        let cubeBg = new THREE.Mesh(new THREE.BoxGeometry(30000, 30000, 30000, 1, 1, 1), materials);
+        cubeBg.position.set(0, 6000, 0)
+        this.scene.add(cubeBg);
     },
     setUpScene() {
         loadedItems[0].position.set(-1000, 0, 0)
@@ -214,81 +247,92 @@ const threeScene = {
         loadedItems[1].scale.set(2, 2, -2)
         this.addLight(-200, 500, -2000, loadedItems[1])
 
-        loadedItems[2].position.set(500, 70, -125)
+        loadedItems[2].position.set(510, 70, -125)
+        loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[1].obj = loadedItems[2]
-        this.addLight(500, 250, -250, loadedItems[2])
+        this.addLight(510, 250, -250, loadedItems[2])
 
-        loadedItems[3].position.set(100, 70, -120)
+        loadedItems[3].position.set(110, 70, -120)
+        loadedItems[3].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         timelineObj[2].obj = loadedItems[3]
-        this.addLight(100, 500, -300, loadedItems[3])
+        this.addLight(110, 500, -300, loadedItems[3])
 
-        loadedItems[4].position.set(-400, 70, -100)
+        loadedItems[4].position.set(-390, 70, -100)
+        loadedItems[4].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[4].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[2].material.side = THREE.FrontSide
         loadedItems[4].children[0].children[3].material.side = THREE.FrontSide
         timelineObj[3].obj = loadedItems[4]
-        this.addLight(-400, 500, -300, loadedItems[4])
+        this.addLight(-390, 500, -300, loadedItems[4])
 
-        loadedItems[5].position.set(-900, 70, -100)
+        loadedItems[5].position.set(-890, 70, -100)
+        loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[4].obj = loadedItems[5]
-        this.addLight(-900, 500, -300, loadedItems[5])
+        this.addLight(-890, 500, -300, loadedItems[5])
 
-        loadedItems[6].position.set(300, 70, 300)
+        loadedItems[6].position.set(310, 70, 300)
+        loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[5].obj = loadedItems[8]
-        this.addLight(300, 500, 125, loadedItems[6])
+        this.addLight(310, 500, 125, loadedItems[6])
 
-        loadedItems[7].position.set(-200, 70, 300)
+        loadedItems[7].position.set(-190, 70, 300)
+        loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[7].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[6].obj = loadedItems[7]
-        this.addLight(-200, 500, 125, loadedItems[7])
+        this.addLight(-219000, 500, 125, loadedItems[7])
 
-        loadedItems[8].position.set(-600, 70, 300)
+        loadedItems[8].position.set(-590, 70, 300)
+        loadedItems[8].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[8].scale.set(1, 1, -1)
         loadedItems[8].children[0].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[8].children[0].children[0].children[1].material.side = THREE.FrontSide
         // loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[7].obj = loadedItems[6]
-        this.addLight(-600, 500, 125, loadedItems[8])
+        this.addLight(-590, 500, 125, loadedItems[8])
 
-        loadedItems[9].position.set(500, 70, 700)
+        loadedItems[9].position.set(510, 70, 700)
+        loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[8].obj = loadedItems[9]
-        this.addLight(500, 500, 525, loadedItems[9])
+        this.addLight(510, 500, 525, loadedItems[9])
 
-        loadedItems[10].position.set(100, 70, 700)
+        loadedItems[10].position.set(110, 70, 700)
+        loadedItems[10].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[10].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[9].obj = loadedItems[10]
-        this.addLight(100, 500, 525, loadedItems[10])
+        this.addLight(110, 500, 525, loadedItems[10])
 
-        loadedItems[11].position.set(-400, 70, 700)
+        loadedItems[11].position.set(-390, 70, 700)
+        loadedItems[11].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[11].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[10].obj = loadedItems[11]
-        this.addLight(-400, 500, 525, loadedItems[11])
+        this.addLight(-390, 500, 525, loadedItems[11])
 
-        loadedItems[12].position.set(-900, 70, 700)
+        loadedItems[12].position.set(-890, 70, 700)
+        loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
         loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
         timelineObj[11].obj = loadedItems[12]
-        this.addLight(-900, 500, 525, loadedItems[12])
+        this.addLight(-890, 500, 525, loadedItems[12])
 
         window.addEventListener("wheel", (evt) => {
             if (evt.deltaY > 0 && this.scroll) {
@@ -303,25 +347,25 @@ const threeScene = {
         this.initPoint = 0
 
 
-        // window.addEventListener("touchstart", (event) => {
-        //     this.touchDown = true
-        //     this.initPoint = event.touches[0].clientY
-        // })
-        // window.addEventListener("touchmove", (event) => {
-        //     if (event.targetTouches.length === 1 && this.touchDown) {
-        //         if (event.touches[0].clientY > this.initPoint && this.scroll) {
-        //             this.fowards()
-        //         }
-        //         else if (event.touches[0].clientY < this.initPoint && this.scroll) {
-        //             this.backwards()
-        //         }
-        //         event.preventDefault()
-        //     }
-        // })
+        window.addEventListener("touchstart", (event) => {
+            this.touchDown = true
+            this.initPoint = event.touches[0].clientY
+        })
+        window.addEventListener("touchmove", (event) => {
+            if (event.targetTouches.length === 1 && this.touchDown) {
+                if (event.touches[0].clientY < this.initPoint && this.scroll) {
+                    this.fowards()
+                }
+                else if (event.touches[0].clientY > this.initPoint && this.scroll) {
+                    this.backwards()
+                }
+                event.preventDefault()
+            }
+        })
 
-        // window.addEventListener("touchend", () => {
-        //     this.touchDown = false
-        // })
+        window.addEventListener("touchend", () => {
+            this.touchDown = false
+        })
 
         this.camera.position.set(-900, 500, -1200)
         this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
