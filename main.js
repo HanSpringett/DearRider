@@ -26,19 +26,19 @@ const timelineObj = [
     },
     {
         id: 1,
-        position: { x: 506, y: 150, z: -350 },
+        position: { x: 500, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 2,
-        position: { x: 106, y: 150, z: -350 },
+        position: { x: 100, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 3,
-        position: { x: -397, y: 150, z: -350 },
+        position: { x: -400, y: 150, z: -350 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
@@ -50,43 +50,43 @@ const timelineObj = [
     },
     {
         id: 5,
-        position: { x: -599, y: 150, z: 85 },
+        position: { x: -600, y: 150, z: 85 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 6,
-        position: { x: -225, y: 150, z: 85 },
+        position: { x: -200, y: 150, z: 85 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 7,
-        position: { x: 281, y: 150, z: 85 },
+        position: { x: 300, y: 150, z: 85 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 8,
-        position: { x: 495, y: 150, z: 500 },
+        position: { x: 500, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 9,
-        position: { x: 104, y: 150, z: 500 },
+        position: { x: 100, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 10,
-        position: { x: -396, y: 150, z: 500 },
+        position: { x: -400, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
     {
         id: 11,
-        position: { x: -913, y: 150, z: 500 },
+        position: { x: -900, y: 150, z: 500 },
         rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
         obj: false,
     },
@@ -106,9 +106,6 @@ const timelineObj = [
 const mouse = new THREE.Vector2();
 
 //drag around when at cubes
-//start postion a bit further, towards from corner
-//adjust lights
-//change fov when at cubes from 75 to 100
 //center camera on board
 
 const threeScene = {
@@ -318,35 +315,35 @@ const threeScene = {
         this.initPoint = 0
 
 
-        window.addEventListener("touchstart", (event) => {
-            this.touchDown = true
-            this.initPoint = event.touches[0].clientY
-        })
-        window.addEventListener("touchmove", (event) => {
-            if (event.targetTouches.length === 1 && this.touchDown) {
-                if (event.touches[0].clientY > this.initPoint && this.scroll) {
-                    this.fowards()
-                }
-                else if (event.touches[0].clientY < this.initPoint && this.scroll) {
-                    this.backwards()
-                }
-                event.preventDefault()
-            }
-        })
+        // window.addEventListener("touchstart", (event) => {
+        //     this.touchDown = true
+        //     this.initPoint = event.touches[0].clientY
+        // })
+        // window.addEventListener("touchmove", (event) => {
+        //     if (event.targetTouches.length === 1 && this.touchDown) {
+        //         if (event.touches[0].clientY > this.initPoint && this.scroll) {
+        //             this.fowards()
+        //         }
+        //         else if (event.touches[0].clientY < this.initPoint && this.scroll) {
+        //             this.backwards()
+        //         }
+        //         event.preventDefault()
+        //     }
+        // })
 
-        window.addEventListener("touchend", () => {
-            this.touchDown = false
-        })
-
-        // this.cameraMovementEvents()
-
+        // window.addEventListener("touchend", () => {
+        //     this.touchDown = false
+        // })
 
         this.camera.position.set(-900, 500, -1200)
         this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
 
+        this.setCameraPinch()
+
         gsap.delayedCall(1, () => {
             this.startAnim()
         })
+
     },
     backwards() {
         if (this.index > 0) {
@@ -456,8 +453,6 @@ const threeScene = {
     animate() {
         const animate = () => {
             if (this.index == 0) {
-                // this.rotateVertical()
-                // this.rotate()
             }
             this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
@@ -473,53 +468,19 @@ const threeScene = {
         mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
     },
-    cameraMovementEvents() {
-        let thisPoint, lastPoint
-        let pointerDown = false
-        this.initAngle = 0
-        document.addEventListener("pointerdown", (event) => {
-            lastPoint = new THREE.Vector2(event.clientX, event.clientY)
-            pointerDown = true
+    setCameraPinch() {
+        let initPointX
+        let initPointY
+        window.addEventListener("touchstart", (evt) => {
+            initPointX = evt.touches[0].x + evt.touches[1].x
+            initPointY = evt.touches[0].y + evt.touches[1].y
         })
-        document.addEventListener("pointermove", (event) => {
-            if (pointerDown) {
-                thisPoint = new THREE.Vector2(event.clientX, event.clientY)
-                this.camera.forwardRotationScalar = (thisPoint.x - lastPoint.x);
-                this.camera.sideRotationScalar = (thisPoint.y - lastPoint.y);
-                lastPoint = new THREE.Vector2(event.clientX, event.clientY)
-            }
+        window.addEventListener("touchmove", (evt) => {
+            let value1 = (evt.touches[0].x + evt.touches[1].x) - initPointX
+            let value2 = (evt.touches[0].y + evt.touches[1].y) - initPointY
+            this.camera.fov = Math.min(Math.max(this.camera.fov + (value1 + value2), 20), 65);
+            this.camera.updateProjectionMatrix()
         })
-
-        document.addEventListener("pointerup", () => {
-            this.camera.forwardRotationScalar = 0;
-            this.camera.sideRotationScalar = 0;
-            pointerDown = false
-        })
-    },
-    rotateVertical() {
-        const v1 = new THREE.Vector3(0, 1, 0)
-        const v2 = new THREE.Vector3()
-        this.camera.getWorldDirection(v2)
-
-        const v3 = new THREE.Vector3((v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x))
-        console.log(this.initAngle)
-        this.initAngle += this.camera.sideRotationScalar
-        if (this.checkCameraRotationMouse(this.initAngle) === false) {
-            this.camera.rotateOnWorldAxis(v3, this.camera.sideRotationScalar)
-        } else {
-            this.initAngle -= this.camera.sideRotationScalar
-        }
-        // this.camera.rotation.z = 0
-    },
-    rotate() {
-        this.camera.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), (-this.camera.forwardRotationScalar / 300))
-        // this.camera.rotation.z = 0
-    },
-    checkCameraRotationMouse(y) {
-        if (y < 0.8 && y > -0.8) {
-            return false
-        }
-        return true
     }
 }
 
