@@ -453,10 +453,10 @@ const threeScene = {
     },
     animate() {
         const animate = () => {
-            if (this.index == 0) {
-                this.rotateVertical()
-                this.rotate()
-            }
+            // if (this.index == 0) {
+            //     this.rotateVertical()
+            //     this.rotate()
+            // }
             this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
         }
