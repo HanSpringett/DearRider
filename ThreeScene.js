@@ -421,7 +421,7 @@ export default class threeScene {
         //add camera movement on pan
         let initX
         let initY
-        window.addEventListener("mousemove", (evt) => {
+        window.addEventListener("pointermove", (evt) => {
             gsap.delayedCall(0.5, () => {
                 initX = evt.x
                 initY = evt.y
