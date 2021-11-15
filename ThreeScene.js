@@ -1,7 +1,7 @@
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
 
 export default class threeScene {
-
     sceneAssets = [
         'assets/Building.gltf',
         'assets/Cubes.gltf',
@@ -110,13 +110,18 @@ export default class threeScene {
         }
     ]
 
+    currentCameraCoords = {
+        x: 0,
+        y: 0,
+        z: 0
+    }
+
     constructor() {
         this.init(document.getElementById("threeDiv"))
         this.loadModels()
         this.animate()
 
     }
-
     init(container) {
         this.scene = new THREE.Scene();
         this.container = container
@@ -126,7 +131,7 @@ export default class threeScene {
             75,
             this.width / this.height,
             0.1,
-            100000
+            1000000
         );
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -206,8 +211,28 @@ export default class threeScene {
             );
         }
         const textureLoader = new THREE.TextureLoader()
+        // this.scene.background = textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg")
+        const geometry = new THREE.PlaneGeometry(15000, 8000);
+        const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
+        const plane = new THREE.Mesh(geometry, material);
+        plane.position.set(1000, -1000, 3000)
+        this.bg = plane
 
-        this.scene.background = textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg")
+        // const geometry = new THREE.SphereGeometry(75, 16, 8, 0, 2, 1, 1.2);
+        // const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
+
+        // const mesh = new THREE.Mesh(geometry, material);
+        // mesh.scale.set(2000, 2000, 2000)
+        // mesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.75)
+        // this.bg = mesh.position.set(0, -30000, -85000)
+
+        const plane2 = new THREE.Mesh(geometry, material);
+        plane2.position.set(10000, -1000, -4000)
+        plane2.rotateOnAxis(new THREE.Vector3(0, 1, 0), 20)
+        this.scene.add(plane2);
+
+        this.scene.add(this.bg);
+
     }
     //maps the loaded models to the timeline and places them in the scene at their positions
     setUpScene() {
@@ -372,19 +397,50 @@ export default class threeScene {
         
         */
 
-        this.camera.position.set(-900, 500, -1200)
-        this.camera.rotation.set(3.096496824068951, -1, 3.1398363604390074)
+        this.camera.position.set(-1302, 492, -983)
+        this.camera.rotation.set(3.096496824068951, -0.635938533090549, 3.1398363604390074)
+
+        this.currentCameraCoords.x = -1302
+        this.currentCameraCoords.y = 492
+        this.currentCameraCoords.z = -983
+
         //events for camera zoom in on mobile
         this.setCameraPinch()
         // this.cameraMovementEvents()
 
         //start animation function
-        this.startAnim()
+        gsap.delayedCall(1, () => {
+            this.startAnim()
 
+        })
         this.circle = this.addRing()
         this.circle.scale.set(3, 3, 3)
         this.circle.visible = false
         this.scene.add(this.circle)
+
+        //add camera movement on pan
+        let initX
+        let initY
+        window.addEventListener("mousemove", (evt) => {
+            gsap.delayedCall(0.5, () => {
+                initX = evt.x
+                initY = evt.y
+            })
+            if (evt.x < initX && this.camera.position.x < this.currentCameraCoords.x + 2) {
+                this.camera.position.x += 0.1
+            }
+            if (evt.y < initY && this.camera.position.y < this.currentCameraCoords.y + 2) {
+                this.camera.position.y += 0.1
+            }
+            if (evt.x > initX && this.camera.position.x > this.currentCameraCoords.x - 2) {
+                this.camera.position.x -= 0.1
+            }
+            if (evt.y > initY && this.camera.position.y > this.currentCameraCoords.y - 2) {
+                this.camera.position.y -= 0.1
+            }
+        })
+
+
     }
     //move camera backwards on the timeline
     backwards() {
@@ -453,6 +509,24 @@ export default class threeScene {
             z: self.timelineObj[index].rotation.z,
             duration: 2,
         })
+        this.currentCameraCoords.x = self.timelineObj[index].position.x
+        this.currentCameraCoords.y = self.timelineObj[index].position.y
+        this.currentCameraCoords.z = self.timelineObj[index].position.z
+        if (index > 0) {
+            gsap.to(this.bg, { z: 3550, duration: 2 })
+        }
+        if (index > 4) {
+            gsap.to(this.bg, { z: 3185, duration: 2 })
+        }
+        if (index > 7) {
+            gsap.to(this.bg, { z: 3600, duration: 2 })
+        }
+        if (index > 11) {
+            gsap.to(this.bg, { z: 4052, duration: 2 })
+        }
+        if (index > 12) {
+            gsap.to(this.bg, { z: 4500, duration: 2 })
+        }
     }
     startSpinBoard(index) {
         const self = this
@@ -472,9 +546,9 @@ export default class threeScene {
         const self = this
         if (self.timelineObj[index].obj) {
             self.timelineObj[index].obj.rotation.set(this.rotateCoords.x, this.rotateCoords.y, this.rotateCoords.z)
-            try{
+            try {
                 this.spinAnim.kill()
-            }catch(e){}
+            } catch (e) { }
             this.spinAnim = null;
         }
     }
@@ -611,6 +685,13 @@ export default class threeScene {
         const mesh2 = new THREE.Mesh(ring2Geom, ring2Mat);
         mesh2.position.set(0, 20, 100)
         circleGroup.add(mesh2);
+
+        const circleGeometry = new THREE.CircleGeometry(10, 32);
+        const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
+        const circle = new THREE.Mesh(circleGeometry, circleMat);
+        circle.position.set(0, 20, 95)
+        circle.name = "explore"
+        circleGroup.add(circle);
 
         const text = this.loadText("Explore", 125)
         text.position.set(0, 20, 100)
