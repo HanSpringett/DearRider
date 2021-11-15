@@ -409,10 +409,9 @@ export default class threeScene {
         // this.cameraMovementEvents()
 
         //start animation function
-        gsap.delayedCall(1, () => {
-            this.startAnim()
+        this.startAnim()
 
-        })
+        
         this.circle = this.addRing()
         this.circle.scale.set(3, 3, 3)
         this.circle.visible = false
