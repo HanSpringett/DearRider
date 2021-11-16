@@ -885,7 +885,4 @@ t.animate()
 
 gsap.delayedCall(1, () => {
     t.startAnim()
-    gsap.delayedCall(3, () => {
-        window.dispatchEvent(new CustomEvent("moveCameraTimeline", { detail: 12 }))
-    })
 })
