@@ -1,128 +1,7 @@
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
-
 export default class threeScene {
-    sceneAssets = [
-        'assets/Building.gltf',
-        'assets/Cubes.gltf',
-        'assets/1979.gltf',
-        'assets/1983.gltf',
-        'assets/1986.gltf',
-        'assets/1989.gltf',
-        'assets/1996_dolphin.gltf',
-        'assets/1996.gltf',
-        'assets/1993.gltf',
-        'assets/2002.gltf',
-        'assets/2013.gltf',
-        'assets/2020.gltf',
-        'assets/2021.gltf',
-        'assets/DearRiderOutro1.gltf',
-        'assets/DearRiderOutro2.gltf'
-    ];
-
-    loadedItems = {};
-    mouse = new THREE.Vector2();
-
-    timelineObj = [
-        {
-            id: 0,
-            position: { x: -201.961180449289, y: 200, z: -900 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 1,
-            position: { x: 500, y: 150, z: -350 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 2,
-            position: { x: 100, y: 150, z: -350 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 3,
-            position: { x: -400, y: 150, z: -350 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 4,
-            position: { x: -900, y: 150, z: -350 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 5,
-            position: { x: -600, y: 150, z: 85 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 6,
-            position: { x: -200, y: 150, z: 85 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 7,
-            position: { x: 300, y: 150, z: 85 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 8,
-            position: { x: 500, y: 150, z: 500 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 9,
-            position: { x: 100, y: 150, z: 500 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 10,
-            position: { x: -400, y: 150, z: 500 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 11,
-            position: { x: -900, y: 150, z: 500 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 12,
-            position: { x: -500, y: 150, z: 952 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        },
-        {
-            id: 13,
-            position: { x: 0, y: 150, z: 1400 },
-            rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
-            obj: false,
-        }
-    ]
-
-    currentCameraCoords = {
-        x: 0,
-        y: 0,
-        z: 0
-    }
-
     constructor() {
-        this.init(document.getElementById("threeDiv"))
-        this.loadModels()
-        this.animate()
-
     }
-    init(container) {
+    init(container, GLTFLoader, ambientLightIntensity, spotlightIntensity) {
         this.scene = new THREE.Scene();
         this.container = container
         this.width = window.innerWidth;
@@ -147,8 +26,6 @@ export default class threeScene {
         this.camera.forwardRotationScalar = 0
         this.camera.sideRotationScalar = 0
 
-        // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-
         this.camera.position.set(0, 20, 100);
         //resize
         window.addEventListener('resize', () => {
@@ -171,13 +48,127 @@ export default class threeScene {
         this.index = 0
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
+        this.sceneAssets = [
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Building.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1979.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1986.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1989.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/1993.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/1996.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1996_dolphin.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2002.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2013.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2020.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2021.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRiderOutro1.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRiderOutro2.gltf'
+        ];
 
-        const light = new THREE.AmbientLight(0x404040, 1); // soft white light
+        this.loadedItems = {};
+        this.mouse = new THREE.Vector2();
+
+        this.timelineObj = [
+            {
+                id: 0,
+                position: { x: -201.961180449289, y: 200, z: -900 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 1,
+                position: { x: 500, y: 150, z: -350 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 2,
+                position: { x: 100, y: 150, z: -350 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 3,
+                position: { x: -400, y: 150, z: -350 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 4,
+                position: { x: -900, y: 150, z: -350 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 5,
+                position: { x: -600, y: 150, z: 85 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 6,
+                position: { x: -200, y: 150, z: 85 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 7,
+                position: { x: 300, y: 150, z: 85 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 8,
+                position: { x: 500, y: 150, z: 500 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 9,
+                position: { x: 100, y: 150, z: 500 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 10,
+                position: { x: -400, y: 150, z: 500 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 11,
+                position: { x: -900, y: 150, z: 500 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 12,
+                position: { x: -500, y: 150, z: 952 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            },
+            {
+                id: 13,
+                position: { x: 100, y: 150, z: 1400 },
+                rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
+                obj: false,
+            }
+        ]
+
+        this.currentCameraCoords = {
+            x: 0,
+            y: 0,
+            z: 0
+        }
+
+        const light = new THREE.AmbientLight(0x404040, ambientLightIntensity); // soft white light
         this.scene.add(light);
 
         this.scroll = false
-
+        this.spotlightIntensity = spotlightIntensity
         this.movementTimeline = gsap.timeline()
+        this.gltfLoader = GLTFLoader
     }
     loadModels() {
         this.manager = new THREE.LoadingManager();
@@ -196,7 +187,7 @@ export default class threeScene {
         };
 
         //Loading of assets
-        const loader = new GLTFLoader(this.manager);
+        const loader = new this.gltfLoader(this.manager);
         const self = this
         // Load a glTF resource
         for (let i = 0; i < self.sceneAssets.length; i++) {
@@ -213,18 +204,10 @@ export default class threeScene {
         const textureLoader = new THREE.TextureLoader()
         // this.scene.background = textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg")
         const geometry = new THREE.PlaneGeometry(15000, 8000);
-        const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
+        const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
         const plane = new THREE.Mesh(geometry, material);
         plane.position.set(1000, -1000, 3000)
         this.bg = plane
-
-        // const geometry = new THREE.SphereGeometry(75, 16, 8, 0, 2, 1, 1.2);
-        // const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
-
-        // const mesh = new THREE.Mesh(geometry, material);
-        // mesh.scale.set(2000, 2000, 2000)
-        // mesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.75)
-        // this.bg = mesh.position.set(0, -30000, -85000)
 
         const plane2 = new THREE.Mesh(geometry, material);
         plane2.position.set(10000, -1000, -4000)
@@ -304,8 +287,6 @@ export default class threeScene {
         self.loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
-        self.loadedItems[9].children[0].children[3].material.side = THREE.FrontSide
-        self.loadedItems[9].children[0].children[4].material.side = THREE.FrontSide
         self.timelineObj[8].obj = self.loadedItems[9]
         this.addLight(510, 500, 525, self.loadedItems[9])
         //2013 board
@@ -334,11 +315,13 @@ export default class threeScene {
         this.addLight(-890, 500, 525, self.loadedItems[12])
 
         //placeholder1
-        self.loadedItems[13].position.set(-500, 150, 1050)
+        self.loadedItems[13].position.set(-500, 175, 1050)
+        self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
         this.placeholder1 = self.loadedItems[13]
         this.placeholder1.visible = false
         //placeholder2
-        self.loadedItems[14].position.set(0, 150, 1500)
+        self.loadedItems[14].position.set(100, 175, 1500)
+        self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
         this.placeholder2 = self.loadedItems[14]
         this.placeholder2.visible = false
 
@@ -382,6 +365,7 @@ export default class threeScene {
             // calculate objects intersecting the picking ray
             const intersects = this.raycaster.intersectObjects(this.scene.children);
             if (intersects[0].object.name == "explore") {
+
                 window.dispatchEvent(new CustomEvent("openExplore", { detail: this.index }))
                 console.log("Index", this.index)
             }
@@ -409,9 +393,9 @@ export default class threeScene {
         // this.cameraMovementEvents()
 
         //start animation function
-        this.startAnim()
+        // this.startAnim()
 
-        
+
         this.circle = this.addRing()
         this.circle.scale.set(3, 3, 3)
         this.circle.visible = false
@@ -421,6 +405,7 @@ export default class threeScene {
         let initX
         let initY
         window.addEventListener("pointermove", (evt) => {
+            this.onMouseMove(evt)
             gsap.delayedCall(0.5, () => {
                 initX = evt.x
                 initY = evt.y
@@ -461,7 +446,7 @@ export default class threeScene {
     }
     //adds a spotlight at the specific coords and looks at the target
     addLight(x, y, z, target) {
-        const spotLight = new THREE.SpotLight(0xffffff, 2);
+        const spotLight = new THREE.SpotLight(0xffffff, this.spotlightIntensity);
         spotLight.position.set(x, y, z);
         spotLight.target = target;
         spotLight.penumbra = 1
@@ -511,20 +496,21 @@ export default class threeScene {
         this.currentCameraCoords.x = self.timelineObj[index].position.x
         this.currentCameraCoords.y = self.timelineObj[index].position.y
         this.currentCameraCoords.z = self.timelineObj[index].position.z
+
         if (index > 0) {
-            gsap.to(this.bg, { z: 3550, duration: 2 })
+            gsap.to(this.bg.position, { z: 3550, duration: 2 })
         }
         if (index > 4) {
-            gsap.to(this.bg, { z: 3185, duration: 2 })
+            gsap.to(this.bg.position, { z: 3185, duration: 2 })
         }
         if (index > 7) {
-            gsap.to(this.bg, { z: 3600, duration: 2 })
+            gsap.to(this.bg.position, { z: 3600, duration: 2 })
         }
         if (index > 11) {
-            gsap.to(this.bg, { z: 4052, duration: 2 })
+            gsap.to(this.bg.position, { z: 4052, duration: 2 })
         }
         if (index > 12) {
-            gsap.to(this.bg, { z: 4500, duration: 2 })
+            gsap.to(this.bg.position, { z: 4500, duration: 2 })
         }
     }
     startSpinBoard(index) {
@@ -591,10 +577,30 @@ export default class threeScene {
     }
     animate() {
         const animate = () => {
-            // if (this.index == 0) {
-            //     this.rotateVertical()
-            //     this.rotate()
-            // }
+            if (this.circle) {
+                this.raycaster.setFromCamera(this.mouse, this.camera);
+                const intersects = this.raycaster.intersectObjects(this.scene.children);
+                if (intersects[0].object.name == "explore") {
+                    gsap.to([this.circle.children[2].material], { opacity: 1, duration: 1 })
+                    gsap.to([this.circle.children[3].material], { opacity: 0.3, duration: 1 })
+                    gsap.to(this.circle.children[3].scale, {
+                        x: 1.15,
+                        y: 1.15,
+                        z: 1.15,
+                        duration: 2
+                    })
+                }
+                else {
+                    gsap.to([this.circle.children[2].material, this.circle.children[3].material], { opacity: 0, duration: 1 })
+                    gsap.to(this.circle.children[3].scale, {
+                        x: 1,
+                        y: 1,
+                        z: 1,
+                        duration: 2
+                    })
+                }
+            }
+
             this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
         }
@@ -679,8 +685,14 @@ export default class threeScene {
     addRing() {
         const circleGroup = new THREE.Group()
 
-        const ring2Geom = new THREE.RingGeometry(9.9, 10, 80);
-        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide });
+        const ring1Geom = new THREE.RingGeometry(9.9, 10, 80);
+        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, transparent: true });
+        const mesh1 = new THREE.Mesh(ring1Geom, ring1Mat);
+        mesh1.position.set(0, 20, 100)
+        circleGroup.add(mesh1);
+
+        const ring2Geom = new THREE.RingGeometry(11.9, 12, 80);
+        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, transparent: true });
         const mesh2 = new THREE.Mesh(ring2Geom, ring2Mat);
         mesh2.position.set(0, 20, 100)
         circleGroup.add(mesh2);
@@ -688,9 +700,15 @@ export default class threeScene {
         const circleGeometry = new THREE.CircleGeometry(10, 32);
         const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
         const circle = new THREE.Mesh(circleGeometry, circleMat);
-        circle.position.set(0, 20, 95)
+        circle.position.set(0, 20, 100.1)
         circle.name = "explore"
         circleGroup.add(circle);
+
+        const circleGeometry2 = new THREE.CircleGeometry(12, 32);
+        const circleMat2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
+        const circle2 = new THREE.Mesh(circleGeometry2, circleMat2);
+        circle2.position.set(0, 20, 100.2)
+        circleGroup.add(circle2);
 
         const text = this.loadText("Explore", 125)
         text.position.set(0, 20, 100)
@@ -705,8 +723,7 @@ export default class threeScene {
         const context = canvas.getContext('2d');
 
         // 2d duty
-        context.font = fontSize + "px Arial";
-
+        context.font = fontSize + "px HelveticaNowText";
 
         let metrics = context.measureText(text);
 
@@ -716,10 +733,10 @@ export default class threeScene {
         canvas.width = textWidth;
         canvas.height = textHeight;
 
-        context.font = "bold " + fontSize + "px Arial";
+        context.font = "bold " + fontSize + "px HelveticaNowText";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillStyle = "#e0e0e0";
+        context.fillStyle = "#ffffff";
         context.fillText(text, textWidth / 2, textHeight / 2);
 
         const texture = new THREE.Texture(canvas);
@@ -772,6 +789,10 @@ export default class threeScene {
                 }
                 this.index = target.id
 
+                this.currentCameraCoords.x = self.timelineObj[this.index].position.x
+                this.currentCameraCoords.y = self.timelineObj[this.index].position.y
+                this.currentCameraCoords.z = self.timelineObj[this.index].position.z
+
             }
         })
         if (target.id > this.currentTimelinePos) {
@@ -781,7 +802,22 @@ export default class threeScene {
                     y: self.timelineObj[i].position.y,
                     z: self.timelineObj[i].position.z,
                     duration: 1,
-                })
+                }, i.toString())
+                if (i == 1) {
+                    this.movementTimeline.to(this.bg.position, { z: 3550, duration: 1 }, i.toString())
+                }
+                if (i == 5) {
+                    this.movementTimeline.to(this.bg.position, { z: 3185, duration: 1 }, i.toString())
+                }
+                if (i == 8) {
+                    this.movementTimeline.to(this.bg.position, { z: 3600, duration: 1 }, i.toString())
+                }
+                if (i == 12) {
+                    this.movementTimeline.to(this.bg.position, { z: 4052, duration: 1 }, i.toString())
+                }
+                if (i == 13) {
+                    this.movementTimeline.to(this.bg.position, { z: 4500, duration: 1 }, i.toString())
+                }
             }
             this.movementTimeline.play()
             this.currentTimelinePos = target.id
@@ -793,13 +829,27 @@ export default class threeScene {
                     y: self.timelineObj[i].position.y,
                     z: self.timelineObj[i].position.z,
                     duration: 1,
-                })
+                }, i.toString())
+                if (i == 1) {
+                    this.movementTimeline.to(this.bg.position, { z: 3550, duration: 1 }, i.toString())
+                }
+                if (i == 5) {
+                    this.movementTimeline.to(this.bg.position, { z: 3185, duration: 1 }, i.toString())
+                }
+                if (i == 8) {
+                    this.movementTimeline.to(this.bg.position, { z: 3600, duration: 1 }, i.toString())
+                }
+                if (i == 12) {
+                    this.movementTimeline.to(this.bg.position, { z: 4052, duration: 1 }, i.toString())
+                }
+                if (i == 13) {
+                    this.movementTimeline.to(this.bg.position, { z: 4500, duration: 1 }, i.toString())
+                }
             }
             this.movementTimeline.play()
             this.currentTimelinePos = target.id
         }
     }
-
     roundUp(numToRound, multiple) {
         let value = multiple;
         while (value < numToRound) {
@@ -807,7 +857,35 @@ export default class threeScene {
         }
         return value;
     }
+    hideExploreButton() {
+        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 0, duration: 1 })
+    }
+    showExploreButton() {
+        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 1, duration: 1 })
+    }
+    onMouseMove(event) {
+
+        // calculate mouse position in normalized device coordinates
+        // (-1 to +1) for both components
+
+        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    }
 }
 
 
-const scene = new threeScene()
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+
+
+let t = new threeScene()
+t.init(document.getElementById("threeDiv"), GLTFLoader, 1, 2)
+t.loadModels()
+t.animate()
+
+gsap.delayedCall(1, () => {
+    t.startAnim()
+    gsap.delayedCall(3, () => {
+        window.dispatchEvent(new CustomEvent("moveCameraTimeline", { detail: 12 }))
+    })
+})
