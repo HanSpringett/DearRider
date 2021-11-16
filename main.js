@@ -170,6 +170,8 @@ export default class threeScene {
         this.movementTimeline = gsap.timeline()
         this.gltfLoader = GLTFLoader
         this.spotLightIntensity = spotLightIntensity
+        //onHover -> expands -> click -> fades
+        //function for fadeIn
     }
     loadModels() {
         this.manager = new THREE.LoadingManager();
@@ -789,3 +791,14 @@ export default class threeScene {
         return value;
     }
 }
+
+
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+
+
+let t = new threeScene()
+t.init(document.getElementById("threeDiv"), GLTFLoader)
+t.loadModels()
+t.animate()
+
+t.startAnim
