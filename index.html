@@ -18,6 +18,16 @@
             height: 5vh;
             border-radius: 50%;
         }
+
+        @font-face {
+            font-family: 'HelveticaNowText';
+            src: local('Helvetica Now Text  Bold'), local('Helvetica-Now-Text--Bold'),
+                url('HelveticaNowText-Bold.woff2') format('woff2'),
+                url('HelveticaNowText-Bold.woff') format('woff'),
+                url('HelveticaNowText-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
@@ -28,13 +38,21 @@
 
 <body>
     <div>
-        <div style="margin: 0; padding: 0; overflow: hidden; position: absolute;" id="threeDiv">
+        <div style="margin: 0; padding: 0; position: absolute;" id="threeDiv">
         </div>
     </div>
-    <script src="ThreeScene.js" type="module">
+    <script src="mainLIve.js" type="module">
     </script>
     <!-- <script type="module">
-        import * as threeScene from 'https://cdn.jsdelivr.net/gh/HanSpringett/DearRider_Webflow_embedtest@test2.1/main.js'
-        threeScene.default.prototype.goTo()
+        import * as threeScene from 'https://cdn.jsdelivr.net/gh/HanSpringett/DearRider_Webflow_embedtest@release2.2/main.js'
+        import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+        document.addEventListener("click", () => {
+            window.dispatchEvent(new CustomEvent("moveCameraTimeline", { detail: 3 }))
+        })
+        threeScene.default.prototype.init(document.getElementById("threeDiv"), GLTFLoader)
+        threeScene.default.prototype.loadModels()
+        threeScene.default.prototype.animate()
+        //add variable to control ambient and spotlights
+        //color the cirlce for explore btn
     </script> -->
 </body>
