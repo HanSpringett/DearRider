@@ -457,7 +457,7 @@ export default class threeScene {
         const spotLight = new THREE.SpotLight(0xffffff, this.spotlightIntensity);
         spotLight.position.set(x, y, z);
         spotLight.target = target;
-        spotLight.penumbra = 1
+        spotLight.penumbra = 0.5
         spotLight.angle = 0.25
         spotLight.castShadow = true;
         spotLight.shadow.bias = -0.0001;
