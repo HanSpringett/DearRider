@@ -886,14 +886,14 @@ export default class threeScene {
 }
 
 
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+// import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
 
 
-let t = new threeScene()
-t.init(document.getElementById("threeDiv"), GLTFLoader, 4, 2)
-t.loadModels()
-t.animate()
+// let t = new threeScene()
+// t.init(document.getElementById("threeDiv"), GLTFLoader, 4, 2)
+// t.loadModels()
+// t.animate()
 
-gsap.delayedCall(1, () => {
-    t.startAnim()
-})
+// gsap.delayedCall(1, () => {
+//     t.startAnim()
+// })
