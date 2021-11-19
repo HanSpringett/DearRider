@@ -1,3 +1,6 @@
+import Stats from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/libs/stats.module.js'
+
+
 export default class threeScene {
     constructor() {
     }
@@ -170,6 +173,11 @@ export default class threeScene {
         this.spotlightIntensity = spotlightIntensity
         this.movementTimeline = gsap.timeline()
         this.gltfLoader = GLTFLoader
+
+        this.stats = new Stats();
+        this.stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+        document.body.appendChild(this.stats.domElement);
+
     }
     loadModels() {
         this.manager = new THREE.LoadingManager();
@@ -589,6 +597,10 @@ export default class threeScene {
     }
     animate() {
         const animate = () => {
+            this.stats.begin();
+
+
+	
             if (this.circle) {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
@@ -614,6 +626,7 @@ export default class threeScene {
             }
 
             this.renderer.render(this.scene, this.camera);
+            this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
