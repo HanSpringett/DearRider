@@ -10,7 +10,7 @@ export default class threeScene {
             75,
             this.width / this.height,
             0.1,
-            1000000
+            10000
         );
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -49,7 +49,7 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            './assets/Building.gltf',
+            './assets/building rebuild_v5.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1979.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
