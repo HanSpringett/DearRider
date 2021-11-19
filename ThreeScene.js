@@ -21,6 +21,7 @@ export default class threeScene {
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMapSoft = true;
+        this.renderer.physicallyCorrectLights = true
         container.appendChild(this.renderer.domElement);
 
         this.camera.forwardRotationScalar = 0
@@ -49,7 +50,7 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            './assets/building rebuild_v5.gltf',
+            './assets/Building.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1979.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
@@ -165,6 +166,9 @@ export default class threeScene {
         const light = new THREE.AmbientLight(0x404040, ambientLightIntensity); // soft white light
         this.scene.add(light);
 
+        const directionalLight = new THREE.DirectionalLight('#ffffff', 3)
+        this.scene.add(directionalLight);
+
         this.scroll = false
         this.spotlightIntensity = spotlightIntensity
         this.movementTimeline = gsap.timeline()
@@ -227,7 +231,7 @@ export default class threeScene {
     setUpScene() {
         const self = this
         //building
-        self.loadedItems[0].position.set(0, 0, 0)
+        self.loadedItems[0].position.set(-1000, 0, 0)
         //cubes
         self.loadedItems[1].position.set(-200, 140, -550)
         self.loadedItems[1].scale.set(2, 2, -2)
@@ -890,7 +894,7 @@ import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples
 
 
 let t = new threeScene()
-t.init(document.getElementById("threeDiv"), GLTFLoader, 4, 2)
+t.init(document.getElementById("threeDiv"), GLTFLoader, 1, 0)
 t.loadModels()
 t.animate()
 
