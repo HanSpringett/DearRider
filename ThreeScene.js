@@ -166,8 +166,8 @@ export default class threeScene {
             z: 0
         }
 
-        // const light = new THREE.AmbientLight(0x404040, ambientLightIntensity); // soft white light
-        // this.scene.add(light);
+        const light = new THREE.AmbientLight(0x404040, ambientLightIntensity); // soft white light
+        this.scene.add(light);
 
         this.scroll = false
         this.spotlightIntensity = spotlightIntensity
