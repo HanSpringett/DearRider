@@ -231,7 +231,7 @@ export default class threeScene {
         //cubes
         self.loadedItems[1].position.set(-200, 140, -550)
         self.loadedItems[1].scale.set(2, 2, -2)
-        this.addLight(-200, 500, -2000, self.loadedItems[1])
+        // this.addLight(-200, 500, -2000, self.loadedItems[1])
         self.loadedItems[1].castShadow = true;
         self.loadedItems[1].receiveShadow = false;
         //1979 board
@@ -241,12 +241,12 @@ export default class threeScene {
         self.loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[1].obj = self.loadedItems[2]
-        this.addLight(510, 500, -150, self.loadedItems[2])
+        // this.addLight(510, 500, -150, self.loadedItems[2])
         //1983 board
         self.loadedItems[3].position.set(110, 70, -120)
         self.loadedItems[3].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.timelineObj[2].obj = self.loadedItems[3]
-        this.addLight(110, 500, -145, self.loadedItems[3])
+        // this.addLight(110, 500, -145, self.loadedItems[3])
         //1986 board
         self.loadedItems[4].position.set(-390, 70, -100)
         self.loadedItems[4].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -255,7 +255,7 @@ export default class threeScene {
         self.loadedItems[4].children[0].children[2].material.side = THREE.FrontSide
         self.loadedItems[4].children[0].children[3].material.side = THREE.FrontSide
         self.timelineObj[3].obj = self.loadedItems[4]
-        this.addLight(-390, 500, -125, self.loadedItems[4])
+        // this.addLight(-390, 500, -125, self.loadedItems[4])
         //1989 board
         self.loadedItems[5].position.set(-890, 70, -100)
         self.loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -263,7 +263,7 @@ export default class threeScene {
         self.loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[4].obj = self.loadedItems[5]
-        this.addLight(-890, 500, -125, self.loadedItems[5])
+        // this.addLight(-890, 500, -125, self.loadedItems[5])
         //1996_dolphin board
         self.loadedItems[6].position.set(310, 70, 300)
         self.loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -271,7 +271,7 @@ export default class threeScene {
         self.loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[5].obj = self.loadedItems[8]
-        this.addLight(310, 500, 275, self.loadedItems[6])
+        // this.addLight(310, 500, 275, self.loadedItems[6])
         //1996 board
         self.loadedItems[7].position.set(-190, 70, 300)
         self.loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -279,7 +279,7 @@ export default class threeScene {
         self.loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[6].obj = self.loadedItems[7]
-        this.addLight(-190, 500, 275, self.loadedItems[7])
+        // this.addLight(-190, 500, 275, self.loadedItems[7])
         //1993 board
         self.loadedItems[8].position.set(-590, 70, 300)
         // self.loadedItems[8].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
@@ -288,7 +288,7 @@ export default class threeScene {
         self.loadedItems[8].children[0].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[7].obj = self.loadedItems[6]
-        this.addLight(-590, 500, 275, self.loadedItems[8])
+        // this.addLight(-590, 500, 275, self.loadedItems[8])
         //2002 board
         self.loadedItems[9].position.set(510, 70, 700)
         self.loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -296,7 +296,7 @@ export default class threeScene {
         self.loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[8].obj = self.loadedItems[9]
-        this.addLight(510, 500, 675, self.loadedItems[9])
+        // this.addLight(510, 500, 675, self.loadedItems[9])
         //2013 board
         self.loadedItems[10].position.set(110, 70, 700)
         self.loadedItems[10].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -304,7 +304,7 @@ export default class threeScene {
         self.loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[9].obj = self.loadedItems[10]
-        this.addLight(110, 500, 675, self.loadedItems[10])
+        // this.addLight(110, 500, 675, self.loadedItems[10])
         //2020 board
         self.loadedItems[11].position.set(-390, 70, 700)
         self.loadedItems[11].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -312,7 +312,7 @@ export default class threeScene {
         self.loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[10].obj = self.loadedItems[11]
-        this.addLight(-390, 500, 675, self.loadedItems[11])
+        // this.addLight(-390, 500, 675, self.loadedItems[11])
         //2021 board
         self.loadedItems[12].position.set(-890, 70, 700)
         self.loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -320,7 +320,7 @@ export default class threeScene {
         self.loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[11].obj = self.loadedItems[12]
-        this.addLight(-890, 500, 675, self.loadedItems[12])
+        // this.addLight(-890, 500, 675, self.loadedItems[12])
 
         //placeholder1
         self.loadedItems[13].position.set(-500, 175, 1050)
