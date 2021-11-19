@@ -432,6 +432,8 @@ export default class threeScene {
             }
         })
 
+        this.needToRender(1000)
+
 
     }
     //move camera backwards on the timeline
@@ -440,6 +442,7 @@ export default class threeScene {
             this.index--
             this.moveCamera(this.index, this.index + 1)
         }
+        this.needToRender(100)
     }
     //move camera forwards on the timeline
     fowards() {
@@ -447,6 +450,7 @@ export default class threeScene {
             this.index++
             this.moveCamera(this.index, this.index - 1)
         }
+        this.needToRender(100)
     }
     //initial animation that moves the camera from the corner to the cubes
     startAnim() {
@@ -588,6 +592,16 @@ export default class threeScene {
     }
     animate() {
         const animate = () => {
+            if (this.shouldRender) {
+                if (this.renderTime >= 1) {
+                    if (this.renderTime > 1) {
+                        this.renderTime -= 1;
+                    } else {
+                        this.shouldRender = false;
+                    }
+                }
+                this.renderer.render(this.scene, this.camera);
+            }
             if (this.circle) {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
@@ -611,8 +625,6 @@ export default class threeScene {
                     })
                 }
             }
-
-            this.renderer.render(this.scene, this.camera);
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
@@ -883,6 +895,10 @@ export default class threeScene {
         this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
     }
+    needToRender(value = 1) {
+        this.renderTime = value
+        this.shouldRender = true
+      }
 }
 
 
