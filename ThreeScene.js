@@ -49,7 +49,7 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Building.gltf',
+            './assets/Building.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1979.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
@@ -886,14 +886,14 @@ export default class threeScene {
 }
 
 
-// import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
 
 
-// let t = new threeScene()
-// t.init(document.getElementById("threeDiv"), GLTFLoader, 4, 2)
-// t.loadModels()
-// t.animate()
+let t = new threeScene()
+t.init(document.getElementById("threeDiv"), GLTFLoader, 4, 2)
+t.loadModels()
+t.animate()
 
-// gsap.delayedCall(1, () => {
-//     t.startAnim()
-// })
+gsap.delayedCall(1, () => {
+    t.startAnim()
+})
