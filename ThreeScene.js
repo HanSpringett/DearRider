@@ -1,5 +1,7 @@
 import Stats from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/libs/stats.module.js'
 import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/RGBELoader.js';
+import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/FBXLoader.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
 
 
 export default class threeScene {
@@ -50,11 +52,13 @@ export default class threeScene {
 
         this.raycaster = new THREE.Raycaster();
 
+        // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
         this.index = 0
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            './assets/building rebuild_v17.gltf',
+            './assets/building rebuild_v19.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
             './assets/DearRider_1977.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
@@ -208,12 +212,13 @@ export default class threeScene {
                 (gltf) => {
                     this.scene.add(gltf.scene);
                     self.loadedItems[i] = gltf.scene
-                    // gltf.scene.traverse(child => {
-                    //     if (child.isMesh) {
-                    //         child.castShadow = true;
-                    //         child.receiveShadow = true;
-                    //     }
-                    // })
+                    gltf.scene.traverse(child => {
+                        // if (child.isMesh) {
+                        //     // child.castShadow = true;
+                        //     // child.receiveShadow = true;
+                        //     child.visible = false
+                        // }
+                    })
                 }
             );
         }
@@ -249,7 +254,6 @@ export default class threeScene {
 
                 this.renderer.render(this.scene, this.camera);
             })
-
     }
     //maps the loaded models to the timeline and places them in the scene at their positions
     setUpScene() {
