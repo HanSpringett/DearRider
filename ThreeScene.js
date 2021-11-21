@@ -58,7 +58,7 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            './assets/building_shadows_v2.gltf',
+            './assets/building_shadows_v3.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
             './assets/DearRider_1977.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
@@ -264,7 +264,6 @@ export default class threeScene {
         //cubes
         self.loadedItems[1].position.set(-200, 140, -550)
         self.loadedItems[1].scale.set(2, 2, -2)
-        self.loadedItems[1].visible = false
         //1979 board
         self.loadedItems[2].position.set(510, 70, -125)
         self.loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
