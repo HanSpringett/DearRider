@@ -52,9 +52,9 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            './assets/building_shadows_v7.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/building_shadows_v7.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
-            './assets/DearRider_1977.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRider_1977.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1986.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1989.gltf',
@@ -232,7 +232,7 @@ export default class threeScene {
         pmremGenerator.compileEquirectangularShader();
         //Loading of assets
         new this.RGBELoader().setDataType(THREE.UnsignedByteType)
-            .load('assets/studio_small_09_1k.hdr', (texture) => {
+            .load('https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/studio_small_09_1k.hdr', (texture) => {
 
                 const envMap = pmremGenerator.fromEquirectangular(texture).texture;
 
