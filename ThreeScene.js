@@ -52,7 +52,7 @@ export default class threeScene {
 
         this.raycaster = new THREE.Raycaster();
 
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
         this.index = 0
         this.spinAnim
