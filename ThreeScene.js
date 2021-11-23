@@ -1,3 +1,7 @@
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
+import Stats from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/libs/stats.module.js'
+
+
 export default class threeScene {
     constructor() {
     }
@@ -52,7 +56,7 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/building_shadows_v7.gltf',
+            './assets/building_shadows_v9.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRider_1977.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
@@ -81,19 +85,19 @@ export default class threeScene {
             },
             {
                 id: 1,
-                position: { x: 1150, y: 150, z: -300 },
+                position: { x: 1140, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 2,
-                position: { x: 415, y: 150, z: -300 },
+                position: { x: 405, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 3,
-                position: { x: -345, y: 150, z: -300 },
+                position: { x: -355, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
@@ -105,43 +109,43 @@ export default class threeScene {
             },
             {
                 id: 5,
-                position: { x: -735, y: 150, z: 285 },
+                position: { x: -745, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 6,
-                position: { x: 35, y: 150, z: 285 },
+                position: { x: 35, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 7,
-                position: { x: 775, y: 150, z: 285 },
+                position: { x: 775, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 8,
-                position: { x: 500, y: 150, z: 625 },
+                position: { x: 1150, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 9,
-                position: { x: 100, y: 150, z: 625 },
+                position: { x: 415, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 10,
-                position: { x: -400, y: 150, z: 625 },
+                position: { x: -345, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 11,
-                position: { x: -900, y: 150, z: 625 },
+                position: { x: -1065, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
@@ -169,9 +173,9 @@ export default class threeScene {
         this.movementTimeline = gsap.timeline()
         this.gltfLoader = GLTFLoader
         this.RGBELoader = RGBELoader
-        // this.stats = new Stats();
-        // this.stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
-        // document.body.appendChild(this.stats.domElement);
+        this.stats = new Stats();
+        this.stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+        document.body.appendChild(this.stats.domElement);
 
     }
     loadModels() {
@@ -218,6 +222,7 @@ export default class threeScene {
         const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
         const plane = new THREE.Mesh(geometry, material);
         plane.position.set(1000, -1000, 3000)
+        plane.scale.set(1.25, 1.25, 1.25)
         this.bg = plane
 
         const plane2 = new THREE.Mesh(geometry, material);
@@ -250,14 +255,13 @@ export default class threeScene {
         const self = this
         //building
         self.loadedItems[0].position.set(0, 0, 0)
-        console.log(self.loadedItems[0])
         //cubes
         self.loadedItems[1].position.set(0, 140, -825)
         self.loadedItems[1].scale.set(1, 1, -1)
         self.loadedItems[1].rotateOnAxis(new THREE.Vector3(0, 1, 0), -10)
 
         //1979 board
-        self.loadedItems[2].position.set(1150, 70, -125)
+        self.loadedItems[2].position.set(1150, 70, -130)
         self.loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[2].scale.set(2, 2, 2)
         // self.loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
@@ -265,11 +269,11 @@ export default class threeScene {
         // self.loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[1].obj = self.loadedItems[2]
         //1983 board
-        self.loadedItems[3].position.set(415, 70, -120)
+        self.loadedItems[3].position.set(415, 70, -135)
         self.loadedItems[3].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.timelineObj[2].obj = self.loadedItems[3]
         //1986 board
-        self.loadedItems[4].position.set(-345, 70, -100)
+        self.loadedItems[4].position.set(-345, 70, -135)
         self.loadedItems[4].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[4].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[4].children[0].children[1].material.side = THREE.FrontSide
@@ -277,28 +281,28 @@ export default class threeScene {
         self.loadedItems[4].children[0].children[3].material.side = THREE.FrontSide
         self.timelineObj[3].obj = self.loadedItems[4]
         //1989 board
-        self.loadedItems[5].position.set(-1065, 70, -100)
+        self.loadedItems[5].position.set(-1065, 70, -135)
         self.loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[4].obj = self.loadedItems[5]
         //1996_dolphin board
-        self.loadedItems[6].position.set(785, 70, 450)
+        self.loadedItems[6].position.set(785, 70, 485)
         self.loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[5].obj = self.loadedItems[8]
         //1996 board
-        self.loadedItems[7].position.set(45, 70, 450)
+        self.loadedItems[7].position.set(45, 70, 485)
         self.loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[7].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[6].obj = self.loadedItems[7]
         //1993 board
-        self.loadedItems[8].position.set(-735, 70, 450)
+        self.loadedItems[8].position.set(-735, 70, 485)
         // self.loadedItems[8].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
         self.loadedItems[8].scale.set(1, 1, -1)
         self.loadedItems[8].children[0].children[0].children[0].material.side = THREE.FrontSide
@@ -306,28 +310,28 @@ export default class threeScene {
         self.loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[7].obj = self.loadedItems[6]
         //2002 board
-        self.loadedItems[9].position.set(510, 70, 800)
+        self.loadedItems[9].position.set(1150, 70, 1000)
         self.loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[8].obj = self.loadedItems[9]
         //2013 board
-        self.loadedItems[10].position.set(110, 70, 800)
+        self.loadedItems[10].position.set(415, 70, 1000)
         self.loadedItems[10].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[10].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[9].obj = self.loadedItems[10]
         //2020 board
-        self.loadedItems[11].position.set(-390, 70, 800)
+        self.loadedItems[11].position.set(-345, 70, 1000)
         self.loadedItems[11].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[11].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[10].obj = self.loadedItems[11]
         //2021 board
-        self.loadedItems[12].position.set(-890, 70, 800)
+        self.loadedItems[12].position.set(-1065, 70, 1000)
         self.loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
         self.loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
@@ -338,7 +342,6 @@ export default class threeScene {
         self.loadedItems[13].position.set(-500, 175, 1050)
         self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
         self.loadedItems[13].scale.set(-1, 1, 1)
-        console.log(self.loadedItems[13])
         this.placeholder1 = self.loadedItems[13]
         this.placeholder1.visible = false
         //placeholder2
@@ -388,7 +391,6 @@ export default class threeScene {
             // calculate objects intersecting the picking ray
             const intersects = this.raycaster.intersectObjects(this.scene.children);
             if (intersects[0].object.name == "explore") {
-
                 window.dispatchEvent(new CustomEvent("openExplore", { detail: this.index }))
                 console.log("Index", this.index)
             }
@@ -414,9 +416,6 @@ export default class threeScene {
         //events for camera zoom in on mobile
         this.setCameraPinch()
         // this.cameraMovementEvents()
-
-        //start animation function
-        // this.startAnim()
 
 
         this.circle = this.addRing()
@@ -466,20 +465,6 @@ export default class threeScene {
     //initial animation that moves the camera from the corner to the cubes
     startAnim() {
         this.moveCamera(0, false)
-    }
-    //adds a spotlight at the specific coords and looks at the target
-    addLight(x, y, z, target) {
-        const spotLight = new THREE.SpotLight(0xffffff, this.spotlightIntensity);
-        spotLight.position.set(x, y, z);
-        spotLight.target = target;
-        spotLight.penumbra = 0.5
-        spotLight.angle = 0.25
-        spotLight.castShadow = true;
-        spotLight.shadow.bias = -0.0001;
-        spotLight.shadow.mapSize.width = 1024 * 4;
-        spotLight.shadow.mapSize.height = 1024 * 4;
-
-        this.scene.add(spotLight);
     }
     moveCamera(index, oldIndex) {
         this.scroll = false
@@ -603,11 +588,12 @@ export default class threeScene {
     }
     animate() {
         const animate = () => {
-            // this.stats.begin();
+            this.stats.begin();
             if (this.circle) {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
                 if (intersects[0].object.name == "explore") {
+                    this.text.material.color = new THREE.Color( 0x808080 );
                     gsap.to([this.circle.children[2].material], { opacity: 1, duration: 1 })
                     gsap.to([this.circle.children[3].material], { opacity: 0.3, duration: 1 })
                     gsap.to(this.circle.children[3].scale, {
@@ -625,11 +611,12 @@ export default class threeScene {
                         z: 1,
                         duration: 2
                     })
+                    this.text.material.color = new THREE.Color( 0xffffff );
                 }
             }
 
             this.renderer.render(this.scene, this.camera);
-            // this.stats.end();
+            this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
@@ -742,6 +729,7 @@ export default class threeScene {
         text.position.set(0, 20, 100)
         text.scale.set(-1, 1, -1)
         circleGroup.add(text)
+        this.text = text
         text.name = "explore"
 
         return circleGroup
@@ -901,3 +889,17 @@ export default class threeScene {
 
     }
 }
+
+
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/RGBELoader.js';
+
+
+let t = new threeScene()
+t.init(document.getElementById("threeDiv"), GLTFLoader, RGBELoader)
+t.loadModels()
+t.animate()
+
+gsap.delayedCall(3, () => {
+    t.startAnim()
+})
