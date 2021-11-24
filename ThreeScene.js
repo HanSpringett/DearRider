@@ -812,59 +812,77 @@ export default class threeScene {
             }
         })
         if (target.id > this.currentTimelinePos) {
-            for (let i = this.currentTimelinePos; i <= target.id; i++) {
+            for (let i = this.currentTimelinePos + 1; i <= target.id; i++) {
                 this.movementTimeline.to(this.camera.position, {
                     x: self.timelineObj[i].position.x,
                     y: self.timelineObj[i].position.y,
                     z: self.timelineObj[i].position.z,
                     duration: 1,
-                }, i.toString())
-                if (i == 1) {
-                    this.movementTimeline.to(this.bg.position, { z: 3550, duration: 1 }, i.toString())
+                })
+                if (i == 0) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 3550, duration: 1 })
+                    })
                 }
-                if (i == 5) {
-                    this.movementTimeline.to(this.bg.position, { z: 3185, duration: 1 }, i.toString())
+                if (i == 4) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 3185, duration: 1 })
+                    })
                 }
-                if (i == 8) {
-                    this.movementTimeline.to(this.bg.position, { z: 3600, duration: 1 }, i.toString())
+                if (i == 7) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 3600, duration: 1 })
+                    })
+                }
+                if (i == 11) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 4052, duration: 1 })
+                    })
                 }
                 if (i == 12) {
-                    this.movementTimeline.to(this.bg.position, { z: 4052, duration: 1 }, i.toString())
-                }
-                if (i == 13) {
-                    this.movementTimeline.to(this.bg.position, { z: 4500, duration: 1 }, i.toString())
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 4500, duration: 1 })
+                    })
                 }
             }
-            this.movementTimeline.play()
-            this.currentTimelinePos = target.id
         }
         else {
-            for (let i = this.currentTimelinePos; i >= target.id; i--) {
+            for (let i = this.currentTimelinePos - 1; i >= target.id; i--) {
                 this.movementTimeline.to(this.camera.position, {
                     x: self.timelineObj[i].position.x,
                     y: self.timelineObj[i].position.y,
                     z: self.timelineObj[i].position.z,
                     duration: 1,
-                }, i.toString())
-                if (i == 1) {
-                    this.movementTimeline.to(this.bg.position, { z: 3550, duration: 1 }, i.toString())
+                })
+                if (i == 0) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 3550, duration: 1 })
+                    })
                 }
-                if (i == 5) {
-                    this.movementTimeline.to(this.bg.position, { z: 3185, duration: 1 }, i.toString())
+                if (i == 4) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 3185, duration: 1 })
+                    })
                 }
-                if (i == 8) {
-                    this.movementTimeline.to(this.bg.position, { z: 3600, duration: 1 }, i.toString())
+                if (i == 7) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 3600, duration: 1 })
+                    })
+                }
+                if (i == 11) {
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 4052, duration: 1 })
+                    })
                 }
                 if (i == 12) {
-                    this.movementTimeline.to(this.bg.position, { z: 4052, duration: 1 }, i.toString())
-                }
-                if (i == 13) {
-                    this.movementTimeline.to(this.bg.position, { z: 4500, duration: 1 }, i.toString())
+                    this.movementTimeline.add(() => {
+                        gsap.to(this.bg.position, { z: 4500, duration: 1 })
+                    })
                 }
             }
-            this.movementTimeline.play()
-            this.currentTimelinePos = target.id
         }
+        this.movementTimeline.play()
+        this.currentTimelinePos = target.id
     }
     roundUp(numToRound, multiple) {
         let value = multiple;
