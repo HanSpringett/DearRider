@@ -293,7 +293,7 @@ export default class threeScene {
         self.loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
-        self.timelineObj[5].obj = self.loadedItems[8]
+        self.timelineObj[5].obj = self.loadedItems[6]
         //1996 board
         self.loadedItems[7].position.set(45, 70, 485)
         self.loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
@@ -308,7 +308,7 @@ export default class threeScene {
         self.loadedItems[8].children[0].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[8].children[0].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
-        self.timelineObj[7].obj = self.loadedItems[6]
+        self.timelineObj[7].obj = self.loadedItems[8]
         //2002 board
         self.loadedItems[9].position.set(1150, 70, 1000)
         self.loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
