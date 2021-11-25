@@ -616,6 +616,9 @@ export default class threeScene {
 
         //kill all tweens
         gsap.globalTimeline.clear()
+        
+        //remove interval
+        clearInterval(this.circleInterval);
 
         this.scene = null
         this.camera = null
