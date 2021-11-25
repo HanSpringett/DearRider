@@ -16,6 +16,8 @@ export default class threeScene {
             1,
             10000
         );
+        // const helper = new THREE.CameraHelper(this.camera);
+        // this.scene.add(helper);
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -79,85 +81,85 @@ export default class threeScene {
         this.timelineObj = [
             {
                 id: 0,
-                position: { x: 0, y: 140, z: -1100 },
+                position: { x: -0, y: 105, z: -1100 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 1,
-                position: { x: 1140, y: 150, z: -300 },
+                position: { x: 1143.25, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 2,
-                position: { x: 405, y: 150, z: -300 },
+                position: { x: 408.5, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 3,
-                position: { x: -355, y: 150, z: -300 },
+                position: { x: -351.5, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 4,
-                position: { x: -1075, y: 150, z: -300 },
+                position: { x: -1072, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 5,
-                position: { x: -745, y: 150, z: 320 },
+                position: { x: -742.25, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 6,
-                position: { x: 35, y: 150, z: 320 },
+                position: { x: 38.5, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 7,
-                position: { x: 775, y: 150, z: 320 },
+                position: { x: 778, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 8,
-                position: { x: 1150, y: 150, z: 835 },
+                position: { x: 1163, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 9,
-                position: { x: 415, y: 150, z: 835 },
+                position: { x: 414, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 10,
-                position: { x: -345, y: 150, z: 835 },
+                position: { x: -336.5, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 11,
-                position: { x: -1065, y: 150, z: 835 },
+                position: { x: -1071.5, y: 150, z: 835 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 12,
-                position: { x: -500, y: 150, z: 952 },
+                position: { x: -500, y: 150, z: 985 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 13,
-                position: { x: 100, y: 150, z: 1400 },
+                position: { x: 100, y: 150, z: 1435 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             }
@@ -256,12 +258,12 @@ export default class threeScene {
         //building
         self.loadedItems[0].position.set(0, 0, 0)
         //cubes
-        self.loadedItems[1].position.set(0, 100, -825)
+        self.loadedItems[1].position.set(0, 120, -825)
         // self.loadedItems[1].rotateOnAxis(new THREE.Vector3(0, 1, 0), -0.25)
 
         //1979 board
         self.loadedItems[2].position.set(1150, 70, -130)
-        self.loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[2].scale.set(2, 2, 2)
         // self.loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
         // self.loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
@@ -269,11 +271,11 @@ export default class threeScene {
         self.timelineObj[1].obj = self.loadedItems[2]
         //1983 board
         self.loadedItems[3].position.set(415, 70, -135)
-        self.loadedItems[3].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[3].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.timelineObj[2].obj = self.loadedItems[3]
         //1986 board
         self.loadedItems[4].position.set(-345, 70, -135)
-        self.loadedItems[4].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[4].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[4].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[4].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[4].children[0].children[2].material.side = THREE.FrontSide
@@ -281,21 +283,21 @@ export default class threeScene {
         self.timelineObj[3].obj = self.loadedItems[4]
         //1989 board
         self.loadedItems[5].position.set(-1065, 70, -135)
-        self.loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[4].obj = self.loadedItems[5]
         //1996_dolphin board
         self.loadedItems[6].position.set(785, 70, 485)
-        self.loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[5].obj = self.loadedItems[6]
         //1996 board
         self.loadedItems[7].position.set(45, 70, 485)
-        self.loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[7].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
@@ -309,29 +311,29 @@ export default class threeScene {
         self.loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[7].obj = self.loadedItems[8]
         //2002 board
-        self.loadedItems[9].position.set(1150, 70, 1000)
-        self.loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[9].position.set(1170, 70, 1000)
+        self.loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[8].obj = self.loadedItems[9]
         //2013 board
-        self.loadedItems[10].position.set(415, 70, 1000)
-        self.loadedItems[10].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[10].position.set(420, 70, 1000)
+        self.loadedItems[10].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[10].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[9].obj = self.loadedItems[10]
         //2020 board
-        self.loadedItems[11].position.set(-345, 70, 1000)
-        self.loadedItems[11].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[11].position.set(-330, 70, 1000)
+        self.loadedItems[11].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[11].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[10].obj = self.loadedItems[11]
         //2021 board
         self.loadedItems[12].position.set(-1065, 70, 1000)
-        self.loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.2)
+        self.loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
@@ -340,12 +342,12 @@ export default class threeScene {
         //placeholder1
         self.loadedItems[13].position.set(-500, 175, 1050)
         self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
-        self.loadedItems[13].scale.set(-1, 1, 1)
+        self.loadedItems[13].scale.set(-0.4, 0.4, 0.4)
         this.placeholder1 = self.loadedItems[13]
         this.placeholder1.visible = false
         //placeholder2
         self.loadedItems[14].position.set(100, 175, 1500)
-        self.loadedItems[14].scale.set(-1, 1, 1)
+        self.loadedItems[14].scale.set(-0.4, 0.4, 0.4)
         self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
         this.placeholder2 = self.loadedItems[14]
         this.placeholder2.visible = false
@@ -469,7 +471,7 @@ export default class threeScene {
         this.scroll = false
         const self = this
         if (oldIndex) {
-            this.endSpinBoard(oldIndex)
+            // this.endSpinBoard(oldIndex)
             this.circle.visible = false
         }
         gsap.to(this.camera.position, {
@@ -478,10 +480,16 @@ export default class threeScene {
             z: self.timelineObj[index].position.z,
             duration: 2,
             onComplete: () => {
-                self.startSpinBoard(index)
+                // self.startSpinBoard(index)
                 this.scroll = true
-                if (index <= 11) {
-                    this.circle.position.set(self.timelineObj[index].position.x + 10, self.timelineObj[index].position.y / 2, self.timelineObj[index].position.z - 150)
+                if (index == 0) {
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 150)
+                    this.circle.visible = true
+                    this.placeholder2.visible = false
+                    this.placeholder1.visible = false
+                }
+                else if (index <= 11) {
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
                     this.circle.visible = true
                     this.placeholder2.visible = false
                     this.placeholder1.visible = false
@@ -592,7 +600,7 @@ export default class threeScene {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
                 if (intersects[0].object.name == "explore") {
-                    this.text.material.color = new THREE.Color( 0x808080 );
+                    this.text.material.color = new THREE.Color(0x808080);
                     gsap.to([this.circle.children[2].material], { opacity: 1, duration: 1 })
                     gsap.to([this.circle.children[3].material], { opacity: 0.3, duration: 1 })
                     gsap.to(this.circle.children[3].scale, {
@@ -610,7 +618,7 @@ export default class threeScene {
                         z: 1,
                         duration: 2
                     })
-                    this.text.material.color = new THREE.Color( 0xffffff );
+                    this.text.material.color = new THREE.Color(0xffffff);
                 }
             }
 
