@@ -447,6 +447,9 @@ export default class threeScene {
             }
         })
 
+        window.addEventListener("beforeunload", () => {
+            this.dispose()
+        })
 
     }
     //move camera backwards on the timeline
