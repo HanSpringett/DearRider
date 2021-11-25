@@ -471,7 +471,7 @@ export default class threeScene {
         this.scroll = false
         const self = this
         if (oldIndex) {
-            // this.endSpinBoard(oldIndex)
+            this.endSpinBoard(oldIndex)
             this.circle.visible = false
         }
         gsap.to(this.camera.position, {
@@ -480,7 +480,7 @@ export default class threeScene {
             z: self.timelineObj[index].position.z,
             duration: 2,
             onComplete: () => {
-                // self.startSpinBoard(index)
+                self.startSpinBoard(index)
                 this.scroll = true
                 if (index == 0) {
                     this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 150)
