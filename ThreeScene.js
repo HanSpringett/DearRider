@@ -451,6 +451,34 @@ export default class threeScene {
             this.dispose()
         })
 
+        this.circleInterval = setInterval(() => {
+            if (this.circle) {
+                this.raycaster.setFromCamera(this.mouse, this.camera);
+                const intersects = this.raycaster.intersectObjects(this.scene.children);
+                if (intersects[0].object.name == "explore") {
+                    this.text.material.color = new THREE.Color(0x808080);
+                    gsap.to([this.circle.children[2].material], { opacity: 1, duration: 1 })
+                    gsap.to([this.circle.children[3].material], { opacity: 0.3, duration: 1 })
+                    gsap.to(this.circle.children[3].scale, {
+                        x: 1.15,
+                        y: 1.15,
+                        z: 1.15,
+                        duration: 1
+                    })
+                }
+                else {
+                    gsap.to([this.circle.children[2].material, this.circle.children[3].material], { opacity: 0, duration: 1 })
+                    gsap.to(this.circle.children[3].scale, {
+                        x: 1,
+                        y: 1,
+                        z: 1,
+                        duration: 1
+                    })
+                    this.text.material.color = new THREE.Color(0xffffff);
+                }
+            }
+        }, 100)
+
     }
     //move camera backwards on the timeline
     backwards() {
@@ -599,32 +627,6 @@ export default class threeScene {
     animate() {
         const animate = () => {
             this.stats.begin();
-            // if (this.circle) {
-            //     this.raycaster.setFromCamera(this.mouse, this.camera);
-            //     const intersects = this.raycaster.intersectObjects(this.scene.children);
-            //     if (intersects[0].object.name == "explore") {
-            //         this.text.material.color = new THREE.Color(0x808080);
-            //         gsap.to([this.circle.children[2].material], { opacity: 1, duration: 1 })
-            //         gsap.to([this.circle.children[3].material], { opacity: 0.3, duration: 1 })
-            //         gsap.to(this.circle.children[3].scale, {
-            //             x: 1.15,
-            //             y: 1.15,
-            //             z: 1.15,
-            //             duration: 2
-            //         })
-            //     }
-            //     else {
-            //         gsap.to([this.circle.children[2].material, this.circle.children[3].material], { opacity: 0, duration: 1 })
-            //         gsap.to(this.circle.children[3].scale, {
-            //             x: 1,
-            //             y: 1,
-            //             z: 1,
-            //             duration: 2
-            //         })
-            //         this.text.material.color = new THREE.Color(0xffffff);
-            //     }
-            // }
-
             this.renderer.render(this.scene, this.camera);
             this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
