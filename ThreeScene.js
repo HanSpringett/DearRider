@@ -57,7 +57,7 @@ export default class threeScene {
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
             './assets/building_shadows_v11.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/Cubes.gltf',
+            './assets/Cubes_v2.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRider_1977.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1986.gltf',
@@ -256,9 +256,8 @@ export default class threeScene {
         //building
         self.loadedItems[0].position.set(0, 0, 0)
         //cubes
-        self.loadedItems[1].position.set(0, 140, -825)
-        self.loadedItems[1].scale.set(1, 1, -1)
-        self.loadedItems[1].rotateOnAxis(new THREE.Vector3(0, 1, 0), -10)
+        self.loadedItems[1].position.set(0, 100, -825)
+        // self.loadedItems[1].rotateOnAxis(new THREE.Vector3(0, 1, 0), -0.25)
 
         //1979 board
         self.loadedItems[2].position.set(1150, 70, -130)
