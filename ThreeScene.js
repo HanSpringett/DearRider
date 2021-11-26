@@ -50,8 +50,8 @@ export default class threeScene {
         this.spinAnim
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
-            './assets/building_shadows_v11.gltf',
-            './assets/Cubes_v2.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/building_shadows_v11.gltf',
+            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/Cubes_v2.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRider_1977.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1986.gltf',
