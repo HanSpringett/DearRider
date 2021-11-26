@@ -1,8 +1,3 @@
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
-import Stats from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/libs/stats.module.js'
-//BUG track pad trigger more scrolls
-//fade in and out the outros
-//50% cap for circle?
 export default class threeScene {
     constructor() {
     }
@@ -17,8 +12,6 @@ export default class threeScene {
             1,
             10000
         );
-        // const helper = new THREE.CameraHelper(this.camera);
-        // this.scene.add(helper);
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -52,8 +45,6 @@ export default class threeScene {
         this.movementTimeline = gsap.timeline()
 
         this.raycaster = new THREE.Raycaster();
-
-        // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
         this.index = 0
         this.spinAnim
@@ -106,13 +97,13 @@ export default class threeScene {
             },
             {
                 id: 4,
-                position: { x: -1072, y: 150, z: -300 },
+                position: { x: -1092, y: 150, z: -300 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 5,
-                position: { x: -742.25, y: 150, z: 320 },
+                position: { x: -732.25, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
@@ -124,31 +115,31 @@ export default class threeScene {
             },
             {
                 id: 7,
-                position: { x: 778, y: 150, z: 320 },
+                position: { x: 772, y: 150, z: 320 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 8,
-                position: { x: 1163, y: 150, z: 835 },
+                position: { x: 1163, y: 150, z: 825 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 9,
-                position: { x: 414, y: 150, z: 835 },
+                position: { x: 414, y: 150, z: 825 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 10,
-                position: { x: -336.5, y: 150, z: 835 },
+                position: { x: -336.5, y: 150, z: 825 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
             {
                 id: 11,
-                position: { x: -1071.5, y: 150, z: 835 },
+                position: { x: -1071.5, y: 150, z: 825 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             },
@@ -176,10 +167,6 @@ export default class threeScene {
         this.movementTimeline = gsap.timeline()
         this.gltfLoader = GLTFLoader
         this.RGBELoader = RGBELoader
-        this.stats = new Stats();
-        this.stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
-        document.body.appendChild(this.stats.domElement);
-
     }
     loadModels() {
         this.manager = new THREE.LoadingManager();
@@ -220,7 +207,6 @@ export default class threeScene {
             );
         }
         const textureLoader = new THREE.TextureLoader()
-        // this.scene.background = textureLoader.load("assets/cube/mountains-covered-with-snow-2-Ab.jpg")
         const geometry = new THREE.PlaneGeometry(15000, 8000);
         const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: textureLoader.load("https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/cube/mountains-covered-with-snow-2-Ab.jpg") });
         const plane = new THREE.Mesh(geometry, material);
@@ -260,15 +246,10 @@ export default class threeScene {
         self.loadedItems[0].position.set(0, 0, 0)
         //cubes
         self.loadedItems[1].position.set(0, 120, -825)
-        // self.loadedItems[1].rotateOnAxis(new THREE.Vector3(0, 1, 0), -0.25)
-
         //1979 board
         self.loadedItems[2].position.set(1150, 70, -130)
         self.loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[2].scale.set(2, 2, 2)
-        // self.loadedItems[2].children[0].children[0].material.side = THREE.FrontSide
-        // self.loadedItems[2].children[0].children[1].material.side = THREE.FrontSide
-        // self.loadedItems[2].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[1].obj = self.loadedItems[2]
         //1983 board
         self.loadedItems[3].position.set(415, 70, -135)
@@ -283,14 +264,14 @@ export default class threeScene {
         self.loadedItems[4].children[0].children[3].material.side = THREE.FrontSide
         self.timelineObj[3].obj = self.loadedItems[4]
         //1989 board
-        self.loadedItems[5].position.set(-1065, 70, -135)
+        self.loadedItems[5].position.set(-1085, 70, -135)
         self.loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
         self.loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[4].obj = self.loadedItems[5]
         //1996_dolphin board
-        self.loadedItems[6].position.set(785, 70, 485)
+        self.loadedItems[6].position.set(-725, 70, 485)
         self.loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
@@ -304,8 +285,7 @@ export default class threeScene {
         self.loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[6].obj = self.loadedItems[7]
         //1993 board
-        self.loadedItems[8].position.set(-735, 70, 485)
-        // self.loadedItems[8].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3)
+        self.loadedItems[8].position.set(780, 70, 485)
         self.loadedItems[8].scale.set(1, 1, -1)
         self.loadedItems[8].children[0].children[0].children[0].material.side = THREE.FrontSide
         self.loadedItems[8].children[0].children[0].children[1].material.side = THREE.FrontSide
@@ -344,9 +324,6 @@ export default class threeScene {
         self.loadedItems[13].position.set(-493, 150, 1150)
         self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
         self.loadedItems[13].scale.set(-0, 0, 0)
-        // self.loadedItems[13].children[0].material.transparent = true
-        // self.loadedItems[13].children[0].material.opacity = 0
-
         this.placeholder1 = self.loadedItems[13]
         //placeholder2
         self.loadedItems[14].position.set(100, 250, 2000)
@@ -354,9 +331,6 @@ export default class threeScene {
         self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.02)
         self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 0, 1), 0.02)
         this.placeholder2 = self.loadedItems[14]
-
-        // this.placeholder1.visible = false
-        // this.placeholder2.visible = false
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
@@ -407,11 +381,6 @@ export default class threeScene {
         window.addEventListener("moveCameraTimeline", (evt) => {
             this.goTo(self.timelineObj[evt.detail])
         })
-        /*
-        //@index is 
-        this.goTo(self.timelineObj[index])
-        
-        */
 
         this.camera.position.set(-1302, 492, -983)
         this.camera.rotation.set(3.096496824068951, -0.635938533090549, 3.1398363604390074)
@@ -422,7 +391,6 @@ export default class threeScene {
 
         //events for camera zoom in on mobile
         this.setCameraPinch()
-        // this.cameraMovementEvents()
 
 
         this.circle = this.addRing()
@@ -663,9 +631,7 @@ export default class threeScene {
     }
     animate() {
         const animate = () => {
-            this.stats.begin();
             this.renderer.render(this.scene, this.camera);
-            this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
@@ -943,17 +909,3 @@ export default class threeScene {
         this.circle.visible = visible
     }
 }
-
-
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
-import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/RGBELoader.js';
-
-
-let t = new threeScene()
-t.init(document.getElementById("threeDiv"), GLTFLoader, RGBELoader)
-t.loadModels()
-t.animate()
-
-gsap.delayedCall(3, () => {
-    t.startAnim()
-})
