@@ -164,6 +164,7 @@ export default class threeScene {
         }
 
         this.scroll = false
+        this.exploreBtnOpen = true
         this.movementTimeline = gsap.timeline()
         this.gltfLoader = GLTFLoader
         this.RGBELoader = RGBELoader
@@ -334,10 +335,10 @@ export default class threeScene {
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
-            if (evt.deltaY > 0 && this.scroll) {
+            if (evt.deltaY > 0 && this.scroll && this.exploreBtnOpen) {
                 this.fowards()
             }
-            else if (evt.deltaY < 0 && this.scroll) {
+            else if (evt.deltaY < 0 && this.scroll && this.exploreBtnOpen) {
                 this.backwards()
             }
         })
@@ -907,5 +908,6 @@ export default class threeScene {
     }
     showExploreBtn(visible) {
         this.circle.visible = visible
+        this.exploreBtnOpen = visible
     }
 }
