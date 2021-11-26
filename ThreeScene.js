@@ -1,7 +1,8 @@
 import { OrbitControls } from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/controls/OrbitControls.js';
 import Stats from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/libs/stats.module.js'
-
-
+//BUG track pad trigger more scrolls
+//fade in and out the outros
+//50% cap for circle?
 export default class threeScene {
     constructor() {
     }
@@ -159,7 +160,7 @@ export default class threeScene {
             },
             {
                 id: 13,
-                position: { x: 100, y: 150, z: 1435 },
+                position: { x: 100, y: 250, z: 1935 },
                 rotation: { x: 3.096496824068951, y: -0.03892926785276455, z: 3.1398363604390074 },
                 obj: false,
             }
@@ -340,16 +341,21 @@ export default class threeScene {
         self.timelineObj[11].obj = self.loadedItems[12]
 
         //placeholder1
-        self.loadedItems[13].position.set(-500, 175, 1050)
+        self.loadedItems[13].position.set(-493, 150, 1150)
         self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
-        self.loadedItems[13].scale.set(-0.4, 0.4, 0.4)
+        self.loadedItems[13].scale.set(-1, 1, 1)
+        // self.loadedItems[13].children[0].material.transparent = true
+        // self.loadedItems[13].children[0].material.opacity = 0
+
         this.placeholder1 = self.loadedItems[13]
-        this.placeholder1.visible = false
         //placeholder2
-        self.loadedItems[14].position.set(100, 175, 1500)
+        self.loadedItems[14].position.set(100, 250, 2000)
         self.loadedItems[14].scale.set(-0.4, 0.4, 0.4)
-        self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
+        self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.02)
+        self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 0, 1), 0.02)
         this.placeholder2 = self.loadedItems[14]
+
+        this.placeholder1.visible = false
         this.placeholder2.visible = false
 
         //event for mouse wheel
@@ -516,24 +522,18 @@ export default class threeScene {
                 if (index == 0) {
                     this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 150)
                     this.circle.visible = true
-                    this.placeholder2.visible = false
-                    this.placeholder1.visible = false
                 }
-                else if (index <= 11) {
+                else if (index <= 12) {
                     this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
                     this.circle.visible = true
-                    this.placeholder2.visible = false
-                    this.placeholder1.visible = false
-
                 }
-                else if (index == 12) {
-                    this.placeholder1.visible = true
-                    this.placeholder2.visible = false
+                else {
+                    this.circle.visible = false
                 }
-                else if (index == 13) {
-                    this.placeholder2.visible = true
-                    this.placeholder1.visible = false
-                }
+                // else if(index == 12){
+                //     this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
+                //     this.circle.visible = true
+                // }
             }
         })
         gsap.to(this.camera.rotation, {
@@ -542,6 +542,18 @@ export default class threeScene {
             z: self.timelineObj[index].rotation.z,
             duration: 2,
         })
+        if (index < 11) {
+            this.placeholder1.visible = false
+            this.placeholder2.visible = false
+        }
+        else if (index == 12) {
+            this.placeholder1.visible = true
+            this.placeholder2.visible = false
+        }
+        else if (index == 13) {
+            this.placeholder1.visible = false
+            this.placeholder2.visible = true
+        }
         this.currentCameraCoords.x = self.timelineObj[index].position.x
         this.currentCameraCoords.y = self.timelineObj[index].position.y
         this.currentCameraCoords.z = self.timelineObj[index].position.z
@@ -616,7 +628,7 @@ export default class threeScene {
 
         //kill all tweens
         gsap.globalTimeline.clear()
-        
+
         //remove interval
         clearInterval(this.circleInterval);
 
@@ -686,55 +698,39 @@ export default class threeScene {
             pointerDown = false
         })
     }
-    rotateVertical() {
-        const v1 = new THREE.Vector3(0, 1, 0)
-        const v2 = new THREE.Vector3()
-        this.camera.getWorldDirection(v2)
-
-        const v3 = new THREE.Vector3((v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x))
-        console.log(this.initAngle)
-        this.initAngle += this.camera.sideRotationScalar
-        if (this.checkCameraRotationMouse(this.initAngle) === false) {
-            this.camera.rotateOnWorldAxis(v3, this.camera.sideRotationScalar)
-        } else {
-            this.initAngle -= this.camera.sideRotationScalar
-        }
-        // this.camera.rotation.z = 0
-    }
-    rotate() {
-        this.camera.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), (-this.camera.forwardRotationScalar / 300))
-        // this.camera.rotation.z = 0
-    }
-    checkCameraRotationMouse(y) {
-        if (y < 0.8 && y > -0.8) {
-            return false
-        }
-        return true
-    }
     //add button
     addRing() {
         const circleGroup = new THREE.Group()
 
-        const ring1Geom = new THREE.RingGeometry(9.9, 10, 80);
+        let radius1 = window.innerWidth / 192
+        if(radius1 < 5){
+            radius1 = 5
+        }
+        let radius2 = window.innerWidth / 160
+        if(radius2 < 6){
+            radius2 = 6
+        }
+
+        const ring1Geom = new THREE.RingGeometry(radius1 - 0.1, radius1, 80);
         const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, transparent: true });
         const mesh1 = new THREE.Mesh(ring1Geom, ring1Mat);
         mesh1.position.set(0, 20, 100)
         circleGroup.add(mesh1);
 
-        const ring2Geom = new THREE.RingGeometry(11.9, 12, 80);
+        const ring2Geom = new THREE.RingGeometry(radius2 - 0.1, radius2, 80);
         const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, transparent: true });
         const mesh2 = new THREE.Mesh(ring2Geom, ring2Mat);
         mesh2.position.set(0, 20, 100)
         circleGroup.add(mesh2);
 
-        const circleGeometry = new THREE.CircleGeometry(10, 32);
+        const circleGeometry = new THREE.CircleGeometry(radius1, 32);
         const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
         const circle = new THREE.Mesh(circleGeometry, circleMat);
         circle.position.set(0, 20, 100.1)
         circle.name = "explore"
         circleGroup.add(circle);
 
-        const circleGeometry2 = new THREE.CircleGeometry(12, 32);
+        const circleGeometry2 = new THREE.CircleGeometry(radius2, 32);
         const circleMat2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
         const circle2 = new THREE.Mesh(circleGeometry2, circleMat2);
         circle2.position.set(0, 20, 100.2)
@@ -920,6 +916,9 @@ export default class threeScene {
         this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
+    }
+    showExploreBtn(visible) {
+        this.circle.visible = visible
     }
 }
 
