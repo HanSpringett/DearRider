@@ -532,7 +532,7 @@ export default class threeScene {
                 }
                 
 
-                if (index < 11) {
+                if (index <= 11) {
                     gsap.to(this.placeholder1.scale, {
                         x: 0,
                         y: 0,
