@@ -530,44 +530,6 @@ export default class threeScene {
                 else {
                     this.circle.visible = false
                 }
-                
-
-                if (index <= 11) {
-                    gsap.to(this.placeholder1.scale, {
-                        x: 0,
-                        y: 0,
-                        z: 0,
-                        duration: 2,
-                    })
-                }
-                else if (index == 12) {
-                    gsap.to(this.placeholder2.scale, {
-                        x: 0,
-                        y: 0,
-                        z: 0,
-                        duration: 2,
-                    })
-                    gsap.to(this.placeholder1.scale, {
-                        x: -1,
-                        y: 1,
-                        z: 1,
-                        duration: 2,
-                    })
-                }
-                else if (index == 13) {
-                    gsap.to(this.placeholder1.scale, {
-                        x: 0,
-                        y: 0,
-                        z: 0,
-                        duration: 2,
-                    })
-                    gsap.to(this.placeholder2.scale, {
-                        x: -0.4,
-                        y: 0.4,
-                        z: 0.4,
-                        duration: 2,
-                    })
-                }
             }
         })
         gsap.to(this.camera.rotation, {
@@ -595,6 +557,43 @@ export default class threeScene {
         }
         if (index > 12) {
             gsap.to(this.bg.position, { z: 4500, duration: 2 })
+        }
+
+        if (index <= 11) {
+            gsap.to(this.placeholder1.scale, {
+                x: 0,
+                y: 0,
+                z: 0,
+                duration: 1,
+            })
+        }
+        else if (index == 12) {
+            gsap.to(this.placeholder2.scale, {
+                x: 0,
+                y: 0,
+                z: 0,
+                duration: 0.25,
+            })
+            gsap.to(this.placeholder1.scale, {
+                x: -1,
+                y: 1,
+                z: 1,
+                duration: 1,
+            })
+        }
+        else if (index == 13) {
+            gsap.to(this.placeholder1.scale, {
+                x: 0,
+                y: 0,
+                z: 0,
+                duration: 0.25,
+            })
+            gsap.to(this.placeholder2.scale, {
+                x: -0.4,
+                y: 0.4,
+                z: 0.4,
+                duration: 1,
+            })
         }
     }
     startSpinBoard(index) {
