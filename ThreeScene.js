@@ -360,6 +360,7 @@ export default class threeScene {
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
+            console.log("Scroll Detected")
             if (evt.deltaY > 0 && this.scroll) {
                 this.fowards()
             }
