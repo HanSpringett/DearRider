@@ -343,24 +343,23 @@ export default class threeScene {
         //placeholder1
         self.loadedItems[13].position.set(-493, 150, 1150)
         self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
-        self.loadedItems[13].scale.set(-1, 1, 1)
+        self.loadedItems[13].scale.set(-0, 0, 0)
         // self.loadedItems[13].children[0].material.transparent = true
         // self.loadedItems[13].children[0].material.opacity = 0
 
         this.placeholder1 = self.loadedItems[13]
         //placeholder2
         self.loadedItems[14].position.set(100, 250, 2000)
-        self.loadedItems[14].scale.set(-0.4, 0.4, 0.4)
+        self.loadedItems[14].scale.set(-0, 0, 0)
         self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.02)
         self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 0, 1), 0.02)
         this.placeholder2 = self.loadedItems[14]
 
-        this.placeholder1.visible = false
-        this.placeholder2.visible = false
+        // this.placeholder1.visible = false
+        // this.placeholder2.visible = false
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
-            console.log("Scroll Detected")
             if (evt.deltaY > 0 && this.scroll) {
                 this.fowards()
             }
@@ -531,10 +530,44 @@ export default class threeScene {
                 else {
                     this.circle.visible = false
                 }
-                // else if(index == 12){
-                //     this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
-                //     this.circle.visible = true
-                // }
+                
+
+                if (index < 11) {
+                    gsap.to(this.placeholder1.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 2,
+                    })
+                }
+                else if (index == 12) {
+                    gsap.to(this.placeholder2.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 2,
+                    })
+                    gsap.to(this.placeholder1.scale, {
+                        x: -1,
+                        y: 1,
+                        z: 1,
+                        duration: 2,
+                    })
+                }
+                else if (index == 13) {
+                    gsap.to(this.placeholder1.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 2,
+                    })
+                    gsap.to(this.placeholder2.scale, {
+                        x: -0.4,
+                        y: 0.4,
+                        z: 0.4,
+                        duration: 2,
+                    })
+                }
             }
         })
         gsap.to(this.camera.rotation, {
@@ -543,18 +576,7 @@ export default class threeScene {
             z: self.timelineObj[index].rotation.z,
             duration: 2,
         })
-        if (index < 11) {
-            this.placeholder1.visible = false
-            this.placeholder2.visible = false
-        }
-        else if (index == 12) {
-            this.placeholder1.visible = true
-            this.placeholder2.visible = false
-        }
-        else if (index == 13) {
-            this.placeholder1.visible = false
-            this.placeholder2.visible = true
-        }
+        
         this.currentCameraCoords.x = self.timelineObj[index].position.x
         this.currentCameraCoords.y = self.timelineObj[index].position.y
         this.currentCameraCoords.z = self.timelineObj[index].position.z
