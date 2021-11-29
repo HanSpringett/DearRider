@@ -474,6 +474,7 @@ export default class threeScene {
         this.moveCamera(0, false)
     }
     moveCamera(index, oldIndex) {
+        this.currentTimelinePos = index
         this.scroll = false
         const self = this
         if (oldIndex) {
@@ -788,20 +789,51 @@ export default class threeScene {
             onComplete: () => {
                 this.startSpinBoard(target.id)
                 this.scroll = true
-                if (target.id <= 11) {
+                if (target.id <= 12) {
                     this.circle.position.set(target.position.x + 10, target.position.y / 2, target.position.z - 150)
                     this.circle.visible = true
-                    this.placeholder2.visible = false
-                    this.placeholder1.visible = false
-
+                }
+                if (target.id <= 11) {
+                    gsap.to(this.placeholder1.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 1,
+                    })
+                    gsap.to(this.placeholder2.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 1,
+                    })
                 }
                 else if (target.id == 12) {
-                    this.placeholder1.visible = true
-                    this.placeholder2.visible = false
+                    gsap.to(this.placeholder2.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 0.25,
+                    })
+                    gsap.to(this.placeholder1.scale, {
+                        x: -1,
+                        y: 1,
+                        z: 1,
+                        duration: 0.25,
+                    })
                 }
                 else if (target.id == 13) {
-                    this.placeholder2.visible = true
-                    this.placeholder1.visible = false
+                    gsap.to(this.placeholder1.scale, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        duration: 0.25,
+                    })
+                    gsap.to(this.placeholder2.scale, {
+                        x: -0.4,
+                        y: 0.4,
+                        z: 0.4,
+                        duration: 0.25,
+                    })
                 }
                 this.index = target.id
 
@@ -819,31 +851,33 @@ export default class threeScene {
                     z: self.timelineObj[i].position.z,
                     duration: 1,
                 })
-                if (i == 0) {
+                if (i == 0 && i !== target.id) {
                     this.movementTimeline.add(() => {
                         gsap.to(this.bg.position, { z: 3550, duration: 1 })
                     })
                 }
-                if (i == 4) {
+                if (i == 4 && i !== target.id) {
                     this.movementTimeline.add(() => {
                         gsap.to(this.bg.position, { z: 3185, duration: 1 })
                     })
                 }
-                if (i == 7) {
+                if (i == 7 && i !== target.id) {
                     this.movementTimeline.add(() => {
                         gsap.to(this.bg.position, { z: 3600, duration: 1 })
                     })
                 }
-                if (i == 11) {
+                if (i == 11 && i !== target.id) {
                     this.movementTimeline.add(() => {
                         gsap.to(this.bg.position, { z: 4052, duration: 1 })
                     })
                 }
-                if (i == 12) {
+                if (i == 12 && i !== target.id) {
                     this.movementTimeline.add(() => {
                         gsap.to(this.bg.position, { z: 4500, duration: 1 })
                     })
                 }
+
+                
             }
         }
         else {
@@ -883,6 +917,7 @@ export default class threeScene {
         }
         this.movementTimeline.play()
         this.currentTimelinePos = target.id
+        console.log(this.currentTimelinePos)
     }
     roundUp(numToRound, multiple) {
         let value = multiple;
@@ -911,16 +946,3 @@ export default class threeScene {
         this.exploreBtnOpen = visible
     }
 }
-
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
-import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/RGBELoader.js';
-
-
-let t = new threeScene()
-t.init(document.getElementById("threeDiv"), GLTFLoader, RGBELoader)
-t.loadModels()
-t.animate()
-
-gsap.delayedCall(3, () => {
-    t.startAnim()
-})
