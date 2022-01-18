@@ -52,17 +52,17 @@ export default class threeScene {
         this.sceneAssets = [
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/building_shadows_v11.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/Cubes_v2.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRider_1977.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1983.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1986.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1989.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/1993.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider/main/assets/1996.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/1996_dolphin.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2002.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2013.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2020.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/2021.gltf',
+            './assets/DearRider_1977.gltf',
+            './assets/DearRider_1983.gltf',
+            './assets/DearRider_1986.gltf',
+            './assets/DearRider_1989.gltf',
+            './assets/DearRider_1993.gltf',
+            './assets/DearRider_1996_Custom.gltf',
+            './assets/DearRider_1996_Dolphin.gltf',
+            './assets/DearRider_2002.gltf',
+            './assets/DearRider_2013.gltf',
+            './assets/DearRider_2020.gltf',
+            './assets/DearRider_2021.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRiderOutro1.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/main/assets/DearRiderOutro2.gltf'
         ];
@@ -166,6 +166,8 @@ export default class threeScene {
         this.scroll = false
         this.exploreBtnOpen = true
         this.movementTimeline = gsap.timeline()
+        this.singleMoveTimeline = gsap.timeline()
+        this.boardRotation = gsap.timeline()
         this.gltfLoader = GLTFLoader
         this.RGBELoader = RGBELoader
     }
@@ -247,10 +249,9 @@ export default class threeScene {
         self.loadedItems[0].position.set(0, 0, 0)
         //cubes
         self.loadedItems[1].position.set(0, 120, -825)
-        //1979 board
+        //1977 board
         self.loadedItems[2].position.set(1150, 70, -130)
         self.loadedItems[2].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[2].scale.set(2, 2, 2)
         self.timelineObj[1].obj = self.loadedItems[2]
         //1983 board
         self.loadedItems[3].position.set(415, 70, -135)
@@ -259,66 +260,40 @@ export default class threeScene {
         //1986 board
         self.loadedItems[4].position.set(-345, 70, -135)
         self.loadedItems[4].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[4].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[4].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[4].children[0].children[2].material.side = THREE.FrontSide
-        self.loadedItems[4].children[0].children[3].material.side = THREE.FrontSide
         self.timelineObj[3].obj = self.loadedItems[4]
         //1989 board
         self.loadedItems[5].position.set(-1085, 70, -135)
         self.loadedItems[5].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[5].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[5].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[5].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[4].obj = self.loadedItems[5]
         //1996_dolphin board
         self.loadedItems[6].position.set(-725, 70, 485)
         self.loadedItems[6].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[6].children[0].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[6].children[0].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[6].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[5].obj = self.loadedItems[6]
         //1996 board
         self.loadedItems[7].position.set(45, 70, 485)
         self.loadedItems[7].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[7].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[7].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[7].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[6].obj = self.loadedItems[7]
         //1993 board
         self.loadedItems[8].position.set(780, 70, 485)
         self.loadedItems[8].scale.set(1, 1, -1)
-        self.loadedItems[8].children[0].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[8].children[0].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[8].children[0].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[7].obj = self.loadedItems[8]
         //2002 board
+        console.log(self.loadedItems[9])
         self.loadedItems[9].position.set(1170, 70, 1000)
         self.loadedItems[9].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[9].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[9].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[9].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[8].obj = self.loadedItems[9]
         //2013 board
         self.loadedItems[10].position.set(420, 70, 1000)
         self.loadedItems[10].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[10].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[10].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[10].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[9].obj = self.loadedItems[10]
         //2020 board
         self.loadedItems[11].position.set(-330, 70, 1000)
         self.loadedItems[11].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[11].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[11].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[11].children[0].children[2].material.side = THREE.FrontSide
         self.timelineObj[10].obj = self.loadedItems[11]
         //2021 board
         self.loadedItems[12].position.set(-1065, 70, 1000)
         self.loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
-        self.loadedItems[12].children[0].children[0].material.side = THREE.FrontSide
-        self.loadedItems[12].children[0].children[1].material.side = THREE.FrontSide
-        self.loadedItems[12].children[0].children[2].material.side = THREE.FrontSide
+        console.log(self.loadedItems[12])
         self.timelineObj[11].obj = self.loadedItems[12]
 
         //placeholder1
@@ -377,9 +352,8 @@ export default class threeScene {
                 console.log("Index", this.index)
             }
         })
-
         //move the camera at the event.detail where event.detail is the index of the timelineObj
-        window.addEventListener("moveCameraTimeline", (evt) => {
+        window.addEventListener("click", (evt) => {
             this.goTo(self.timelineObj[evt.detail])
         })
 
@@ -474,6 +448,10 @@ export default class threeScene {
         this.moveCamera(0, false)
     }
     moveCamera(index, oldIndex) {
+        this.movementTimeline.kill()
+        this.boardRotation.kill()
+        this.singleMoveTimeline.kill()
+
         this.currentTimelinePos = index
         this.scroll = false
         const self = this
@@ -481,7 +459,7 @@ export default class threeScene {
             this.endSpinBoard(oldIndex)
             this.circle.visible = false
         }
-        gsap.to(this.camera.position, {
+        this.singleMoveTimeline = gsap.to(this.camera.position, {
             x: self.timelineObj[index].position.x,
             y: self.timelineObj[index].position.y,
             z: self.timelineObj[index].position.z,
@@ -502,31 +480,30 @@ export default class threeScene {
                 }
             }
         })
-        gsap.to(this.camera.rotation, {
+        this.boardRotation = gsap.to(this.camera.rotation, {
             x: self.timelineObj[index].rotation.x,
             y: self.timelineObj[index].rotation.y,
             z: self.timelineObj[index].rotation.z,
             duration: 2,
         })
-        
+
         this.currentCameraCoords.x = self.timelineObj[index].position.x
         this.currentCameraCoords.y = self.timelineObj[index].position.y
         this.currentCameraCoords.z = self.timelineObj[index].position.z
-
-        if (index > 0) {
-            gsap.to(this.bg.position, { z: 3550, duration: 2 })
-        }
-        if (index > 4) {
-            gsap.to(this.bg.position, { z: 3185, duration: 2 })
-        }
-        if (index > 7) {
-            gsap.to(this.bg.position, { z: 3600, duration: 2 })
-        }
-        if (index > 11) {
-            gsap.to(this.bg.position, { z: 4052, duration: 2 })
-        }
         if (index > 12) {
             gsap.to(this.bg.position, { z: 4500, duration: 2 })
+        }
+        else if (index > 11) {
+            gsap.to(this.bg.position, { z: 4052, duration: 2 })
+        }
+        else if (index > 7) {
+            gsap.to(this.bg.position, { z: 3600, duration: 2 })
+        }
+        else if (index > 4) {
+            gsap.to(this.bg.position, { z: 3185, duration: 2 })
+        }
+        else if (index > 0) {
+            gsap.to(this.bg.position, { z: 3550, duration: 2 })
         }
 
         if (index <= 11) {
@@ -583,11 +560,12 @@ export default class threeScene {
     endSpinBoard(index) {
         const self = this
         if (self.timelineObj[index].obj) {
-            self.timelineObj[index].obj.rotation.set(this.rotateCoords.x, this.rotateCoords.y, this.rotateCoords.z)
             try {
                 this.spinAnim.kill()
             } catch (e) { }
             this.spinAnim = null;
+
+            self.timelineObj[index].obj.rotation.set(this.rotateCoords.x, this.rotateCoords.y, this.rotateCoords.z)
         }
     }
     //function that cleans and disposes the scene
@@ -693,11 +671,11 @@ export default class threeScene {
         const circleGroup = new THREE.Group()
 
         let radius1 = window.innerWidth / 192
-        if(radius1 < 5){
+        if (radius1 < 5) {
             radius1 = 5
         }
         let radius2 = window.innerWidth / 160
-        if(radius2 < 6){
+        if (radius2 < 6) {
             radius2 = 6
         }
 
@@ -780,17 +758,48 @@ export default class threeScene {
         return mesh;
 
     }
-    //move the camera through the timeline to the target
+    roundUp(numToRound, multiple) {
+        let value = multiple;
+        while (value < numToRound) {
+            value = value * multiple;
+        }
+        return value;
+    }
+    hideExploreButton() {
+        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 0, duration: 1 })
+    }
+    showExploreButton() {
+        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 1, duration: 1 })
+    }
+    onMouseMove(event) {
+
+        // calculate mouse position in normalized device coordinates
+        // (-1 to +1) for both components
+
+        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    }
+    showExploreBtn(visible) {
+        this.circle.visible = visible
+        this.exploreBtnOpen = visible
+    }
     goTo(target) {
-        this.endSpinBoard(target.id)
+        this.endSpinBoard(this.index)
         const self = this
         this.movementTimeline.kill()
+        this.boardRotation.kill()
+        this.singleMoveTimeline.kill()
         this.movementTimeline = gsap.timeline({
             onComplete: () => {
                 this.startSpinBoard(target.id)
                 this.scroll = true
-                if (target.id <= 12) {
-                    this.circle.position.set(target.position.x + 10, target.position.y / 2, target.position.z - 150)
+                if(target.id == 0){
+                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 2) - 0.5, self.timelineObj[target.id].position.z - 150)
+                    this.circle.visible = true
+                }
+                else if (target.id <= 12) {
+                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, self.timelineObj[target.id].position.y / 1.55, self.timelineObj[target.id].position.z - 150)
                     this.circle.visible = true
                 }
                 if (target.id <= 11) {
@@ -835,114 +844,52 @@ export default class threeScene {
                         duration: 0.25,
                     })
                 }
-                this.index = target.id
-
+        
                 this.currentCameraCoords.x = self.timelineObj[this.index].position.x
                 this.currentCameraCoords.y = self.timelineObj[this.index].position.y
                 this.currentCameraCoords.z = self.timelineObj[this.index].position.z
 
             }
         })
-        if (target.id > this.currentTimelinePos) {
-            for (let i = this.currentTimelinePos + 1; i <= target.id; i++) {
-                this.movementTimeline.to(this.camera.position, {
-                    x: self.timelineObj[i].position.x,
-                    y: self.timelineObj[i].position.y,
-                    z: self.timelineObj[i].position.z,
-                    duration: 1,
-                })
-                if (i == 0 && i !== target.id) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 3550, duration: 1 })
-                    })
-                }
-                if (i == 4 && i !== target.id) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 3185, duration: 1 })
-                    })
-                }
-                if (i == 7 && i !== target.id) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 3600, duration: 1 })
-                    })
-                }
-                if (i == 11 && i !== target.id) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 4052, duration: 1 })
-                    })
-                }
-                if (i == 12 && i !== target.id) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 4500, duration: 1 })
-                    })
-                }
-
-                
-            }
+        this.movementTimeline.to(this.camera.position, {
+            x: self.timelineObj[target.id].position.x,
+            y: self.timelineObj[target.id].position.y,
+            z: self.timelineObj[target.id].position.z,
+            duration: 1,
+        }, 0)
+        if (target.id == 1) {
+            this.movementTimeline.add(() => {
+                gsap.to(this.bg.position, { z: 3550, duration: 1 })
+            }, 0)
         }
-        else {
-            for (let i = this.currentTimelinePos - 1; i >= target.id; i--) {
-                this.movementTimeline.to(this.camera.position, {
-                    x: self.timelineObj[i].position.x,
-                    y: self.timelineObj[i].position.y,
-                    z: self.timelineObj[i].position.z,
-                    duration: 1,
-                })
-                if (i == 0) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 3550, duration: 1 })
-                    })
-                }
-                if (i == 4) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 3185, duration: 1 })
-                    })
-                }
-                if (i == 7) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 3600, duration: 1 })
-                    })
-                }
-                if (i == 11) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 4052, duration: 1 })
-                    })
-                }
-                if (i == 12) {
-                    this.movementTimeline.add(() => {
-                        gsap.to(this.bg.position, { z: 4500, duration: 1 })
-                    })
-                }
-            }
+        if (target.id == 5) {
+            this.movementTimeline.add(() => {
+                gsap.to(this.bg.position, { z: 3185, duration: 1 })
+            }, 0)
         }
+        if (target.id == 8) {
+            this.movementTimeline.add(() => {
+                gsap.to(this.bg.position, { z: 3600, duration: 1 })
+            }, 0)
+        }
+        if (target.id == 12) {
+            this.movementTimeline.add(() => {
+                gsap.to(this.bg.position, { z: 4052, duration: 1 })
+            }, 0)
+        }
+        if (target.id == 13) {
+            this.movementTimeline.add(() => {
+                gsap.to(this.bg.position, { z: 4500, duration: 1 })
+            }, 0)
+        }
+        this.index = target.id
         this.movementTimeline.play()
         this.currentTimelinePos = target.id
-        console.log(this.currentTimelinePos)
     }
-    roundUp(numToRound, multiple) {
-        let value = multiple;
-        while (value < numToRound) {
-            value = value * multiple;
+    showUI(show){
+        for(let i = 0; i < this.circle.children.length; i++){
+            this.circle.children[i].visible = show
         }
-        return value;
-    }
-    hideExploreButton() {
-        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 0, duration: 1 })
-    }
-    showExploreButton() {
-        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 1, duration: 1 })
-    }
-    onMouseMove(event) {
-
-        // calculate mouse position in normalized device coordinates
-        // (-1 to +1) for both components
-
-        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-    }
-    showExploreBtn(visible) {
-        this.circle.visible = visible
-        this.exploreBtnOpen = visible
     }
 }
+
