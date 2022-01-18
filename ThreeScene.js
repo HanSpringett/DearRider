@@ -444,8 +444,9 @@ export default class threeScene {
         }
     }
     //initial animation that moves the camera from the corner to the cubes
-    startAnim() {
+    startAnim(showUI) {
         this.moveCamera(0, false)
+        t.showUI(showUI)
     }
     moveCamera(index, oldIndex) {
         this.movementTimeline.kill()
@@ -892,4 +893,3 @@ export default class threeScene {
         }
     }
 }
-
