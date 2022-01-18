@@ -353,7 +353,7 @@ export default class threeScene {
             }
         })
         //move the camera at the event.detail where event.detail is the index of the timelineObj
-        window.addEventListener("click", (evt) => {
+        window.addEventListener("moveCameraTimeline", (evt) => {
             this.goTo(self.timelineObj[evt.detail])
         })
 
