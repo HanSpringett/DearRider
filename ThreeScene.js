@@ -428,6 +428,11 @@ export default class threeScene {
             }
         }, 100)
 
+        t.animate()
+        gsap.delayedCall(3, () => {
+            t.startAnim(false)
+        })
+
     }
     //move camera backwards on the timeline
     backwards() {
@@ -795,7 +800,7 @@ export default class threeScene {
             onComplete: () => {
                 this.startSpinBoard(target.id)
                 this.scroll = true
-                if(target.id == 0){
+                if (target.id == 0) {
                     this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 2) - 0.5, self.timelineObj[target.id].position.z - 150)
                     this.circle.visible = true
                 }
@@ -845,7 +850,7 @@ export default class threeScene {
                         duration: 0.25,
                     })
                 }
-        
+
                 this.currentCameraCoords.x = self.timelineObj[this.index].position.x
                 this.currentCameraCoords.y = self.timelineObj[this.index].position.y
                 this.currentCameraCoords.z = self.timelineObj[this.index].position.z
@@ -887,8 +892,8 @@ export default class threeScene {
         this.movementTimeline.play()
         this.currentTimelinePos = target.id
     }
-    showUI(show){
-        for(let i = 0; i < this.circle.children.length; i++){
+    showUI(show) {
+        for (let i = 0; i < this.circle.children.length; i++) {
             this.circle.children[i].visible = show
         }
     }
@@ -901,8 +906,4 @@ import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples
 let t = new threeScene()
 t.init(document.getElementById("threeDiv"), GLTFLoader, RGBELoader)
 t.loadModels()
-t.animate()
-gsap.delayedCall(3, () => {
-    t.startAnim(false)
-})
 
