@@ -44,23 +44,15 @@
     <script src="ThreeScene.js" type="module">
     </script>
     <script type="module">
-        import * as threeScene from 'https://cdn.jsdelivr.net/gh/HanSpringett/DearRider_Webflow_embedtest@release2.2/main.js'
-        import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
-        import Stats from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/libs/stats.module.js'
-
-
         import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
         import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/RGBELoader.js';
-
 
         let t = new threeScene()
         t.init(document.getElementById("threeDiv"), GLTFLoader, RGBELoader)
         t.loadModels()
         t.animate()
-
-        gsap.delayedCall(1, () => {
+        gsap.delayedCall(3, () => {
             t.startAnim(false)
         })
-
     </script>
 </body>
