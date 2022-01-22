@@ -504,7 +504,7 @@ export default class threeScene {
         this.keepPosition = false
         const self = this
         if (oldIndex) {
-            this.endSpinBoard(oldIndex)
+            // this.endSpinBoard(oldIndex)
             this.circle.visible = false
         }
         this.singleMoveTimeline = gsap.to(this.camera.position, {
@@ -514,7 +514,7 @@ export default class threeScene {
             duration: 2,
             onComplete: () => {
                 this.moveButtonText = false
-                self.startSpinBoard(index)
+                // self.startSpinBoard(index)
                 this.scroll = true
                 if (index == 0) {
                     this.showWatchButtons(true)
@@ -887,7 +887,7 @@ export default class threeScene {
         this.exploreBtnOpen = visible
     }
     goTo(target) {
-        this.endSpinBoard(this.index)
+        // this.endSpinBoard(this.index)
         const self = this
         this.moveButtonText = false
         this.movementTimeline.kill()
@@ -895,7 +895,7 @@ export default class threeScene {
         this.singleMoveTimeline.kill()
         this.movementTimeline = gsap.timeline({
             onComplete: () => {
-                this.startSpinBoard(target.id)
+                // this.startSpinBoard(target.id)
                 this.scroll = true
                 if (target.id == 0) {
                     this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 2) - 0.5, self.timelineObj[target.id].position.z - 150)
