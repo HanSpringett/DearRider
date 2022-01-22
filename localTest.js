@@ -210,13 +210,6 @@ export default class threeScene {
                 (gltf) => {
                     this.scene.add(gltf.scene);
                     self.loadedItems[i] = gltf.scene
-                    gltf.scene.traverse(child => {
-                        // if (child.isMesh) {
-                        //     // child.castShadow = true;
-                        //     // child.receiveShadow = true;
-                        //     child.visible = false
-                        // }
-                    })
                 }
             );
         }
