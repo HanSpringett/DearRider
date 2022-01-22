@@ -687,7 +687,7 @@ export default class threeScene {
     animate() {
         const animate = () => {
             this.stats.begin();
-            // this.moveText()
+            this.moveText()
             this.renderer.render(this.scene, this.camera);
             this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
@@ -1011,25 +1011,25 @@ export default class threeScene {
         this.logoText.rotation.copy(this.camera.rotation)
     }
     showCirclesCircle(visible) {
-        // for (let i = 0; i < this.circle.children.length - 1; i++) {
-        //     this.circle.children[i].visible = visible
-        // }
+        for (let i = 0; i < this.circle.children.length - 1; i++) {
+            this.circle.children[i].visible = visible
+        }
     }
     fadeLogo(opacity, duration = 1) {
-        // gsap.to(this.logoText.children[0].material, { opacity: opacity, duration: duration })
+        gsap.to(this.logoText.children[0].material, { opacity: opacity, duration: duration })
     }
     enlargeTween(object, scale, duration = 1) {
-        // gsap.to(object.scale, { x: scale.x, y: scale.y, z: scale.z, duration: duration })
+        gsap.to(object.scale, { x: scale.x, y: scale.y, z: scale.z, duration: duration })
     }
     moveObjectTween(object, position, duration = 1, last = false) {
-        // gsap.to(object.position, {
-        //     x: position.x, y: position.y, z: position.z, duration: duration,
-        //     onComplete: () => {
-        //         if (last) {
-        //             this.moveButtonTextAnim = false
-        //         }
-        //     }
-        // })
+        gsap.to(object.position, {
+            x: position.x, y: position.y, z: position.z, duration: duration,
+            onComplete: () => {
+                if (last) {
+                    this.moveButtonTextAnim = false
+                }
+            }
+        })
     }
     showWatchButtons(visible) {
         this.logoText.visible = visible
