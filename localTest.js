@@ -10,7 +10,7 @@ export default class threeScene {
             75,
             this.width / this.height,
             1,
-            6000
+            9000
         );
 
         this.renderer = new THREE.WebGLRenderer({antialias: true})
