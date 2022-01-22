@@ -28,7 +28,6 @@ export default class threeScene {
         this.camera.sideRotationScalar = 0
 
         this.stats = new Stats();
-        console.log(this.stats)
         this.stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
         document.body.appendChild(this.stats.dom);
 
@@ -688,7 +687,7 @@ export default class threeScene {
     animate() {
         const animate = () => {
             this.stats.begin();
-            this.moveText()
+            // this.moveText()
             this.renderer.render(this.scene, this.camera);
             this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
