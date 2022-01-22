@@ -711,7 +711,7 @@ export default class threeScene {
     animate() {
         const animate = () => {
             this.stats.begin();
-            this.moveText()
+            // this.moveText()
             this.renderer.render(this.scene, this.camera);
             this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
