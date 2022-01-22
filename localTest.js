@@ -323,6 +323,7 @@ export default class threeScene {
         else {
             this.uiScale = 0.01
         }
+        console.log(this.uiScale)
         this.textButton = self.loadedItems[15]
         this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
         this.textBG = self.loadedItems[16]
@@ -492,7 +493,7 @@ export default class threeScene {
     }
     //initial animation that moves the camera from the corner to the cubes
     startAnim(showUI) {
-        for(let i = 0; i < this.loadedItems.length; i++){
+        for (let i = 0; i < this.loadedItems.length; i++) {
             self.loadedItems[i].matrixAutoUpdate = false
         }
         this.moveCamera(0, false)
@@ -591,6 +592,7 @@ export default class threeScene {
                 z: -0.35,
                 duration: 1,
             })
+
             this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
             this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
             this.moveObjectTween(this.textBG, { x: -499, y: 138, z: 1005 }, 2)
@@ -614,12 +616,11 @@ export default class threeScene {
                 duration: 1,
             })
             this.fadeLogo(0)
-            this.enlargeTween(this.textBG, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
-            this.enlargeTween(this.textButton, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
+            this.enlargeTween(this.textBG, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: this.uiScale * 1.75 })
+            this.enlargeTween(this.textButton, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: -this.uiScale * 1.75 })
             this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 2)
             this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 2, true)
         }
-
     }
     startSpinBoard(index) {
         const self = this
