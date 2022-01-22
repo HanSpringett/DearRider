@@ -61,17 +61,17 @@ export default class threeScene {
         this.sceneAssets = [
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/building_shadows_v11.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/Cubes_v2.gltf',
-            './assets/test/DearRider_1977.gltf',
-            './assets/test/DearRider_1983.gltf',
-            './assets/test/DearRider_1986.gltf',
-            './assets/test/DearRider_1989.gltf',
-            './assets/test/DearRider_1993.gltf',
-            './assets/test/DearRider_1996_Custom.gltf',
-            './assets/test/DearRider_1996_Dolphin.gltf',
-            './assets/test/DearRider_2002.gltf',
-            './assets/test/DearRider_2013.gltf',
-            './assets/test/DearRider_2020.gltf',
-            './assets/test/DearRider_2021.gltf',
+            './assets/DearRider_1977.gltf',
+            './assets/DearRider_1983.gltf',
+            './assets/DearRider_1986.gltf',
+            './assets/DearRider_1989.gltf',
+            './assets/DearRider_1993.gltf',
+            './assets/DearRider_1996_Custom.gltf',
+            './assets/DearRider_1996_Dolphin.gltf',
+            './assets/DearRider_2002.gltf',
+            './assets/DearRider_2013.gltf',
+            './assets/DearRider_2020.gltf',
+            './assets/DearRider_2021.gltf',
             './assets/Outro1.gltf',
             './assets/Outro2.gltf',
             './assets/WatchDocumentary_text.gltf',
@@ -717,6 +717,7 @@ export default class threeScene {
 
         cancelAnimationFrame(this.animFrame)
     }
+   
   
     animate() {
         const animate = () => {
@@ -727,6 +728,17 @@ export default class threeScene {
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
+        const animate = () => {
+            this.animationFrameId = requestAnimationFrame(animate);
+            if (this.renderTime >= 1) {
+              if (this.renderTime > 1) {
+                this.renderTime -= 1;
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+              }
+            }
+          };
+          animate();
     }
     setCameraPinch() {
         let value = 0
@@ -1069,6 +1081,9 @@ export default class threeScene {
         this.logoText.visible = visible
         this.textBG.visible = visible
         this.textButton.visible = visible
+    }
+    needToRender(value = 2) {
+        this.renderTime = value;
     }
 }
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
