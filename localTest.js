@@ -78,9 +78,9 @@ export default class threeScene {
             './assets/DearRider_2021.gltf',
             './assets/Outro1.gltf',
             './assets/Outro2.gltf',
-            './assets/WatchDocumentary_text.gltf',
-            './assets/WatchDocumentary_background.gltf',
-            './assets/DearRider_icon.gltf'
+            // './assets/WatchDocumentary_text.gltf',
+            // './assets/WatchDocumentary_background.gltf',
+            // './assets/DearRider_icon.gltf'
         ];
 
         this.loadedItems = {};
@@ -325,16 +325,16 @@ export default class threeScene {
         else {
             this.uiScale = 0.01
         }
-        this.textButton = self.loadedItems[15]
-        this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
-        this.textBG = self.loadedItems[16]
-        this.textBG.name = 'textBG'
-        this.textBG.children[0].children[0].material.transparent = true
-        this.textBG.scale.set(this.uiScale, this.uiScale, this.uiScale)
-        this.textBG.children[0].children[0].opacity = 0
-        this.logoText = self.loadedItems[17]
-        this.logoText.children[0].material.transparent = true
-        this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
+        // this.textButton = self.loadedItems[15]
+        // this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
+        // this.textBG = self.loadedItems[16]
+        // this.textBG.name = 'textBG'
+        // this.textBG.children[0].children[0].material.transparent = true
+        // this.textBG.scale.set(this.uiScale, this.uiScale, this.uiScale)
+        // this.textBG.children[0].children[0].opacity = 0
+        // this.logoText = self.loadedItems[17]
+        // this.logoText.children[0].material.transparent = true
+        // this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
@@ -594,13 +594,13 @@ export default class threeScene {
                 duration: 1,
             })
 
-            this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
-            this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
-            this.moveObjectTween(this.textBG, { x: -499, y: 138, z: 1005 }, 2)
-            this.moveObjectTween(this.textButton, { x: -499, y: 138, z: 1005 }, 2, true)
-            gsap.delayedCall(2, () => {
-                this.fadeLogo(1)
-            })
+            // this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
+            // this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
+            // this.moveObjectTween(this.textBG, { x: -499, y: 138, z: 1005 }, 2)
+            // this.moveObjectTween(this.textButton, { x: -499, y: 138, z: 1005 }, 2, true)
+            // gsap.delayedCall(2, () => {
+            //     this.fadeLogo(1)
+            // })
         }
         else if (index == 13) {
             this.moveButtonTextAnim = true
@@ -616,11 +616,11 @@ export default class threeScene {
                 z: 0.035,
                 duration: 1,
             })
-            this.fadeLogo(0)
-            this.enlargeTween(this.textBG, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: this.uiScale * 1.75 })
-            this.enlargeTween(this.textButton, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: -this.uiScale * 1.75 })
-            this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 2)
-            this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 2, true)
+            // this.fadeLogo(0)
+            // this.enlargeTween(this.textBG, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: this.uiScale * 1.75 })
+            // this.enlargeTween(this.textButton, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: -this.uiScale * 1.75 })
+            // this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 2)
+            // this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 2, true)
         }
     }
     startSpinBoard(index) {
@@ -662,30 +662,30 @@ export default class threeScene {
             }
         }
 
-        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
-            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
-            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
-        }
-        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
-            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
-            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
-        }
-        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
-            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
-            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
-        }
-        this.textButton.children[0].children[1].geometry.dispose()
-        cleanMaterial(this.textButton.children[0].children[1].material)
-        this.textButton.children[0].children[1].geometry.dispose()
-        cleanMaterial(this.textButton.children[0].children[1].material)
-        this.textBG.children[0].children[0].geometry.dispose()
-        cleanMaterial(this.textBG.children[0].children[0].material)
-        this.logoText.children[0].geometry.dispose()
-        cleanMaterial(this.logoText.children[0].material)
+        // for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+        //     this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+        //     cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        // }
+        // for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+        //     this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+        //     cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        // }
+        // for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+        //     this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+        //     cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        // }
+        // this.textButton.children[0].children[1].geometry.dispose()
+        // cleanMaterial(this.textButton.children[0].children[1].material)
+        // this.textButton.children[0].children[1].geometry.dispose()
+        // cleanMaterial(this.textButton.children[0].children[1].material)
+        // this.textBG.children[0].children[0].geometry.dispose()
+        // cleanMaterial(this.textBG.children[0].children[0].material)
+        // this.logoText.children[0].geometry.dispose()
+        // cleanMaterial(this.logoText.children[0].material)
 
-        this.textButton = null
-        this.logoText = null
-        this.textBG = null
+        // this.textButton = null
+        // this.logoText = null
+        // this.textBG = null
 
         this.scene.traverse(object => {
             if (!object.isMesh) return
@@ -716,7 +716,7 @@ export default class threeScene {
     animate() {
         const animate = () => {
             this.stats.begin();
-            this.moveText()
+            // this.moveText()
             this.renderer.render(this.scene, this.camera);
             this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
@@ -945,13 +945,13 @@ export default class threeScene {
                     })
                     this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 1.55) - 40, self.timelineObj[target.id].position.z - 150)
                     this.showCirclesCircle(false)
-                    this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
-                    this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
-                    this.moveObjectTween(this.textBG, { x: -499, y: 138, z: 1005 }, 1)
-                    this.moveObjectTween(this.textButton, { x: -499, y: 138, z: 1005 }, 1, true)
-                    gsap.delayedCall(1, () => {
-                        this.fadeLogo(1)
-                    })
+                    // this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
+                    // this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
+                    // this.moveObjectTween(this.textBG, { x: -499, y: 138, z: 1005 }, 1)
+                    // this.moveObjectTween(this.textButton, { x: -499, y: 138, z: 1005 }, 1, true)
+                    // gsap.delayedCall(1, () => {
+                    //     this.fadeLogo(1)
+                    // })
                 }
                 else if (target.id == 13) {
                     this.moveButtonTextAnim = true
@@ -968,10 +968,10 @@ export default class threeScene {
                         z: 0.035,
                         duration: 1,
                     })
-                    this.enlargeTween(this.textBG, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
-                    this.enlargeTween(this.textButton, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
-                    this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 1)
-                    this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 1, true)
+                    // this.enlargeTween(this.textBG, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
+                    // this.enlargeTween(this.textButton, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
+                    // this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 1)
+                    // this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 1, true)
                 }
                 this.currentCameraCoords.x = self.timelineObj[this.index].position.x
                 this.currentCameraCoords.y = self.timelineObj[this.index].position.y
@@ -1061,9 +1061,9 @@ export default class threeScene {
         })
     }
     showWatchButtons(visible) {
-        this.logoText.visible = visible
-        this.textBG.visible = visible
-        this.textButton.visible = visible
+        // this.logoText.visible = visible
+        // this.textBG.visible = visible
+        // this.textButton.visible = visible
     }
     needToRender(value = 2) {
         this.renderTime = value;
