@@ -620,17 +620,17 @@ export default class threeScene {
     }
     startSpinBoard(index) {
         const self = this
-        // if (self.timelineObj[index].obj) {
-        //     this.rotateCoords = {
-        //         x: self.timelineObj[index].obj.rotation.x,
-        //         y: self.timelineObj[index].obj.rotation.y,
-        //         z: self.timelineObj[index].obj.rotation.z
-        //     }
-        //     this.spinAnim = gsap.timeline({ repeat: -1, duration: 0.01 })
-        //     this.spinAnim.add(() => {
-        //         self.timelineObj[index].obj.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.01)
-        //     })
-        // }
+        if (self.timelineObj[index].obj) {
+            this.rotateCoords = {
+                x: self.timelineObj[index].obj.rotation.x,
+                y: self.timelineObj[index].obj.rotation.y,
+                z: self.timelineObj[index].obj.rotation.z
+            }
+            this.spinAnim = gsap.timeline({ repeat: -1, duration: 0.01 })
+            this.spinAnim.add(() => {
+                self.timelineObj[index].obj.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.01)
+            })
+        }
     }
     endSpinBoard(index) {
         const self = this
