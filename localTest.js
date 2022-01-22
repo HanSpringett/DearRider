@@ -13,15 +13,7 @@ export default class threeScene {
             6000
         );
 
-        let pixelRatio = window.devicePixelRatio
-        let AA = true
-        if (pixelRatio > 1) {
-            AA = false
-        }
-        this.renderer = new THREE.WebGLRenderer({
-            antialias: AA,
-            powerPreference: "high-performance",
-        })
+        this.renderer = new THREE.WebGLRenderer({antialias: true})
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
