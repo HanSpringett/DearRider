@@ -13,7 +13,7 @@ export default class threeScene {
             10000
         );
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer = new THREE.WebGLRenderer({ antialias: false });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         if(window.devicePixelRatio > 2){
             this.renderer.setPixelRatio(2);
@@ -193,6 +193,7 @@ export default class threeScene {
         };
         this.manager.onLoad = () => {
             console.log('Loading complete!');
+            console.log("Number of Triangles :", this.renderer.info.render.triangles);
             this.setUpScene()
         };
         this.manager.onProgress = function (url, itemsLoaded, itemsTotal) {
@@ -716,8 +717,6 @@ export default class threeScene {
 
         cancelAnimationFrame(this.animFrame)
     }
-   
-  
     animate() {
         const animate = () => {
             this.stats.begin();
