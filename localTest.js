@@ -30,8 +30,15 @@ export default class threeScene {
             NEAR,
             FAR
         )
-
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        let pixelRatio = window.devicePixelRatio
+        let AA = true
+        if (pixelRatio > 1) {
+            AA = false
+        }
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: AA,
+            powerPreference: "high-performance",
+          })
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
