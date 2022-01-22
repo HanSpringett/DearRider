@@ -492,11 +492,13 @@ export default class threeScene {
     }
     //initial animation that moves the camera from the corner to the cubes
     startAnim(showUI) {
+        for(let i = 0; i < this.loadedItems.length; i++){
+            self.loadedItems[i].matrixAutoUpdate = false
+        }
         this.moveCamera(0, false)
         this.showUI(showUI)
     }
     moveCamera(index, oldIndex) {
-        this.needToRender(125)
         this.movementTimeline.kill()
         this.boardRotation.kill()
         this.singleMoveTimeline.kill()
@@ -630,7 +632,6 @@ export default class threeScene {
             this.spinAnim = gsap.timeline({ repeat: -1, duration: 0.01 })
             this.spinAnim.add(() => {
                 self.timelineObj[index].obj.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.01)
-                this.needToRender(2)
             })
         }
     }
@@ -712,18 +713,13 @@ export default class threeScene {
     }
     animate() {
         const animate = () => {
-            this.animationFrameId = requestAnimationFrame(animate);
-            if (this.renderTime >= 1) {
-              if (this.renderTime > 1) {
-                this.stats.begin();
-                this.renderTime -= 1;
-                this.moveText()
-                this.stats.end();
-                this.renderer.render(this.scene, this.camera);
-              }
-            }
-          };
-          animate();
+            this.stats.begin();
+            this.moveText()
+            this.renderer.render(this.scene, this.camera);
+            this.stats.end();
+            this.animFrame = requestAnimationFrame(animate);
+        }
+        animate()
     }
     setCameraPinch() {
         let value = 0
