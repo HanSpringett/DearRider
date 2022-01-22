@@ -645,7 +645,6 @@ export default class threeScene {
     }
     //function that cleans and disposes the scene
     dispose() {
-        // stop sounds
         const cleanMaterial = material => {
             // dispose material
             material.dispose()
@@ -657,6 +656,32 @@ export default class threeScene {
                 }
             }
         }
+
+        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        }
+        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        }
+        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        }
+        this.textButton.children[0].children[1].geometry.dispose()
+        cleanMaterial(this.textButton.children[0].children[1].material)
+        this.textButton.children[0].children[1].geometry.dispose()
+        cleanMaterial(this.textButton.children[0].children[1].material)
+        this.textBG.children[0].children[0].geometry.dispose()
+        cleanMaterial(this.textBG.children[0].children[0].material)
+        this.logoText.children[0].geometry.dispose()
+        cleanMaterial(this.logoText.children[0].material)
+
+        this.textButton = null
+        this.logoText = null
+        this.textBG = null
+
         this.scene.traverse(object => {
             if (!object.isMesh) return
 
@@ -670,16 +695,15 @@ export default class threeScene {
                 for (const material of object.material) cleanMaterial(material)
             }
         })
-
         //kill all tweens
         gsap.globalTimeline.clear()
 
         //remove interval
         clearInterval(this.circleInterval);
-
         this.scene = null
         this.camera = null
         this.renderer && this.renderer.renderLists.dispose()
+        this.renderer.domElement.remove()
         this.renderer = null
 
         cancelAnimationFrame(this.animFrame)
