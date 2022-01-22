@@ -1034,3 +1034,10 @@ export default class threeScene {
         this.textButton.visible = visible
     }
 }
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
+import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@v0.108.0/examples/jsm/loaders/RGBELoader.js';
+
+
+let t = new threeScene()
+t.init(document.getElementById("threeDiv"), GLTFLoader, RGBELoader)
+t.loadModels()
