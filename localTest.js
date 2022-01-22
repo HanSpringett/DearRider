@@ -517,30 +517,30 @@ export default class threeScene {
             z: self.timelineObj[index].position.z,
             duration: 2,
             onComplete: () => {
-                // this.moveButtonText = false
-                // self.startSpinBoard(index)
+                this.moveButtonText = false
+                self.startSpinBoard(index)
                 this.scroll = true
-                // if (index == 0) {
-                //     this.showWatchButtons(true)
-                //     this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 150)
-                //     this.circle.visible = true
-                //     this.showCirclesCircle(true)
-                // }
-                // else if (index <= 11) {
-                //     this.showWatchButtons(true)
-                //     this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
-                //     this.circle.visible = true
-                //     this.showCirclesCircle(true)
-                // }
-                // else if (index == 12) {
-                //     this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 1.55) - 40, self.timelineObj[index].position.z - 150)
-                //     this.circle.visible = true
-                //     this.showCirclesCircle(false)
-                // }
-                // else {
-                //     this.circle.visible = false
-                //     this.moveButtonText = true
-                // }
+                if (index == 0) {
+                    this.showWatchButtons(true)
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 150)
+                    this.circle.visible = true
+                    this.showCirclesCircle(true)
+                }
+                else if (index <= 11) {
+                    this.showWatchButtons(true)
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
+                    this.circle.visible = true
+                    this.showCirclesCircle(true)
+                }
+                else if (index == 12) {
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 1.55) - 40, self.timelineObj[index].position.z - 150)
+                    this.circle.visible = true
+                    this.showCirclesCircle(false)
+                }
+                else {
+                    this.circle.visible = false
+                    this.moveButtonText = true
+                }
             }
         })
         this.boardRotation = gsap.to(this.camera.rotation, {
