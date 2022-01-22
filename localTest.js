@@ -15,12 +15,7 @@ export default class threeScene {
 
         this.renderer = new THREE.WebGLRenderer({ antialias: false });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        if(window.devicePixelRatio > 2){
-            this.renderer.setPixelRatio(2);
-        }
-        else{
-            this.renderer.setPixelRatio(window.devicePixelRatio);
-        }
+        this.renderer.setPixelRatio(window.devicePixelRatio * 0.5)
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.outputEncoding = THREE.sRGBEncoding;
