@@ -15,7 +15,12 @@ export default class threeScene {
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
+        if(window.devicePixelRatio > 2){
+            this.renderer.setPixelRatio(2);
+        }
+        else{
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+        }
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.outputEncoding = THREE.sRGBEncoding;
@@ -328,10 +333,12 @@ export default class threeScene {
         this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
         this.textBG = self.loadedItems[16]
         this.textBG.name = 'textBG'
+        this.textBG.children[0].children[0].material.transparent = true
         this.textBG.scale.set(this.uiScale, this.uiScale, this.uiScale)
-        this.textBG.children[0].children[0].alphaTest = 0
+        this.textBG.children[0].children[0].opacity = 0
         this.logoText = self.loadedItems[17]
-        this.logoText.children[0].material.alphaTest = 0
+        this.logoText.children[0].material.transparent = true
+        this.logoText.children[0].material.opacity = 0
         this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
 
         //event for mouse wheel
@@ -437,8 +444,8 @@ export default class threeScene {
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
                 if (intersects[0].object.name == "explore") {
                     this.text.material.color = new THREE.Color(0x808080);
-                    gsap.to([this.circle.children[2].material], { alphaTest: 1, duration: 1 })
-                    gsap.to([this.circle.children[3].material], { alphaTest: 0.3, duration: 1 })
+                    gsap.to([this.circle.children[2].material], { opacity: 1, duration: 1 })
+                    gsap.to([this.circle.children[3].material], { opacity: 0.3, duration: 1 })
                     gsap.to(this.circle.children[3].scale, {
                         x: 1.15,
                         y: 1.15,
@@ -447,7 +454,7 @@ export default class threeScene {
                     })
                 }
                 else {
-                    gsap.to([this.circle.children[2].material, this.circle.children[3].material], { alphaTest: 0, duration: 1 })
+                    gsap.to([this.circle.children[2].material, this.circle.children[3].material], { opacity: 0, duration: 1 })
                     gsap.to(this.circle.children[3].scale, {
                         x: 1,
                         y: 1,
@@ -461,10 +468,10 @@ export default class threeScene {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
                 if (intersects[0].object.parent && intersects[0].object.parent.parent && intersects[0].object.parent.parent.name == "textBG") {
-                    gsap.to(this.textBG.children[0].children[0].material, { alphaTest: 0.65, duration: 1 })
+                    gsap.to(this.textBG.children[0].children[0].material, { opacity: 0.65, duration: 1 })
                 }
                 else {
-                    gsap.to(this.textBG.children[0].children[0].material, { alphaTest: 0, duration: 1 })
+                    gsap.to(this.textBG.children[0].children[0].material, { opacity: 0, duration: 1 })
                 }
             }
         }, 100)
@@ -784,26 +791,26 @@ export default class threeScene {
         }
 
         const ring1Geom = new THREE.RingGeometry(radius1 - 0.1, radius1, 80);
-        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, alphaTest: 0 });
+        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, transparent: true });
         const mesh1 = new THREE.Mesh(ring1Geom, ring1Mat);
         mesh1.position.set(0, 20, 100)
         circleGroup.add(mesh1);
 
         const ring2Geom = new THREE.RingGeometry(radius2 - 0.1, radius2, 80);
-        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, alphaTest: 0 });
+        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0, side: THREE.DoubleSide, transparent: true });
         const mesh2 = new THREE.Mesh(ring2Geom, ring2Mat);
         mesh2.position.set(0, 20, 100)
         circleGroup.add(mesh2);
 
         const circleGeometry = new THREE.CircleGeometry(radius1, 32);
-        const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, alphaTest: 0, side: THREE.DoubleSide });
+        const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, alphaTest: 0, side: THREE.DoubleSide });
         const circle = new THREE.Mesh(circleGeometry, circleMat);
         circle.position.set(0, 20, 100.1)
         circle.name = "explore"
         circleGroup.add(circle);
 
         const circleGeometry2 = new THREE.CircleGeometry(radius2, 32);
-        const circleMat2 = new THREE.MeshBasicMaterial({ color: 0xffffff, alphaTest: 0, side: THREE.DoubleSide });
+        const circleMat2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, alphaTest: 0, side: THREE.DoubleSide });
         const circle2 = new THREE.Mesh(circleGeometry2, circleMat2);
         circle2.position.set(0, 20, 100.2)
         circleGroup.add(circle2);
@@ -843,7 +850,7 @@ export default class threeScene {
 
         const material = new THREE.MeshBasicMaterial({
             map: texture,
-            alphaTest: 0,
+            transparent: true,
             side: THREE.DoubleSide
             //color: 0xffffff,
             //useScreenCoordinates: false
