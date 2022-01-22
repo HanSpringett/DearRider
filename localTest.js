@@ -6,19 +6,37 @@ export default class threeScene {
         this.container = container
         this.width = window.innerWidth;
         this.height = window.innerHeight;
+        let FOV
+        let FAR
+        let NEAR = 400
+
+        // Mobile camera
+        if (window.innerWidth <= 768) {
+            FOV = 50
+            FAR = 1200
+            // 769px - 1080px screen width camera
+        } else if (window.innerWidth >= 769 && window.innerWidth <= 1080) {
+            FOV = 50
+            FAR = 1475
+            // > 1080px screen width res camera
+        } else {
+            FOV = 40
+            FAR = 1800
+        }
+
         this.camera = new THREE.PerspectiveCamera(
-            75,
-            this.width / this.height,
-            1,
-            10000
-        );
+            FOV,
+            window.innerWidth / window.innerHeight,
+            NEAR,
+            FAR
+        )
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        if(window.devicePixelRatio > 2){
+        if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
         }
-        else{
+        else {
             this.renderer.setPixelRatio(window.devicePixelRatio);
         }
         this.renderer.outputEncoding = THREE.sRGBEncoding;
