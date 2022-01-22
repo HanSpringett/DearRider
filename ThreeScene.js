@@ -15,20 +15,22 @@ export default class threeScene {
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        if(window.devicePixelRatio > 2){
+            this.renderer.setPixelRatio(2);
+        }
+        else{
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+        }
         this.renderer.outputEncoding = THREE.sRGBEncoding;
-        this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMapSoft = true;
 
         container.appendChild(this.renderer.domElement);
 
         this.camera.forwardRotationScalar = 0
         this.camera.sideRotationScalar = 0
 
-        // const helper = new THREE.CameraHelper(this.camera);
-        // this.scene.add(helper);
+        this.stats = new Stats();
+        this.stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+        document.body.appendChild(this.stats.dom);
 
         this.camera.position.set(0, 20, 100);
         //resize
@@ -208,13 +210,6 @@ export default class threeScene {
                 (gltf) => {
                     this.scene.add(gltf.scene);
                     self.loadedItems[i] = gltf.scene
-                    gltf.scene.traverse(child => {
-                        // if (child.isMesh) {
-                        //     // child.castShadow = true;
-                        //     // child.receiveShadow = true;
-                        //     child.visible = false
-                        // }
-                    })
                 }
             );
         }
@@ -331,7 +326,6 @@ export default class threeScene {
         this.textBG.children[0].children[0].opacity = 0
         this.logoText = self.loadedItems[17]
         this.logoText.children[0].material.transparent = true
-        this.logoText.children[0].material.opacity = 0
         this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
 
         //event for mouse wheel
@@ -471,6 +465,7 @@ export default class threeScene {
         this.showWatchButtons(false)
         this.animate()
         gsap.delayedCall(3, () => {
+            console.log("Number of Triangles :", this.renderer.info.render.triangles);
             this.startAnim(true)
         })
 
@@ -491,6 +486,9 @@ export default class threeScene {
     }
     //initial animation that moves the camera from the corner to the cubes
     startAnim(showUI) {
+        for (let i = 0; i < this.loadedItems.length; i++) {
+            self.loadedItems[i].matrixAutoUpdate = false
+        }
         this.moveCamera(0, false)
         this.showUI(showUI)
     }
@@ -587,6 +585,7 @@ export default class threeScene {
                 z: -0.35,
                 duration: 1,
             })
+
             this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
             this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
             this.moveObjectTween(this.textBG, { x: -499, y: 138, z: 1005 }, 2)
@@ -610,12 +609,11 @@ export default class threeScene {
                 duration: 1,
             })
             this.fadeLogo(0)
-            this.enlargeTween(this.textBG, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
-            this.enlargeTween(this.textButton, { x: this.uiScale * 25, y: this.uiScale * 25, z: -this.uiScale * 25 })
+            this.enlargeTween(this.textBG, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: this.uiScale * 1.75 })
+            this.enlargeTween(this.textButton, { x: this.uiScale * 1.75, y: this.uiScale * 1.75, z: -this.uiScale * 1.75 })
             this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 2)
             this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 2, true)
         }
-
     }
     startSpinBoard(index) {
         const self = this
@@ -644,7 +642,6 @@ export default class threeScene {
     }
     //function that cleans and disposes the scene
     dispose() {
-        // stop sounds
         const cleanMaterial = material => {
             // dispose material
             material.dispose()
@@ -656,6 +653,32 @@ export default class threeScene {
                 }
             }
         }
+
+        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        }
+        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        }
+        for (let i = 0; i < this.textButton.children[0].children[0].children[0].children[0].children.length; i++) {
+            this.textButton.children[0].children[0].children[0].children[0].children[i].geometry.dispose()
+            cleanMaterial(this.textButton.children[0].children[0].children[0].children[0].children[i].material)
+        }
+        this.textButton.children[0].children[1].geometry.dispose()
+        cleanMaterial(this.textButton.children[0].children[1].material)
+        this.textButton.children[0].children[1].geometry.dispose()
+        cleanMaterial(this.textButton.children[0].children[1].material)
+        this.textBG.children[0].children[0].geometry.dispose()
+        cleanMaterial(this.textBG.children[0].children[0].material)
+        this.logoText.children[0].geometry.dispose()
+        cleanMaterial(this.logoText.children[0].material)
+
+        this.textButton = null
+        this.logoText = null
+        this.textBG = null
+
         this.scene.traverse(object => {
             if (!object.isMesh) return
 
@@ -669,24 +692,25 @@ export default class threeScene {
                 for (const material of object.material) cleanMaterial(material)
             }
         })
-
         //kill all tweens
         gsap.globalTimeline.clear()
 
         //remove interval
         clearInterval(this.circleInterval);
-
         this.scene = null
         this.camera = null
         this.renderer && this.renderer.renderLists.dispose()
+        this.renderer.domElement.remove()
         this.renderer = null
 
         cancelAnimationFrame(this.animFrame)
     }
     animate() {
         const animate = () => {
+            this.stats.begin();
             this.moveText()
             this.renderer.render(this.scene, this.camera);
+            this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
@@ -841,10 +865,10 @@ export default class threeScene {
         return value;
     }
     hideExploreButton() {
-        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 0, duration: 1 })
+        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { alphaTest: 0, duration: 1 })
     }
     showExploreButton() {
-        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { opacity: 1, duration: 1 })
+        gsap.to([this.circle.children[0].material, this.circle.children[1].material, this.circle.children[2].material], { alphaTest: 1, duration: 1 })
     }
     onMouseMove(event) {
 
@@ -1032,5 +1056,8 @@ export default class threeScene {
         this.logoText.visible = visible
         this.textBG.visible = visible
         this.textButton.visible = visible
+    }
+    needToRender(value = 2) {
+        this.renderTime = value;
     }
 }
