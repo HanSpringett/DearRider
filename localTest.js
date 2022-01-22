@@ -21,11 +21,7 @@ export default class threeScene {
         else{
             this.renderer.setPixelRatio(window.devicePixelRatio);
         }
-        this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        this.renderer.outputEncoding = THREE.sRGBEncoding;
-        this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMapSoft = true;
+        // this.renderer.outputEncoding = THREE.sRGBEncoding;
 
         container.appendChild(this.renderer.domElement);
 
