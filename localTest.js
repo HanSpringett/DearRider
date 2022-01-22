@@ -67,8 +67,8 @@ export default class threeScene {
             './assets/DearRider_2013.gltf',
             './assets/DearRider_2020.gltf',
             './assets/DearRider_2021.gltf',
-            './assets/Outro1.gltf',
-            './assets/Outro2.gltf',
+            // './assets/Outro1.gltf',
+            // './assets/Outro2.gltf',
             // './assets/WatchDocumentary_text.gltf',
             // './assets/WatchDocumentary_background.gltf',
             // './assets/DearRider_icon.gltf'
@@ -304,17 +304,17 @@ export default class threeScene {
         self.loadedItems[12].rotateOnAxis(new THREE.Vector3(0, 1, 0), 3.14159)
         self.timelineObj[11].obj = self.loadedItems[12]
 
-        //placeholder1
-        self.loadedItems[13].position.set(-493, 200, 1150)
-        self.loadedItems[13].scale.set(0, 0, 0)
-        self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
-        this.placeholder1 = self.loadedItems[13]
-        //placeholder2
-        self.loadedItems[14].position.set(100, 265, 2000)
-        self.loadedItems[14].scale.set(0, 0, 0)
-        self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.02)
-        self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 0, 1), 0.02)
-        this.placeholder2 = self.loadedItems[14]
+        // //placeholder1
+        // self.loadedItems[13].position.set(-493, 200, 1150)
+        // self.loadedItems[13].scale.set(0, 0, 0)
+        // self.loadedItems[13].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.04)
+        // this.placeholder1 = self.loadedItems[13]
+        // //placeholder2
+        // self.loadedItems[14].position.set(100, 265, 2000)
+        // self.loadedItems[14].scale.set(0, 0, 0)
+        // self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.02)
+        // self.loadedItems[14].rotateOnAxis(new THREE.Vector3(0, 0, 1), 0.02)
+        // this.placeholder2 = self.loadedItems[14]
 
         this.uiScale = window.innerWidth / 958
         if (this.uiScale < 1) {
