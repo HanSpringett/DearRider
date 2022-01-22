@@ -21,7 +21,7 @@ export default class threeScene {
         else{
             this.renderer.setPixelRatio(window.devicePixelRatio);
         }
-        // this.renderer.outputEncoding = THREE.sRGBEncoding;
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
 
         container.appendChild(this.renderer.domElement);
 
@@ -56,18 +56,18 @@ export default class threeScene {
         this.rotateCoords = { x: 0, y: 0, z: 0 }
         this.sceneAssets = [
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/building_shadows_v11.gltf',
-            'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/Cubes_v2.gltf',
-            './assets/DearRider_1977.gltf',
-            './assets/DearRider_1983.gltf',
-            './assets/DearRider_1986.gltf',
-            './assets/DearRider_1989.gltf',
-            './assets/DearRider_1993.gltf',
-            './assets/DearRider_1996_Custom.gltf',
-            './assets/DearRider_1996_Dolphin.gltf',
-            './assets/DearRider_2002.gltf',
-            './assets/DearRider_2013.gltf',
-            './assets/DearRider_2020.gltf',
-            './assets/DearRider_2021.gltf',
+            './assets/test/Cubes.gltf',
+            './assets/test/DearRider_1977.gltf',
+            './assets/test/DearRider_1983.gltf',
+            './assets/test/DearRider_1986.gltf',
+            './assets/test/DearRider_1989.gltf',
+            './assets/test/DearRider_1993.gltf',
+            './assets/test/DearRider_1996_Custom.gltf',
+            './assets/test/DearRider_1996_Dolphin.gltf',
+            './assets/test/DearRider_2002.gltf',
+            './assets/test/DearRider_2013.gltf',
+            './assets/test/DearRider_2020.gltf',
+            './assets/test/DearRider_2021.gltf',
             './assets/Outro1.gltf',
             './assets/Outro2.gltf',
             './assets/WatchDocumentary_text.gltf',
@@ -189,7 +189,6 @@ export default class threeScene {
         };
         this.manager.onLoad = () => {
             console.log('Loading complete!');
-            console.log("Number of Triangles :", this.renderer.info.render.triangles);
             this.setUpScene()
         };
         this.manager.onProgress = function (url, itemsLoaded, itemsTotal) {
@@ -325,7 +324,6 @@ export default class threeScene {
         else {
             this.uiScale = 0.01
         }
-        console.log(this.uiScale)
         this.textButton = self.loadedItems[15]
         this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
         this.textBG = self.loadedItems[16]
@@ -474,6 +472,7 @@ export default class threeScene {
         this.showWatchButtons(false)
         this.animate()
         gsap.delayedCall(3, () => {
+            console.log("Number of Triangles :", this.renderer.info.render.triangles);
             this.startAnim(true)
         })
 
@@ -716,7 +715,7 @@ export default class threeScene {
     animate() {
         const animate = () => {
             this.stats.begin();
-            this.moveText()
+            // this.moveText()
             this.renderer.render(this.scene, this.camera);
             this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
