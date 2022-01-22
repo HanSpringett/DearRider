@@ -12,13 +12,13 @@ export default class threeScene {
             1,
             10000
         );
-        this.renderTime = 2
+
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        if (window.devicePixelRatio > 2) {
+        if(window.devicePixelRatio > 2){
             this.renderer.setPixelRatio(2);
         }
-        else {
+        else{
             this.renderer.setPixelRatio(window.devicePixelRatio);
         }
         this.renderer.shadowMap.enabled = true;
@@ -61,17 +61,17 @@ export default class threeScene {
         this.sceneAssets = [
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/building_shadows_v11.gltf',
             'https://raw.githubusercontent.com/HanSpringett/DearRider_Webflow_embedtest/release5.0/assets/Cubes_v2.gltf',
-            './assets/DearRider_1977.gltf',
-            './assets/DearRider_1983.gltf',
-            './assets/DearRider_1986.gltf',
-            './assets/DearRider_1989.gltf',
-            './assets/DearRider_1993.gltf',
-            './assets/DearRider_1996_Custom.gltf',
-            './assets/DearRider_1996_Dolphin.gltf',
-            './assets/DearRider_2002.gltf',
-            './assets/DearRider_2013.gltf',
-            './assets/DearRider_2020.gltf',
-            './assets/DearRider_2021.gltf',
+            './assets/test/DearRider_1977.gltf',
+            './assets/test/DearRider_1983.gltf',
+            './assets/test/DearRider_1986.gltf',
+            './assets/test/DearRider_1989.gltf',
+            './assets/test/DearRider_1993.gltf',
+            './assets/test/DearRider_1996_Custom.gltf',
+            './assets/test/DearRider_1996_Dolphin.gltf',
+            './assets/test/DearRider_2002.gltf',
+            './assets/test/DearRider_2013.gltf',
+            './assets/test/DearRider_2020.gltf',
+            './assets/test/DearRider_2021.gltf',
             './assets/Outro1.gltf',
             './assets/Outro2.gltf',
             './assets/WatchDocumentary_text.gltf',
@@ -626,7 +626,6 @@ export default class threeScene {
             this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 2)
             this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 2, true)
         }
-        this.needToRender(120)
     }
     startSpinBoard(index) {
         const self = this
@@ -718,33 +717,16 @@ export default class threeScene {
 
         cancelAnimationFrame(this.animFrame)
     }
-    needToRender(value = 2) {
-        this.renderTime = value;
-    }
-
-
+  
     animate() {
-        // const animate = () => {
-        //     this.stats.begin();
-        //     this.moveText()
-        //     this.renderer.render(this.scene, this.camera);
-        //     this.stats.end();
-        //     this.animFrame = requestAnimationFrame(animate);
-        // }
-        // animate()
         const animate = () => {
+            this.stats.begin();
+            this.moveText()
+            this.renderer.render(this.scene, this.camera);
+            this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
-            if (this.renderTime >= 1) {
-                if (this.renderTime > 1) {
-                    this.renderTime -= 1;
-                    this.stats.begin();
-                    // this.moveText()
-                    this.renderer.render(this.scene, this.camera);
-                    this.stats.end();
-                }
-            }
-        };
-        animate();
+        }
+        animate()
     }
     setCameraPinch() {
         let value = 0
