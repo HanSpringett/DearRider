@@ -12,13 +12,13 @@ export default class threeScene {
             1,
             10000
         );
-
+        this.renderTime = 2
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        if(window.devicePixelRatio > 2){
+        if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
         }
-        else{
+        else {
             this.renderer.setPixelRatio(window.devicePixelRatio);
         }
         this.renderer.shadowMap.enabled = true;
@@ -626,6 +626,7 @@ export default class threeScene {
             this.moveObjectTween(this.textBG, { x: 101, y: 243, z: 1955 }, 2)
             this.moveObjectTween(this.textButton, { x: 101, y: 243, z: 1955 }, 2, true)
         }
+        this.needToRender(120)
     }
     startSpinBoard(index) {
         const self = this
@@ -717,15 +718,33 @@ export default class threeScene {
 
         cancelAnimationFrame(this.animFrame)
     }
+    needToRender(value = 2) {
+        this.renderTime = value;
+    }
+
+
     animate() {
+        // const animate = () => {
+        //     this.stats.begin();
+        //     this.moveText()
+        //     this.renderer.render(this.scene, this.camera);
+        //     this.stats.end();
+        //     this.animFrame = requestAnimationFrame(animate);
+        // }
+        // animate()
         const animate = () => {
-            this.stats.begin();
-            this.moveText()
-            this.renderer.render(this.scene, this.camera);
-            this.stats.end();
             this.animFrame = requestAnimationFrame(animate);
-        }
-        animate()
+            if (this.renderTime >= 1) {
+                if (this.renderTime > 1) {
+                    this.renderTime -= 1;
+                    this.stats.begin();
+                    // this.moveText()
+                    this.renderer.render(this.scene, this.camera);
+                    this.stats.end();
+                }
+            }
+        };
+        animate();
     }
     setCameraPinch() {
         let value = 0
@@ -1068,9 +1087,6 @@ export default class threeScene {
         this.logoText.visible = visible
         this.textBG.visible = visible
         this.textButton.visible = visible
-    }
-    needToRender(value = 2) {
-        this.renderTime = value;
     }
 }
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'
