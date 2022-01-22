@@ -338,7 +338,6 @@ export default class threeScene {
         this.textBG.children[0].children[0].opacity = 0
         this.logoText = self.loadedItems[17]
         this.logoText.children[0].material.transparent = true
-        this.logoText.children[0].material.opacity = 0
         this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
 
         //event for mouse wheel
@@ -728,17 +727,6 @@ export default class threeScene {
             this.animFrame = requestAnimationFrame(animate);
         }
         animate()
-        const animate = () => {
-            this.animationFrameId = requestAnimationFrame(animate);
-            if (this.renderTime >= 1) {
-              if (this.renderTime > 1) {
-                this.renderTime -= 1;
-                this.controls.update();
-                this.renderer.render(this.scene, this.camera);
-              }
-            }
-          };
-          animate();
     }
     setCameraPinch() {
         let value = 0
@@ -816,14 +804,14 @@ export default class threeScene {
         circleGroup.add(mesh2);
 
         const circleGeometry = new THREE.CircleGeometry(radius1, 32);
-        const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, alphaTest: 0, side: THREE.DoubleSide });
+        const circleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
         const circle = new THREE.Mesh(circleGeometry, circleMat);
         circle.position.set(0, 20, 100.1)
         circle.name = "explore"
         circleGroup.add(circle);
 
         const circleGeometry2 = new THREE.CircleGeometry(radius2, 32);
-        const circleMat2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, alphaTest: 0, side: THREE.DoubleSide });
+        const circleMat2 = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide });
         const circle2 = new THREE.Mesh(circleGeometry2, circleMat2);
         circle2.position.set(0, 20, 100.2)
         circleGroup.add(circle2);
@@ -1062,7 +1050,7 @@ export default class threeScene {
         }
     }
     fadeLogo(opacity, duration = 1) {
-        gsap.to(this.logoText.children[0].material, { alphaTest: opacity, duration: duration })
+        gsap.to(this.logoText.children[0].material, { opacity: opacity, duration: duration })
     }
     enlargeTween(object, scale, duration = 1) {
         gsap.to(object.scale, { x: scale.x, y: scale.y, z: scale.z, duration: duration })
