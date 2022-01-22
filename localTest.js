@@ -13,9 +13,14 @@ export default class threeScene {
             10000
         );
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: false });
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio * 0.5)
+        if(window.devicePixelRatio > 2){
+            this.renderer.setPixelRatio(2);
+        }
+        else{
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+        }
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.outputEncoding = THREE.sRGBEncoding;
