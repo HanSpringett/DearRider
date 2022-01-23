@@ -10,15 +10,15 @@ export default class threeScene {
             75,
             this.width / this.height,
             1,
-            10000
+            9000
         );
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer = new THREE.WebGLRenderer({antialias: true})
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        if(window.devicePixelRatio > 2){
+        if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
         }
-        else{
+        else {
             this.renderer.setPixelRatio(window.devicePixelRatio);
         }
         this.renderer.outputEncoding = THREE.sRGBEncoding;
