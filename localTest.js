@@ -13,7 +13,7 @@ export default class threeScene {
             9000
         );
 
-        this.renderer = new THREE.WebGLRenderer({antialias: true})
+        this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
@@ -318,6 +318,7 @@ export default class threeScene {
             this.uiScale = 0.01
         }
         this.textButton = self.loadedItems[15]
+        this.textButton.name = 'textBG'
         this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
         this.textBG = self.loadedItems[16]
         this.textBG.name = 'textBG'
@@ -327,6 +328,9 @@ export default class threeScene {
         this.logoText = self.loadedItems[17]
         this.logoText.children[0].material.transparent = true
         this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
+
+        console.log(this.textButton)
+
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
@@ -372,6 +376,10 @@ export default class threeScene {
                 console.log("Index", this.index)
             }
             if (intersects[0].object.parent && intersects[0].object.parent.parent && intersects[0].object.parent.parent.name == "textBG") {
+                window.dispatchEvent(new CustomEvent("watchDocumentary", { detail: this.index }))
+                console.log("watchDocumentary", this.index)
+            }
+            else if (intersects[0].object.parent && intersects[0].object.parent.name == "Watch" || intersects[0].object.parent && intersects[0].object.parent.name == "the" || intersects[0].object.parent && intersects[0].object.parent.name == "Documentary") {
                 window.dispatchEvent(new CustomEvent("watchDocumentary", { detail: this.index }))
                 console.log("watchDocumentary", this.index)
             }
@@ -455,6 +463,9 @@ export default class threeScene {
                 this.raycaster.setFromCamera(this.mouse, this.camera);
                 const intersects = this.raycaster.intersectObjects(this.scene.children);
                 if (intersects[0].object.parent && intersects[0].object.parent.parent && intersects[0].object.parent.parent.name == "textBG") {
+                    gsap.to(this.textBG.children[0].children[0].material, { opacity: 0.65, duration: 1 })
+                }
+                else if (intersects[0].object.parent && intersects[0].object.parent.name == "Watch" || intersects[0].object.parent && intersects[0].object.parent.name == "the" || intersects[0].object.parent && intersects[0].object.parent.name == "Documentary") {
                     gsap.to(this.textBG.children[0].children[0].material, { opacity: 0.65, duration: 1 })
                 }
                 else {
@@ -1056,9 +1067,6 @@ export default class threeScene {
         this.logoText.visible = visible
         this.textBG.visible = visible
         this.textButton.visible = visible
-    }
-    needToRender(value = 2) {
-        this.renderTime = value;
     }
 }
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/jsm/loaders/GLTFLoader.js'

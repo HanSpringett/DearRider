@@ -13,7 +13,7 @@ export default class threeScene {
             9000
         );
 
-        this.renderer = new THREE.WebGLRenderer({antialias: true})
+        this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         if (window.devicePixelRatio > 2) {
             this.renderer.setPixelRatio(2);
@@ -27,6 +27,7 @@ export default class threeScene {
 
         this.camera.forwardRotationScalar = 0
         this.camera.sideRotationScalar = 0
+
 
         this.camera.position.set(0, 20, 100);
         //resize
@@ -314,6 +315,7 @@ export default class threeScene {
             this.uiScale = 0.01
         }
         this.textButton = self.loadedItems[15]
+        this.textButton.name = 'textBG'
         this.textButton.scale.set(this.uiScale, this.uiScale, -this.uiScale)
         this.textBG = self.loadedItems[16]
         this.textBG.name = 'textBG'
@@ -323,6 +325,7 @@ export default class threeScene {
         this.logoText = self.loadedItems[17]
         this.logoText.children[0].material.transparent = true
         this.logoText.scale.set(this.uiScale, this.uiScale, this.uiScale)
+
 
         //event for mouse wheel
         window.addEventListener("wheel", (evt) => {
@@ -368,6 +371,10 @@ export default class threeScene {
                 console.log("Index", this.index)
             }
             if (intersects[0].object.parent && intersects[0].object.parent.parent && intersects[0].object.parent.parent.name == "textBG") {
+                window.dispatchEvent(new CustomEvent("watchDocumentary", { detail: this.index }))
+                console.log("watchDocumentary", this.index)
+            }
+            else if (intersects[0].object.parent && intersects[0].object.parent.name == "Watch" || intersects[0].object.parent && intersects[0].object.parent.name == "the" || intersects[0].object.parent && intersects[0].object.parent.name == "Documentary") {
                 window.dispatchEvent(new CustomEvent("watchDocumentary", { detail: this.index }))
                 console.log("watchDocumentary", this.index)
             }
@@ -453,6 +460,9 @@ export default class threeScene {
                 if (intersects[0].object.parent && intersects[0].object.parent.parent && intersects[0].object.parent.parent.name == "textBG") {
                     gsap.to(this.textBG.children[0].children[0].material, { opacity: 0.65, duration: 1 })
                 }
+                else if (intersects[0].object.parent && intersects[0].object.parent.name == "Watch" || intersects[0].object.parent && intersects[0].object.parent.name == "the" || intersects[0].object.parent && intersects[0].object.parent.name == "Documentary") {
+                    gsap.to(this.textBG.children[0].children[0].material, { opacity: 0.65, duration: 1 })
+                }
                 else {
                     gsap.to(this.textBG.children[0].children[0].material, { opacity: 0, duration: 1 })
                 }
@@ -461,7 +471,6 @@ export default class threeScene {
         this.showWatchButtons(false)
         this.animate()
         gsap.delayedCall(3, () => {
-            console.log("Number of Triangles :", this.renderer.info.render.triangles);
             this.startAnim(true)
         })
 
@@ -1050,8 +1059,5 @@ export default class threeScene {
         this.logoText.visible = visible
         this.textBG.visible = visible
         this.textButton.visible = visible
-    }
-    needToRender(value = 2) {
-        this.renderTime = value;
     }
 }
