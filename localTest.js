@@ -526,18 +526,18 @@ export default class threeScene {
                 this.scroll = true
                 if (index == 0) {
                     this.showWatchButtons(true)
-                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 150)
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 2) - 0.5, self.timelineObj[index].position.z - 160)
                     this.circle.visible = true
                     this.showCirclesCircle(true)
                 }
                 else if (index <= 11) {
                     this.showWatchButtons(true)
-                    this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 150)
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, self.timelineObj[index].position.y / 1.55, self.timelineObj[index].position.z - 160)
                     this.circle.visible = true
                     this.showCirclesCircle(true)
                 }
                 else if (index == 12) {
-                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 1.55) - 40, self.timelineObj[index].position.z - 150)
+                    this.circle.position.set(self.timelineObj[index].position.x + 7, (self.timelineObj[index].position.y / 1.55) - 40, self.timelineObj[index].position.z - 160)
                     this.circle.visible = true
                     this.showCirclesCircle(false)
                 }
@@ -906,12 +906,12 @@ export default class threeScene {
                 this.startSpinBoard(target.id)
                 this.scroll = true
                 if (target.id == 0) {
-                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 2) - 0.5, self.timelineObj[target.id].position.z - 150)
+                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 2) - 0.5, self.timelineObj[target.id].position.z - 160)
                     this.circle.visible = true
                     this.showCirclesCircle(true)
                 }
                 else if (target.id <= 12) {
-                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, self.timelineObj[target.id].position.y / 1.55, self.timelineObj[target.id].position.z - 150)
+                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, self.timelineObj[target.id].position.y / 1.55, self.timelineObj[target.id].position.z - 160)
                     this.circle.visible = true
                     this.showCirclesCircle(true)
                 }
@@ -946,7 +946,7 @@ export default class threeScene {
                         z: -0.35,
                         duration: 1,
                     })
-                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 1.55) - 40, self.timelineObj[target.id].position.z - 150)
+                    this.circle.position.set(self.timelineObj[target.id].position.x + 7, (self.timelineObj[target.id].position.y / 1.55) - 40, self.timelineObj[target.id].position.z - 160)
                     this.showCirclesCircle(false)
                     this.enlargeTween(this.textBG, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
                     this.enlargeTween(this.textButton, { x: this.uiScale, y: this.uiScale, z: -this.uiScale })
