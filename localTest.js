@@ -64,7 +64,7 @@ export default class threeScene {
             './assets/DearRider_1977.gltf',
             './assets/DearRider_1983.gltf',
             './assets/DearRider_1986.gltf',
-            './assets/DearRider_1989_v2.gltf',
+            './assets/DearRider_1989_v3.gltf',
             './assets/DearRider_1993.gltf',
             './assets/DearRider_1996_Custom.gltf',
             './assets/DearRider_1996_Dolphin.gltf',
